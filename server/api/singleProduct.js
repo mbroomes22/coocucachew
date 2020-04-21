@@ -33,8 +33,8 @@ router.put('/:productId', isAdmin, async (req, res, next) => {
   try {
     const updatedProduct = await Product.update(req.body, {
       where: {
-        id: req.params.productId,
-      },
+        id: req.params.productId
+      }
     })
     res.status(201).json(updatedProduct)
   } catch (err) {
