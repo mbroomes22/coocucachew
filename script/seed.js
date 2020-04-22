@@ -32,7 +32,7 @@ async function seed() {
   const snickerDoodle = await Product.create({
     name: 'snickerDoodle',
     type: 'cookie',
-    image:
+    imageUrl:
       'https://www.foxandbriar.com/wp-content/uploads/2019/09/Snickerdoodles-12-of-12.jpg',
     price: 0.0,
     description:
@@ -43,7 +43,7 @@ async function seed() {
   const thinMint = await Product.create({
     name: 'thinMint',
     type: 'cookie',
-    image:
+    imageUrl:
       'https://www.clipartkey.com/mpngs/m/62-623214_thin-mint-clipart-thin-mint-cookies-transparent.png',
     price: 0.0,
     description: 'Minty, soft, refreshing, decadent, ....awesome!',
