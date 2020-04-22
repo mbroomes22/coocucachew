@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import fetchProducts from '../store/products'
+import {fetchProducts} from '../store/products'
 
 /**
  * COMPONENT
@@ -9,22 +9,26 @@ import fetchProducts from '../store/products'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
+    // console.log('PROPSSHY=>', this.props)
     this.props.getAllProducts()
   }
 
   render() {
-    console.log('PROPSSHY=>', this.props)
+    // console.log('PROPSSHY=>', this.props)
+    // console.log(product)
     return (
       <div>
-        {this.props.products.map(product => {
-          return (
-            <div key={product.id}>
-              <h4>{product.name}</h4>
-              <img src={product.imageUrl} />
-              <p>{product.description}</p>
-            </div>
-          )
-        })}
+        {this.props.products[0]
+          ? this.props.products.map(product => {
+              return (
+                <div key={product.id}>
+                  <h4>{product.name}</h4>
+                  <img src={product.image} width="200" />
+                  <p>{product.description}</p>
+                </div>
+              )
+            })
+          : 'loading....'}
       </div>
     )
   }
@@ -35,7 +39,8 @@ export class AllProducts extends React.Component {
  */
 const mapState = state => {
   return {
-    products: state.products
+    products: state.products,
+    user: state.user
   }
 }
 
@@ -50,6 +55,6 @@ export default connect(mapState, mapDispatch)(AllProducts)
 /**
  * PROP TYPES
  */
-AllProducts.propTypes = {
-  //   product: PropTypes.string
-}
+// AllProducts.propTypes = {
+//     product: PropTypes.string
+// }

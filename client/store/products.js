@@ -6,7 +6,7 @@ const GET_A_PRODUCT = 'GET_A_PRODUCT'
 
 //initial state
 
-const product = []
+const initialProducts = {}
 
 //action creator
 
@@ -29,9 +29,11 @@ export const getAProduct = productId => {
 }
 
 export const fetchProducts = () => async dispatch => {
+  // console.log('before dispatching')
   try {
-    const {data} = await axios.get('../api/products')
-    dispatch(getProducts(data))
+    const res = await axios.get('/api/products')
+    dispatch(getProducts(res.data))
+    // console.log('after dispatching in store')
   } catch (error) {
     console.error(error)
   }
@@ -39,7 +41,7 @@ export const fetchProducts = () => async dispatch => {
 
 //reducer
 
-export default function singleProductReducer(state = product, action) {
+export default function singleProductReducer(state = initialProducts, action) {
   switch (action.type) {
     case GET_A_PRODUCT:
       return action.product

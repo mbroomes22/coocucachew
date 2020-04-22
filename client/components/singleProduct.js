@@ -1,16 +1,17 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {singleProduct} from '../store/singleProduct'
+import {getAProduct} from '../store/products'
 
 export class SingleProduct extends Component {
   constructor(props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    this.props.getAProduct(this.props.match.params.productId)
+    console.log('^*^*^')
+    this.props.getAProduct(this.props.match.params.id)
   }
 
   // handleSubmit(event){
@@ -21,6 +22,7 @@ export class SingleProduct extends Component {
   // }
 
   render() {
+    console.log('$$$$$$$$', this.props)
     const singleProduct = this.props.singleProduct
     return (
       <div className="singleProduct_page">
@@ -40,9 +42,9 @@ export class SingleProduct extends Component {
         </div>
         <div className="quantity_change">
           <div className="quantity_input">
-            <form onSubmit={this.handleSubmit}>
+            <form>
               <select id="product_quantity">
-                <option selected="">Qty</option>
+                {/* <option selected="">Qty</option> */}
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -60,7 +62,7 @@ export class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    singleProduct: state.singleProduct
+    singleProduct: state.products
   }
 }
 
