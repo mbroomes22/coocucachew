@@ -16,3 +16,5 @@ router.get('/', isAdmin, async (req, res, next) => {
     next(err)
   }
 })
+
+// /api/users/:userId --> admins and the logged in user who matches that userId in the api request

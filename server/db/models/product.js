@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const ProductCategory = require('./product_category')
 
 const Product = db.define('product', {
   name: {
@@ -9,22 +10,21 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
-  type: {
-    type: Sequelize.ENUM('cupCake', 'chocolate', 'cakePop', 'cookie'),
-    validate: {
-      notEmpty: true
-    }
-  },
   price: {
+    // look into getters/setters/class/instance methods/hooks
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       min: 0,
       notEmpty: true
+    },
+    get() {
+      return '$' + this.getDataValue('price')
     }
   },
-  image: {
-    type: Sequelize.STRING,
+  imageUrl: {
+    // update to imageUrl
+    type: Sequelize.STRING, // update to TEXT
     validate: {
       isUrl: true
     },
@@ -40,11 +40,11 @@ const Product = db.define('product', {
   },
   isActive: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    defaultValue: true // set to false
   },
   stock: {
     type: Sequelize.INTEGER,
-    defaultValue: 1000
+    defaultValue: 1000 // set to 0
   }
 })
 

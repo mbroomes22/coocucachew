@@ -1,16 +1,33 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Order, Product, OrderProduct} = require('../server/db/models')
+const {
+  User,
+  Order,
+  Product,
+  OrderProduct,
+  ProductCategory
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const cookies = await ProductCategory.create({
+    name: 'cookies'
+  })
+
+  const chocolates = await ProductCategory.create({
+    name: 'chocolates'
+  })
+
+  const cakePops = await ProductCategory.create({
+    name: 'cakePops'
+  })
+
+  const cupcakes = await ProductCategory.create({
+    name: 'cupcakes'
+  })
 
   const snickerDoodle = await Product.create({
     name: 'snickerDoodle',
@@ -18,7 +35,9 @@ async function seed() {
     image:
       'https://www.foxandbriar.com/wp-content/uploads/2019/09/Snickerdoodles-12-of-12.jpg',
     price: 0.0,
-    description: 'Sweet, soft, cinnamony...uhm, how do you describe perfection?'
+    description:
+      'Sweet, soft, cinnamony...uhm, how do you describe perfection?',
+    productCategoryId: 1
   })
 
   const thinMint = await Product.create({
@@ -27,8 +46,14 @@ async function seed() {
     image:
       'https://www.clipartkey.com/mpngs/m/62-623214_thin-mint-clipart-thin-mint-cookies-transparent.png',
     price: 0.0,
-    description: 'Minty, soft, refreshing, decadent, ....awesome!'
+    description: 'Minty, soft, refreshing, decadent, ....awesome!',
+    productCategoryId: 1
   })
+
+  const users = await Promise.all([
+    User.create({email: 'cody@email.com', password: '123'}),
+    User.create({email: 'murphy@email.com', password: '123'})
+  ])
 
   const guest = await User.create({
     email: 'thinMint@gmail.com',
