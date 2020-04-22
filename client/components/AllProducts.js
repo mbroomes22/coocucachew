@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import fetchProducts from '../store/products'
+import {fetchProducts} from '../store/products'
 
 /**
  * COMPONENT
@@ -9,11 +9,13 @@ import fetchProducts from '../store/products'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
+    console.log('PROPSSHY=>', this.props)
     this.props.getAllProducts()
   }
 
   render() {
     console.log('PROPSSHY=>', this.props)
+    // console.log(product)
     return (
       <div>
         {this.props.products.map(product => {
@@ -35,7 +37,8 @@ export class AllProducts extends React.Component {
  */
 const mapState = state => {
   return {
-    products: state.products
+    products: state.products,
+    user: state.user
   }
 }
 
@@ -50,6 +53,6 @@ export default connect(mapState, mapDispatch)(AllProducts)
 /**
  * PROP TYPES
  */
-AllProducts.propTypes = {
-  //   product: PropTypes.string
-}
+// AllProducts.propTypes = {
+//     product: PropTypes.string
+// }

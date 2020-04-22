@@ -9,23 +9,27 @@ const getProducts = products => ({
   products
 })
 
+//initialState
+const initialProducts = {}
+
 //thunk creators
 export const fetchProducts = () => async dispatch => {
+  console.log('before dispatching')
   try {
-    const {data} = await axios.get('../api/products')
-    dispatch(getProducts(data))
+    const res = await axios.get('/api/products')
+    dispatch(getProducts(res.data))
+    console.log('after dispatching in store')
   } catch (error) {
     console.error(error)
   }
 }
 
-//initialState
-const initialState = {}
 //reducer
 
-export default function productsReducer(state = initialState, action) {
+export default function productsReducer(state = initialProducts, action) {
   switch (action.type) {
     case GET_PRODUCTS:
+      console.log('inside products reducer', action)
       return action.products
     default:
       return state
