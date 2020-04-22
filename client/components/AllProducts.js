@@ -6,23 +6,28 @@ import fetchProducts from '../store/products'
 /**
  * COMPONENT
  */
-export const AllProducts = props => {
-  const {products} = props
-  console.log('all products component props', props)
 
-  return (
-    <div>
-      {products.map(product => {
-        return (
-          <div key={product.id}>
-            <h4>{product.name}</h4>
-            <img src={product.imageUrl} />
-            <p>{product.description}</p>
-          </div>
-        )
-      })}
-    </div>
-  )
+export class AllProducts extends React.Component {
+  componentDidMount() {
+    this.props.getAllProducts()
+  }
+
+  render() {
+    console.log('PROPSSHY=>', this.props)
+    return (
+      <div>
+        {this.props.products.map(product => {
+          return (
+            <div key={product.id}>
+              <h4>{product.name}</h4>
+              <img src={product.imageUrl} />
+              <p>{product.description}</p>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 }
 
 /**
