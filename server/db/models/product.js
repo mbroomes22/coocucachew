@@ -16,6 +16,7 @@ const Product = db.define('product', {
     }
   },
   price: {
+    // look into getters/setters/class/instance methods/hooks
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
@@ -24,7 +25,8 @@ const Product = db.define('product', {
     }
   },
   image: {
-    type: Sequelize.STRING,
+    // update to imageUrl
+    type: Sequelize.STRING, // update to TEXT
     validate: {
       isUrl: true
     },
@@ -40,11 +42,11 @@ const Product = db.define('product', {
   },
   isActive: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    defaultValue: true // set to false
   },
   stock: {
     type: Sequelize.INTEGER,
-    defaultValue: 1000
+    defaultValue: 1000 // set to 0
   }
 })
 

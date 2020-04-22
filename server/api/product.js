@@ -35,7 +35,7 @@ const isAdmin = (req, res, next) => {
 router.post('/', isAdmin, async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body)
-    res.json(newProduct)
+    res.json(newProduct) // manually set status to 201
   } catch (err) {
     next(err)
   }

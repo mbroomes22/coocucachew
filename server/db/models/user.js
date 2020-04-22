@@ -2,6 +2,8 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+// isAdmin: Boolean
+
 const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
