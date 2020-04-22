@@ -23,6 +23,7 @@ export class AllProducts extends React.Component {
               return (
                 <div key={product.id}>
                   <h4>{product.name}</h4>
+                  <h4>{product.price}</h4>
                   <img src={product.image} width="200" />
                   <p>{product.description}</p>
                 </div>

@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const ProductCategory = require('./product_category')
 
 const Product = db.define('product', {
   name: {
@@ -9,12 +10,14 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
-  type: {
-    type: Sequelize.ENUM('cupCake', 'chocolate', 'cakePop', 'cookie'),
-    validate: {
-      notEmpty: true
-    }
-  },
+  // type: {
+  //   type: Sequelize.ENUM('cupCake', 'chocolate', 'cakePop', 'cookie'),
+
+  //   validate: {
+  //     notEmpty: true,
+  //   },
+  // },
+
   price: {
     // look into getters/setters/class/instance methods/hooks
     type: Sequelize.INTEGER,
@@ -22,6 +25,9 @@ const Product = db.define('product', {
     validate: {
       min: 0,
       notEmpty: true
+    },
+    get() {
+      return '$' + this.getDataValue('price')
     }
   },
   image: {

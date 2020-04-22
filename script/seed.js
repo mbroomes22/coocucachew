@@ -1,7 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Order, Product, OrderProduct} = require('../server/db/models')
+const {
+  User,
+  Order,
+  Product,
+  OrderProduct,
+  ProductCategory
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -21,14 +27,25 @@ async function seed() {
     description: 'Sweet, soft, cinnamony...uhm, how do you describe perfection?'
   })
 
-  const thinMint = await Product.create({
-    name: 'thinMint',
-    type: 'cookie',
-    image:
-      'https://www.clipartkey.com/mpngs/m/62-623214_thin-mint-clipart-thin-mint-cookies-transparent.png',
-    price: 0.0,
-    description: 'Minty, soft, refreshing, decadent, ....awesome!'
-  })
+  const thinMint = await Product.create(
+    {
+      name: 'thinMint',
+      type: 'cookie',
+      image:
+        'https://www.clipartkey.com/mpngs/m/62-623214_thin-mint-clipart-thin-mint-cookies-transparent.png',
+      price: 0.0,
+      description: 'Minty, soft, refreshing, decadent, ....awesome!',
+      productCategory: [{name: 'cookie'}]
+    },
+    {
+      include: [
+        {
+          association: ProductCategory,
+          as: 'productCategory'
+        }
+      ]
+    }
+  )
 
   const guest = await User.create({
     email: 'thinMint@gmail.com',
