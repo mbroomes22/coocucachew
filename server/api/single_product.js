@@ -1,6 +1,15 @@
 const router = require('express').Router()
 
-const {Product} = require('../db/models/product')
+const {Product, User, OrderProduct, Order} = require('../db/models')
+
+router.get('/', async (req, res, next) => {
+  try {
+    const products = await Product.findAll()
+    res.json(products)
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.get('/:productId', async (req, res, next) => {
   try {
@@ -33,11 +42,13 @@ router.put('/:productId', isAdmin, async (req, res, next) => {
   try {
     const updatedProduct = await Product.update(req.body, {
       where: {
-        id: req.params.productId,
-      },
+        id: req.params.productId
+      }
     })
     res.status(201).json(updatedProduct)
   } catch (err) {
     next(err)
   }
 })
+
+module.exports = router
