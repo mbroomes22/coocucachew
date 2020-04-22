@@ -2,6 +2,11 @@ body {
   font-family: sans-serif;
 }
 
+.title {
+  font-family: 'Satisfy', cursive;
+  color: #fe00fe;
+}
+
 a {
   text-decoration: none;
 }
