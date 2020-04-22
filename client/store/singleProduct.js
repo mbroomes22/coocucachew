@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 //action type
-
+const GET_PRODUCTS = 'GET_PRODUCTS'
 const GET_A_PRODUCT = 'GET_A_PRODUCT'
 
 //initial state
@@ -15,6 +15,10 @@ export const gotAProduct = product => ({
   product
 })
 
+const getProducts = products => ({
+  type: GET_PRODUCTS,
+  products
+})
 //thunk
 
 export const getAProduct = productId => {
@@ -24,12 +28,23 @@ export const getAProduct = productId => {
   }
 }
 
+export const fetchProducts = () => async dispatch => {
+  try {
+    const {data} = await axios.get('../api/products')
+    dispatch(getProducts(data))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 //reducer
 
 export default function singleProductReducer(state = product, action) {
   switch (action.type) {
     case GET_A_PRODUCT:
       return action.product
+    case GET_PRODUCTS:
+      return action.products
     default:
       return state
   }
