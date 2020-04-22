@@ -4,14 +4,16 @@ import {connect} from 'react-redux'
 import {getAProduct} from '../store/products'
 
 export class SingleProduct extends Component {
-  constructor(props) {
-    super(props)
-    // this.handleSubmit = this.handleSubmit.bind(this)
-  }
+  // constructor(props) {
+  //   super(props)
+  //   // this.handleSubmit = this.handleSubmit.bind(this)
+  // }
 
   componentDidMount() {
-    console.log('^*^*^')
-    this.props.getAProduct(this.props.match.params.id)
+    // console.log('^*^*^', this.props)
+    // this.props.match.params.productId ? (
+    this.props.getProduct(this.props.match.params.productId)
+    // : ('loading')
   }
 
   // handleSubmit(event){
@@ -31,7 +33,7 @@ export class SingleProduct extends Component {
         </div>
         <div className="singleProduct_container">
           <div className="singleProduct_image">
-            <img src={singleProduct.image} />
+            <img src={singleProduct.image} width="200" />
           </div>
           <div className="singleProduct_description">
             <p>{singleProduct.description}</p>
@@ -68,7 +70,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAProduct: productId => dispatch(getAProduct(productId))
+    getProduct: productId => dispatch(getAProduct(productId))
   }
 }
 

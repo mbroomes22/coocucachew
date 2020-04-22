@@ -5,6 +5,8 @@ router.use('/users', require('./users'))
 
 router.use('/products', require('./product'))
 
+router.use('/products/:productId', require('./product'))
+
 router.use((req, res, next) => {
   const error = new Error('Not Found')
   error.status = 404

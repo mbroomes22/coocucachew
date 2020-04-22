@@ -21,10 +21,14 @@ const getProducts = products => ({
 })
 //thunk
 
-export const getAProduct = productId => {
-  return async dispatch => {
-    const {data} = await axios.get(`api/products/${productId}`)
-    dispatch(gotAProduct(data))
+export const getAProduct = productId => async dispatch => {
+  try {
+    console.log('get product thunk before dispatch', productId)
+    const res = await axios.get(`api/products/${productId}`)
+    dispatch(gotAProduct(res.data))
+    console.log('get product thunk AFTER dispatch', res.data)
+  } catch (err) {
+    console.error(err)
   }
 }
 
