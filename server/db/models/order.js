@@ -9,7 +9,7 @@ const Order = db.define('order', {
   isPending: {
     // isPending = true means that the order is incomplete
     type: Sequelize.BOOLEAN,
-    default: true
+    defaultValue: true
   }
 })
 
