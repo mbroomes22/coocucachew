@@ -4,10 +4,10 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, removeAProduct} from '../store/products'
 import AddProductForm from './AddProductForm'
+import {Cart} from './cart'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
-    console.log('inside allproducts', this.props)
     this.props.getAllProducts()
   }
 
@@ -46,6 +46,7 @@ export class AllProducts extends React.Component {
         </div>
         <div>
           <AddProductForm props={this.props} />
+          {/* <Cart /> */}
         </div>
       </div>
     )
