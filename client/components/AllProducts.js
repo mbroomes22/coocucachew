@@ -1,13 +1,18 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {fetchProducts} from '../store/products'
+import {fetchProducts, removeAProduct} from '../store/products'
 import AddProductForm from './AddProductForm'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getAllProducts()
   }
+
+  handleRemove(productId) {
+    this.props.removeProduct(productId)
+  }
+
   render() {
     return (
       <div>
@@ -16,6 +21,15 @@ export class AllProducts extends React.Component {
             ? this.props.products.map(product => {
                 return (
                   <div key={product.id}>
+                    <button
+                      className="button"
+                      type="button"
+                      onClick={() => this.handleRemove(product.id)}
+                      width="100px"
+                    >
+                      <h1>X</h1>
+                      <h5>delete</h5>
+                    </button>
                     <h4>{product.name}</h4>
                     <h4>{product.price}</h4>
                     <img src={product.imageUrl} width="200" />
@@ -33,9 +47,6 @@ export class AllProducts extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     products: state.products,
@@ -45,15 +56,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getAllProducts: () => dispatch(fetchProducts())
+    getAllProducts: () => dispatch(fetchProducts()),
+    removeProduct: productId => dispatch(removeAProduct(productId))
   }
 }
 
 export default connect(mapState, mapDispatch)(AllProducts)
-
-/**
- * PROP TYPES
- */
-// AllProducts.propTypes = {
-//     product: PropTypes.string
-// }

@@ -46,4 +46,18 @@ router.put('/:productId', isAdmin, async (req, res, next) => {
   }
 })
 
+router.delete('/:productId', isAdmin, async (req, res, next) => {
+  try {
+    await Product.destroy({
+      where: {
+        id: req.params.productId
+      }
+    })
+    const products = await Product.findAll()
+    res.status(201).json(products)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

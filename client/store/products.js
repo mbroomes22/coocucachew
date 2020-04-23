@@ -4,6 +4,7 @@ import axios from 'axios'
 const GET_PRODUCTS = 'GET_PRODUCTS'
 const GET_A_PRODUCT = 'GET_A_PRODUCT'
 const ADD_PRODUCT = 'ADD_PRODUCT'
+const DELETE_PRODUCT = 'DELETE_PRODUCT'
 
 //initial state
 const initialProducts = {}
@@ -19,9 +20,14 @@ const getProducts = products => ({
   products
 })
 
-const addedProduct = product => ({
+const addedProduct = products => ({
   type: ADD_PRODUCT,
-  product
+  products
+})
+
+const deletedProduct = products => ({
+  type: DELETE_PRODUCT,
+  products
 })
 
 //thunk
@@ -45,10 +51,18 @@ export const fetchProducts = () => async dispatch => {
 
 export const addNewProduct = productInfo => async dispatch => {
   try {
-    console.log('inside thunk, before dispatch')
     const res = await axios.post('/api/products', productInfo)
     dispatch(addedProduct(res.data))
-    console.log('inside thunk, AFTER dispatch')
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const removeAProduct = productId => async dispatch => {
+  try {
+    console.log('inside thunk, before dispatch')
+    const res = await axios.delete(`api/products/${productId}`)
+    dispatch(deletedProduct(res.data))
   } catch (error) {
     console.error(error)
   }
@@ -59,10 +73,16 @@ export default function singleProductReducer(state = initialProducts, action) {
   switch (action.type) {
     case GET_A_PRODUCT:
       return action.product
+
     case GET_PRODUCTS:
       return action.products
+
     case ADD_PRODUCT:
       return action.product
+
+    case DELETE_PRODUCT:
+      return action.products
+
     default:
       return state
   }
