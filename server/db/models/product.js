@@ -11,7 +11,6 @@ const Product = db.define('product', {
     }
   },
   price: {
-    // look into getters/setters/class/instance methods/hooks
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
@@ -23,13 +22,12 @@ const Product = db.define('product', {
     }
   },
   imageUrl: {
-    // update to imageUrl
-    type: Sequelize.STRING, // update to TEXT
+    type: Sequelize.TEXT,
     validate: {
       isUrl: true
     },
     defaultValue:
-      'https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-stock-vector-no-image-available-icon-flat-vector.jpg?ver=6'
+      'https://cdn.shopify.com/s/files/1/0034/7550/5225/products/Birthday_Cake_6in_Overhead-1_800x.jpg?v=1579840506'
   },
   description: {
     type: Sequelize.TEXT,
@@ -40,11 +38,11 @@ const Product = db.define('product', {
   },
   isActive: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true // set to false
+    defaultValue: false
   },
   stock: {
     type: Sequelize.INTEGER,
-    defaultValue: 1000 // set to 0
+    defaultValue: 0
   }
 })
 

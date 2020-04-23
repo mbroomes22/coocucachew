@@ -25,8 +25,9 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/', isAdmin, async (req, res, next) => {
   try {
-    const newProduct = await Product.create(req.body)
-    res.json(newProduct) // manually set status to 201
+    await Product.create(req.body)
+    const products = await Product.findAll()
+    res.status(201).json(products)
   } catch (err) {
     next(err)
   }

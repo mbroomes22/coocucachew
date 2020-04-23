@@ -33,7 +33,7 @@ export class SingleProduct extends Component {
         </div>
         <div className="singleProduct_container">
           <div className="singleProduct_image">
-            <img src={singleProduct.image} width="200" />
+            <img src={singleProduct.imageUrl} width="200" />
           </div>
           <div className="singleProduct_description">
             <p>{singleProduct.description}</p>
