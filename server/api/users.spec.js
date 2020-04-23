@@ -5,6 +5,7 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const User = db.model('user')
+// const isAdmin = require('./isAdmin')
 
 describe('User routes', () => {
   beforeEach(() => {
