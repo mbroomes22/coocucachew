@@ -9,9 +9,9 @@ export class SingleProduct extends Component {
     this.state = {
       name: '',
       price: '',
-      qty: ''
+      qty: 0
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -21,13 +21,27 @@ export class SingleProduct extends Component {
     // : ('loading')
   }
 
-  handleSubmit(event) {
-    console.log('^^^^^^', event.target.value)
-    event.preventDefault()
-    return this.setState({
+  // handleSubmit(event) {
+  //   console.log('^^^^^^', event.target.value)
+  //   event.preventDefault()
+  //   return this.setState({
+  //     name: this.props.singleProduct.name,
+  //     price: this.props.singleProduct.price,
+  //     qty: 0
+  //   })
+  // }
+  Increament = () => {
+    this.setState({
       name: this.props.singleProduct.name,
       price: this.props.singleProduct.price,
-      qty: event.target.name
+      qty: this.state.qty + 1
+    })
+  }
+  Decreament = () => {
+    this.setState({
+      name: this.props.singleProduct.name,
+      price: this.props.singleProduct.price,
+      qty: this.state.qty - 1
     })
   }
 
@@ -51,7 +65,10 @@ export class SingleProduct extends Component {
           </div>
         </div>
         <div className="quantity_change">
-          <div className="quantity_input">
+          <button onClick={this.Decreament}>-</button>
+          Qty: {this.state.qty}
+          <button onClick={this.Increament}>+</button>
+          {/* <div className="quantity_input">
             <form onSubmit={event => this.handleSubmit(event)}>
               <select id="qty">
                 <option defaultValue="">Qty</option>
@@ -68,7 +85,7 @@ export class SingleProduct extends Component {
               </select>
               <button type="submit">add to cart</button>
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
     )
