@@ -4,10 +4,15 @@ import {connect} from 'react-redux'
 import {getAProduct} from '../store/products'
 
 export class SingleProduct extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   // this.handleSubmit = this.handleSubmit.bind(this)
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      price: '',
+      qty: ''
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
 
   componentDidMount() {
     // console.log('^*^*^', this.props)
@@ -16,19 +21,22 @@ export class SingleProduct extends Component {
     // : ('loading')
   }
 
-  // handleSubmit(event){
-  //   event.preventDefault()
-  //   const productAddTOCart =
-  //   // add the product with the qty to the cart
-
-  // }
+  handleSubmit(event) {
+    console.log('^^^^^^', event.target.value)
+    event.preventDefault()
+    return this.setState({
+      name: this.props.singleProduct.name,
+      price: this.props.singleProduct.price,
+      qty: event.target.name
+    })
+  }
 
   render() {
-    console.log('$$$$$$$$', this.props)
+    console.log('THIS STATE: ', this.state)
     const singleProduct = this.props.singleProduct
     return (
       <div className="singleProduct_page">
-        <div className="header">
+        <div className="header" key={singleProduct.id}>
           <h3>{singleProduct.name}</h3>
         </div>
         <div className="singleProduct_container">
@@ -44,8 +52,8 @@ export class SingleProduct extends Component {
         </div>
         <div className="quantity_change">
           <div className="quantity_input">
-            <form>
-              <select id="product_quantity">
+            <form onSubmit={event => this.handleSubmit(event)}>
+              <select id="qty">
                 <option defaultValue="">Qty</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
