@@ -1,11 +1,13 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {fetchProducts, removeAProduct} from '../store/products'
 import AddProductForm from './AddProductForm'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
+    console.log('inside allproducts', this.props)
     this.props.getAllProducts()
   }
 
@@ -14,11 +16,12 @@ export class AllProducts extends React.Component {
   }
 
   render() {
+    const {products} = this.props
     return (
       <div>
         <div>
           {this.props.products[0]
-            ? this.props.products.map(product => {
+            ? products.map(product => {
                 return (
                   <div key={product.id}>
                     <button
@@ -30,7 +33,9 @@ export class AllProducts extends React.Component {
                       <h1>X</h1>
                       <h5>delete</h5>
                     </button>
-                    <h4>{product.name}</h4>
+                    <Link to={`/${product.id}`}>
+                      <h4>{product.name}</h4>
+                    </Link>
                     <h4>{product.price}</h4>
                     <img src={product.imageUrl} width="200" />
                     <p>{product.description}</p>
