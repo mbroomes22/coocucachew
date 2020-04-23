@@ -1,0 +1,69 @@
+import React from 'react'
+// import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {fetchProducts, removeAProduct} from '../store/products'
+import AddProductForm from './AddProductForm'
+
+export class AllProducts extends React.Component {
+  componentDidMount() {
+    console.log('inside allproducts', this.props)
+    this.props.getAllProducts()
+  }
+
+  handleRemove(productId) {
+    this.props.removeProduct(productId)
+  }
+
+  render() {
+    const {products} = this.props
+    return (
+      <div>
+        <div>
+          {this.props.products[0]
+            ? products.map(product => {
+                return (
+                  <div key={product.id}>
+                    <button
+                      className="button"
+                      type="button"
+                      onClick={() => this.handleRemove(product.id)}
+                      width="100px"
+                    >
+                      <h1>X</h1>
+                      <h5>delete</h5>
+                    </button>
+                    <Link to={`/${product.id}`}>
+                      <h4>{product.name}</h4>
+                    </Link>
+                    <h4>{product.price}</h4>
+                    <img src={product.imageUrl} width="200" />
+                    <p>{product.description}</p>
+                  </div>
+                )
+              })
+            : 'loading....'}
+        </div>
+        <div>
+          <AddProductForm props={this.props} />
+        </div>
+      </div>
+    )
+  }
+}
+
+const mapState = state => {
+  return {
+    products: state.products,
+    user: state.user
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    getAllProducts: () => dispatch(fetchProducts()),
+    removeProduct: productId => dispatch(removeAProduct(productId))
+  }
+}
+
+export default connect(mapState, mapDispatch)(AllProducts)
