@@ -3,12 +3,13 @@ const db = require('../db')
 
 const OrderProduct = db.define('orderproduct', {
   quantity: {
-    // might want to have a validation here
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0
+    }
   },
   price: {
-    // fix
-    type: Sequelize.FLOAT
+    type: Sequelize.INTEGER
   }
 })
 
