@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const isAdmin = require('./isAdmin')
 
 const {Product} = require('../db/models/product')
 
@@ -10,15 +11,6 @@ router.get('/:productId', async (req, res, next) => {
     next(err)
   }
 })
-
-const isAdmin = (req, res, next) => {
-  if (!req.user.isAdmin) {
-    const err = new Error('No privileges')
-    err.status = 401
-    return next(err)
-  }
-  next()
-}
 
 router.post('/', isAdmin, async (req, res, next) => {
   try {

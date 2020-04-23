@@ -23,8 +23,7 @@ const Product = db.define('product', {
     }
   },
   imageUrl: {
-    // update to imageUrl
-    type: Sequelize.STRING, // update to TEXT
+    type: Sequelize.TEXT,
     validate: {
       isUrl: true
     },
@@ -40,11 +39,11 @@ const Product = db.define('product', {
   },
   isActive: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true // set to false
+    defaultValue: false
   },
   stock: {
     type: Sequelize.INTEGER,
-    defaultValue: 1000 // set to 0
+    defaultValue: 0
   }
 })
 
