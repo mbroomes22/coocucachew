@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, removeAProduct} from '../store/products'
 import AddProductForm from './AddProductForm'
-import {Cart} from './cart'
+// import {Cart} from './cart'
 
 export class AllProducts extends React.Component {
   componentDidMount() {

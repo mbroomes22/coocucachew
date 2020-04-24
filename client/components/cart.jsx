@@ -18,7 +18,7 @@ export class Cart extends React.Component {
 
   render() {
     localStorage.setItem('state', defaultState)
-    console.log(localStorage)
+    // console.log(localStorage)
     return <div>{/* <CartList state={this.state} /> */}</div>
   }
 }

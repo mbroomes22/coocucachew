@@ -46,9 +46,12 @@ User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
+// User.prototype.hasAccess = function()
+
 /**
  * classMethods
  */
+
 User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64')
 }

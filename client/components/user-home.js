@@ -9,12 +9,12 @@ import {Cart} from './cart'
  */
 export const UserHome = props => {
   const {email} = props
-  console.log('PROPS=>', props)
+  // console.log('PROPS=>', props)
 
   return (
     <div>
       <h3>Welcome, {email}</h3>
-      <Cart />
+      {/* <Cart /> */}
     </div>
   )
 }
