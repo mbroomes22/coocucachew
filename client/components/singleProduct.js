@@ -4,10 +4,15 @@ import {connect} from 'react-redux'
 import {getAProduct} from '../store/products'
 
 export class SingleProduct extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   // this.handleSubmit = this.handleSubmit.bind(this)
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      price: '',
+      qty: 0
+    }
+    // this.handleSubmit = this.handleSubmit.bind(this)
+  }
 
   componentDidMount() {
     // console.log('^*^*^', this.props)
@@ -16,19 +21,36 @@ export class SingleProduct extends Component {
     // : ('loading')
   }
 
-  // handleSubmit(event){
+  // handleSubmit(event) {
+  //   console.log('^^^^^^', event.target.value)
   //   event.preventDefault()
-  //   const productAddTOCart =
-  //   // add the product with the qty to the cart
-
+  //   return this.setState({
+  //     name: this.props.singleProduct.name,
+  //     price: this.props.singleProduct.price,
+  //     qty: 0
+  //   })
   // }
+  Increament = () => {
+    this.setState({
+      name: this.props.singleProduct.name,
+      price: this.props.singleProduct.price,
+      qty: this.state.qty + 1
+    })
+  }
+  Decreament = () => {
+    this.setState({
+      name: this.props.singleProduct.name,
+      price: this.props.singleProduct.price,
+      qty: this.state.qty - 1
+    })
+  }
 
   render() {
-    console.log('$$$$$$$$', this.props)
+    console.log('THIS STATE: ', this.state)
     const singleProduct = this.props.singleProduct
     return (
       <div className="singleProduct_page">
-        <div className="header">
+        <div className="header" key={singleProduct.id}>
           <h3>{singleProduct.name}</h3>
         </div>
         <div className="singleProduct_container">
@@ -43,9 +65,12 @@ export class SingleProduct extends Component {
           </div>
         </div>
         <div className="quantity_change">
-          <div className="quantity_input">
-            <form>
-              <select id="product_quantity">
+          <button onClick={this.Decreament}>-</button>
+          Qty: {this.state.qty}
+          <button onClick={this.Increament}>+</button>
+          {/* <div className="quantity_input">
+            <form onSubmit={event => this.handleSubmit(event)}>
+              <select id="qty">
                 <option defaultValue="">Qty</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -60,7 +85,7 @@ export class SingleProduct extends Component {
               </select>
               <button type="submit">add to cart</button>
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
     )
