@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import AllProducts from './AllProducts'
+import {AllProducts} from './'
 // import { CartList } from './cartList'
 import axios from 'axios'
 
@@ -22,3 +22,5 @@ export class Cart extends React.Component {
     return <div>{/* <CartList state={this.state} /> */}</div>
   }
 }
+
+export default connect(null, null)(Cart)
