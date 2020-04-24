@@ -18,12 +18,14 @@ before_script:
 script:
   - npm test # test the code
   - npm run build-client # make the bundle
-
-before_deploy:
-  - rm -rf node_modules # omit from the tarball, since we skip cleanup
-deploy:
-  skip_cleanup: true # prevents travis from deleting the build
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
   provider: heroku
-  app: coocucachew # see README
+  # app should be your heroku app name; see README
+  app: coocucachew
+  # the secure key indicates an encrypted value; see README
   api_key:
-    secure: "NTWGDpDzUyT257PwS/fPbWeHigLOUlRU3LlHQLA/GPY+pDLMdSrqyUCcWylvUup1gjdo1zIpc9LFUtIMmwle4GS5nfvl1sD7m9ect/BCnJTshohqs5Duf9gDyOpu5GOQXJVHBtCVvgw/AiptQ4ucbmQEEgerUkUKtiGSRnGnM9WOyU7+FYopASXpbQDaXw07Tb1o5ODOfDf7kFM+t0YZ2sgBoU9RakMDmGjn+pqC88dIlGs5SUUw7UqsXALUrVnHGfyls8oO1WAClLHK5K4NenGHG+mXnNwzXk/OMRyP4kHTywPFW8gDoGUzP6e7OSGfK5U9qj3TkY65YPNeAPyr2hZb7dBL6VFlufmfVZkvi/CcKodYd8Q8pgD4BEjapLdmgRMf/q8t4dRQR4HrYzXfUPsxy8wS60Cwua2ertidfCdVyuUdp2A8zpJwoezgMptLX8nyGVYJOiVYRZITJ8BrM3X4cDt32KROJQF7z+J5GKJwQGuniRpUuAbUFUF5Ynr5XqtHcp14Ghlza7/FIzmXEgp+SwcFyfaOHDP8XuiIowwVIKoRTxzZuJleIHnEIqP5EGdDD6Kp0hSoewx5jilwfnn42XJJaTXJe04DuTNeD3lU4lA7Ub8l1xXm6Ih6z5lTnM8bMLwVr0hvPUHBsyP1nU0apB1Z24CMviNbArv7wts=" # see README
+    secure: VOOyIdFZhieDOD868PN3lwlJL8mEAYeGtUznkUraziR1Wk1fhe1CHOU36DO7/AtJ6ym1WgtKoInnxJVFrUxIcnZ+EZ1F6Yd1bgFwzC773C7YuL5blIw0raPvZ3+KU+Ht5JSw31EHf5tYzVXyvYOmH7NGnDUcgfeyaeLMr2VefbtZKZTOdk1fK+HCrubOUao6l0VsEuYWYgb16RH2mjXrBfyw46eJ+V65qofJRV0iM9g0HXboxQNL9WX1prjHebG2bUB0l1T9WoLBk72+SJCo7iDsBAMpnCOuTsmAFcvveClXX8Gb8KOEAFl9BiIzRq2fm/+83NnH0ltYxV5dpTVOawFikd+uffHKGJlEjT4py4Y/UCP1AhHsp+Z0LGpvZALRlVcpRXp9+DKT7Rd80RpV02X4VJJaD8aHiegvqx66ecpjjoDv8Pj6gtj0pBndhmpinwAhEFfOV6lXc2zzb6K2Bd25BW/B19gs6p4ZQL0/vKUAtCnamKGJn1JtCXLhBqEYmpRhUmdS79PYw++p6wYr9Nb0M9d48rDPQ11Sdg5w9GWc71NAkyk9gAJS7jQhxV3Goo+rwL6NDsweoF/wpECs/cWppzBzomEFCeow438SM5Va+tC1LQ2m6mPvjqynaTKtbs6m02kvq3+fife17Bz/kN7d6TJqoi+rDggYzCvzXSE=
