@@ -6,7 +6,7 @@ const ProductCategory = db.model('productCategory')
 
 // const {db, ProductCategory} = require('../../db')
 
-describe('ProductCategory model', () => {
+xdescribe('ProductCategory model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
