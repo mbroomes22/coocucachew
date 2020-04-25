@@ -2,18 +2,35 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/cart'
 
-// const localCart = localStorage.cart
-// const defaultState = { cart: localCart }
+const localCart = localStorage.cart
+const defaultState = {}
 
 export class Cart extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
   componentDidMount() {
-    this.props.getCart()
-    console.log('cart render props', this.props)
+    const dbCart = this.props.cart
+    if (!localCart[0]) {
+      this.props.getCart()
+      this.setState(dbCart)
+    }
+    this.setState(localCart)
   }
 
   render() {
     console.log(this.props)
-    return <div />
+    return (
+      <div>
+        <h3>C A R T</h3>
+        {this.state.map(order => (
+          <div key={order.id}>
+            <p />
+          </div>
+        ))}
+      </div>
+    )
   }
 }
 
