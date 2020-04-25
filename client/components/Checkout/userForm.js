@@ -12,10 +12,7 @@ class UserForm extends Component {
     email: '',
     streetAddress: '',
     zipCode: '',
-    country: '',
-    cardNum: '',
-    cardExp: '',
-    cardCVV: ''
+    country: ''
   }
 
   //continue to next step
@@ -48,10 +45,7 @@ class UserForm extends Component {
       email,
       streetAddress,
       zipCode,
-      country,
-      cardNum,
-      cardExp,
-      cardCVV
+      country
     } = this.state
     const values = {
       firstName,
@@ -59,10 +53,7 @@ class UserForm extends Component {
       email,
       streetAddress,
       zipCode,
-      country,
-      cardNum,
-      cardExp,
-      cardCVV
+      country
     }
 
     switch (step) {
@@ -94,7 +85,7 @@ class UserForm extends Component {
       case 4:
         return <Success />
       default:
-        return <div />
+        return <div>Checkout</div>
     }
   }
 }

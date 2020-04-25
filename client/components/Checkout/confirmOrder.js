@@ -1,12 +1,11 @@
-// confirmation page confirming address and payment info
-//props should access db to find and show user's input address and payment from checkout page
+// confirmation page confirming address, payment info, and cart items/cart total
+//needs to be passed props from '../cart', bc props should access name, price, qty of items in cart and confirm a calculated total
+//clicking 'Confirm&Checkout' button should send user's address, cart, and payment to db
 import React, {Component} from 'react'
-// import MultiThemeProvider from 'material-ui/styles/MultiThemeProvider'
-// import AppBar from 'material-ui/AppBar'
-// import {List, ListItem} from 'material-ui/List'
-// import RaisedButton from 'material-ui/RaisedButton'
+import {updateOrderHistory, updateUserAddresses} from '../../store/saveOrder'
+import {connect} from 'react-redux'
 
-export default class ConfirmOrder extends Component {
+export class ConfirmOrder extends Component {
   continue = evt => {
     evt.preventDefault()
     //Process form -send data to DB
@@ -18,111 +17,87 @@ export default class ConfirmOrder extends Component {
     this.props.prevStep()
   }
 
+  handleSubmit = evt => {
+    evt.preventDefault()
+    this.props.addOrder(this.props.userId, this.props.total)
+    this.props.addAddress(this.state.streetAddress)
+    this.setState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      streetAddress: '',
+      zipCode: '',
+      country: ''
+    })
+  }
+
   render() {
     const {
-      values: {
-        firstName,
-        lastName,
-        email,
-        streetAddress,
-        zipCode,
-        country,
-        cardNum,
-        cardExp,
-        cardCVV
-      }
+      values: {firstName, lastName, email, streetAddress, zipCode, country}
     } = this.props
     return (
-      // <MultiThemeProvider>
-      //   <React.Fragment>
-      //     <AppBar title="Confirm Order Details" />
-
-      //     <List>
-      //       <ListItem
-      //         primaryText="First Name"
-      //         secondaryText={ firstName }
-      //       />
-      //       <ListItem
-      //         primaryText="Last Name"
-      //         secondaryText={ lastName }
-      //       />
-      //       <ListItem
-      //         primaryText="Email"
-      //         secondaryText={ email }
-      //       />
-      //       <ListItem
-      //         primaryText="Street Address"
-      //         secondaryText={ streetAddress }
-      //       />
-      //       <ListItem
-      //         primaryText="Zipcode"
-      //         secondaryText={ zipCode }
-      //       />
-      //       <ListItem
-      //         primaryText="Country"
-      //         secondaryText={ country }
-      //       />
-      //       <ListItem
-      //         primaryText="Card Number"
-      //         secondaryText={ cardNum }
-      //       />
-      //       <ListItem
-      //         primaryText="Card exp. date"
-      //         secondaryText={ cardExp }
-      //       />
-      //       <ListItem
-      //         primaryText="CVV"
-      //         secondaryText={ cardCVV }
-      //       />
-      //     </List><br />
-
-      //     <RaisedButton
-      //       label= "Confirm & Checkout"
-      //       primary= "true"
-      //       onClick= {this.continue}
-      //     />
-      //     <RaisedButton
-      //       label= "Return to Payment Details"
-      //       primary= "true"
-      //       onClick= {this.goBack}
-      //     />
-      //   </React.Fragment>
-      // </MultiThemeProvider>
-
       <div>
         <button type="submit" onClick={this.goBack}>
           Return to Payment Details
         </button>
         <h1>Confirm Order Details</h1>
+        <br />
+        <br />
+        <h2>Shipping Address</h2>
+        <br />
+        <br />
         <ul>
           <li>
-            First Name <br /> {firstName}
+            <h3>First Name:</h3> <br /> {firstName}
           </li>
           <li>
-            Last Name <br /> {lastName}
+            <h3>Last Name:</h3> <br /> {lastName}
           </li>
           <li>
-            Email <br /> {email}
+            <h3>Email:</h3> <br /> {email}
           </li>
           <li>
-            Street Address <br /> {streetAddress}
+            <h3>Street Address:</h3> <br /> {streetAddress}
           </li>
           <li>
-            Zipcode <br /> {zipCode}
+            <h3>Zipcode:</h3> <br /> {zipCode}
           </li>
           <li>
-            Country <br /> {country}
-          </li>
-          <li>
-            Card Number <br /> {cardNum}
-          </li>
-          <li>
-            Card Exp. date <br /> {cardExp}
-          </li>
-          <li>
-            CVV <br /> {cardCVV}
+            <h3>Country:</h3> <br /> {country}
           </li>
         </ul>
+        <h2>Payment Method</h2>
+        <br />
+        <br />
+        <ul>
+          <li>
+            <h3>Payment:</h3> <br /> <p>Stripe</p>
+          </li>
+        </ul>
+        <h2>Review Items</h2>
+        <br />
+        <br />
+        <ul>
+          {this.props.cartItems.map(item => (
+            <div key={item.id}>
+              <li>
+                <h3>{item.name}</h3> <br />
+              </li>
+              <li>
+                <h3>{item.description}</h3> <br />
+              </li>
+              <li>
+                <h3>{item.qty}</h3> <br />
+              </li>
+              <li>
+                <h3>{item.price}</h3> <br />
+              </li>
+            </div>
+          ))}
+        </ul>
+        <h2>Order Total</h2>
+        <br />
+        {this.props.total}
 
         <button type="submit" onClick={this.continue}>
           Confirm & Checkout
@@ -131,3 +106,12 @@ export default class ConfirmOrder extends Component {
     )
   }
 }
+
+const mapState = () => {}
+
+const mapDispatch = dispatch => ({
+  addOrder: newOrder => dispatch(updateOrderHistory(newOrder)),
+  addAddress: newAddress => dispatch(updateUserAddresses(newAddress))
+})
+
+export default connect(mapState, mapDispatch)(ConfirmOrder)
