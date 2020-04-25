@@ -3,8 +3,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, removeAProduct} from '../store/products'
-import {AddProductForm} from './'
-// import {Cart} from './cart'
+import AddProductForm from './AddProductForm'
+import {Cart} from './Cart'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
