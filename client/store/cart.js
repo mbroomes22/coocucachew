@@ -14,10 +14,9 @@ export const getCart = cart => ({
   cart
 })
 
-export const addToCart = (order, item) => ({
+export const addedToCart = orderProduct => ({
   type: ADD_TO_CART,
-  order,
-  item
+  orderProduct
 })
 
 export const updateQty = qty => ({
@@ -41,7 +40,9 @@ export const getTotalPrice = totalPrice => ({
 
 //initial state
 
-const initialState = {}
+const initialState = {
+  cart: []
+}
 
 //thunks
 
@@ -62,6 +63,13 @@ export const fetchCart = () => async dispatch => {
   }
 }
 
+export const addToCart = (orderId, orderProduct) => {
+  return async dispatch => {
+    const {data} = await axios.post(`/api/orders/${orderId}`, orderProduct)
+    dispatch(addedToCart(data))
+  }
+}
+
 //****not finish, also think about add-To-Cart button which will use POST, and remove item which will use delete */
 
 //^^^
@@ -72,6 +80,9 @@ export default function cartReducer(state = initialState, action) {
     case GET_CART:
       console.log('inside cart reducer', action.cart)
       return action.cart
+
+    case ADD_TO_CART:
+      return [...state, action.orderProduct]
 
     default:
       return state

@@ -8,13 +8,15 @@ const defaultState = {}
 export class Cart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      cart: {}
+    }
   }
   componentDidMount() {
     const dbCart = this.props.cart
     if (!localCart[0]) {
       this.props.getCart()
-      this.setState(dbCart)
+      // this.setState({this.state.cart = dbCart})
     }
     this.setState(localCart)
   }
