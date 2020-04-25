@@ -3,7 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, removeAProduct} from '../store/products'
-import {fetchCart} from '../store/cart'
+// import {fetchCart} from '../store/cart'
 import AddProductForm from './AddProductForm'
 // import {Cart} from './Cart'
 
