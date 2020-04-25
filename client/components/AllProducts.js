@@ -46,7 +46,7 @@ export class AllProducts extends React.Component {
         </div>
         <div>
           <AddProductForm props={this.props} />
-          {/* <Cart /> */}
+          <Cart />
         </div>
       </div>
     )

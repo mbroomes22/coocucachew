@@ -4,7 +4,7 @@ import {AllProducts} from './'
 // import { CartList } from './cartList'
 import axios from 'axios'
 
-const defaultState = []
+const defaultState = {cart: localStorage.cart}
 
 export class Cart extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export class Cart extends React.Component {
 
   render() {
     localStorage.setItem('state', defaultState)
-    // console.log(localStorage)
+    console.log(localStorage)
     return <div>{/* <CartList state={this.state} /> */}</div>
   }
 }
