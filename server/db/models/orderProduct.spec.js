@@ -4,7 +4,7 @@ const OrderProduct = db.model('orderProduct')
 const Product = require('./product')
 const Order = require('./order')
 
-describe('orderProduct Model', () => {
+xdescribe('orderProduct Model', () => {
   before(() => db.sync({force: true}))
   afterEach(() => db.sync({force: true}))
 

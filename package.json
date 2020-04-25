@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "We sell cookies, chocolates, cupcakes, and cake pops'!",
   "engines": {
-    "node": ">= 7.0.0"
+    "node": "12.16.x"
   },
   "main": "index.js",
   "scripts": {

@@ -2,7 +2,7 @@ const {expect} = require('chai')
 const db = require('../index')
 const Product = db.model('product')
 
-describe('Sequelize Product Model', () => {
+xdescribe('Sequelize Product Model', () => {
   before(() => db.sync({force: true}))
   afterEach(() => db.sync({force: true}))
 
