@@ -72,31 +72,57 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '1234'}),
-    User.create({email: 'giselle@email.com', password: '1235', isAdmin: true}),
-    User.create({email: 'michelle@email.com', password: '1236', isAdmin: true}),
-    User.create({email: 'adriana@email.com', password: '1237', isAdmin: true}),
-    User.create({email: 'yunshu@email.com', password: '1238', isAdmin: true}),
-    User.create({
-      email: 'giselleclone@email.com',
-      password: '1231',
-      isAdmin: false
-    }),
-    User.create({
-      email: 'michelleclone@email.com',
-      password: '1232',
-      isAdmin: false
-    }),
-    User.create({
-      email: 'adrianaclone@email.com',
-      password: '1233',
-      isAdmin: false
-    }),
-    User.create({
-      email: 'yunshuclone@email.com',
-      password: '12344',
-      isAdmin: false
-    })
+    User.create({email: 'anotherpug@email.com', password: '1234'})
   ])
+
+  const user1 = User.create({
+    email: 'giselle@email.com',
+    password: '1235',
+    isAdmin: true
+  })
+
+  const user2 = User.create({
+    email: 'michelle@email.com',
+    password: '1236',
+    isAdmin: true,
+    googleId: ''
+  })
+
+  const user3 = User.create({
+    email: 'adriana@email.com',
+    password: '1237',
+    isAdmin: true
+  })
+
+  const user4 = User.create({
+    email: 'yunshu@email.com',
+    password: '1238',
+    isAdmin: true
+  })
+
+  const user5 = User.create({
+    email: 'giselleclone@email.com',
+    password: '1231',
+    isAdmin: false
+  })
+
+  const user6 = User.create({
+    email: 'michelleclone@email.com',
+    password: '1232',
+    isAdmin: false
+  })
+
+  const user8 = User.create({
+    email: 'adrianaclone@email.com',
+    password: '1233',
+    isAdmin: false
+  })
+
+  const user7 = User.create({
+    email: 'yunshuclone@email.com',
+    password: '12344',
+    isAdmin: false
+  })
 
   const guest = await User.create({
     email: 'thinMint@gmail.com',
@@ -113,27 +139,12 @@ async function seed() {
   })
 
   const order1 = await Order.create({
-    // total: 30.0,
+    userId: 1,
     isActive: true
   })
 
   const order2 = await Order.create({
-    // total: 30.0,
-    isActive: true
-  })
-
-  const order3 = await Order.create({
-    // total: 30.0,
-    isActive: true
-  })
-
-  const order4 = await Order.create({
-    // total: 30.0,
-    isActive: true
-  })
-
-  const order5 = await Order.create({
-    // total: 30.0,
+    userId: 2,
     isActive: true
   })
 
@@ -144,25 +155,18 @@ async function seed() {
     orderId: 1
   })
 
-  const orderproduct2 = await OrderProduct.create({
-    quantity: 1,
-    price: 4,
-    productId: 1,
-    orderId: 3
-  })
-
   const orderproduct3 = await OrderProduct.create({
     quantity: 1,
     price: 3,
     productId: 2,
-    orderId: 3
+    orderId: 1
   })
 
   const orderproduct4 = await OrderProduct.create({
     quantity: 1,
     price: 5,
     productId: 3,
-    orderId: 2
+    orderId: 1
   })
 
   const orderproduct5 = await OrderProduct.create({
@@ -176,7 +180,7 @@ async function seed() {
     quantity: 1,
     price: 3,
     productId: 4,
-    orderId: 4
+    orderId: 1
   })
 
   console.log(`seeded ${users.length} users`)

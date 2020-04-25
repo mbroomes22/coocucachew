@@ -1,5 +1,5 @@
 const isAuth = (req, res, next) => {
-  if (!req.user.googleId) {
+  if (!req.user.googleId || !req.user.isAdmin) {
     const err = new Error('No privileges')
     err.status = 401
     return next(err)
