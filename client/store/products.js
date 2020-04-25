@@ -68,7 +68,7 @@ export const removeAProduct = productId => async dispatch => {
 }
 
 //reducer
-export default function singleProductReducer(state = initialProducts, action) {
+export default function productsReducer(state = initialProducts, action) {
   switch (action.type) {
     case GET_A_PRODUCT:
       return action.product

@@ -3,12 +3,14 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, removeAProduct} from '../store/products'
+import {fetchCart} from '../store/cart'
 import AddProductForm from './AddProductForm'
 import {Cart} from './Cart'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getAllProducts()
+    this.props.getCart(this.props.user.id)
   }
 
   handleRemove(productId) {
@@ -46,7 +48,8 @@ export class AllProducts extends React.Component {
         </div>
         <div>
           <AddProductForm props={this.props} />
-          <Cart />
+          <Cart props={this.props} />
+          {/* user={this.props.user} */}
         </div>
       </div>
     )
@@ -56,14 +59,16 @@ export class AllProducts extends React.Component {
 const mapState = state => {
   return {
     products: state.products,
-    user: state.user
+    user: state.user,
+    cart: state.cart
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     getAllProducts: () => dispatch(fetchProducts()),
-    removeProduct: productId => dispatch(removeAProduct(productId))
+    removeProduct: productId => dispatch(removeAProduct(productId)),
+    getCart: userId => dispatch(fetchCart(userId))
   }
 }
 

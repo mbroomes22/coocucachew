@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 //action types
-
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 const UPDATE_QTY = 'UPDATE_QTY'
@@ -10,10 +9,9 @@ const EMPTY_CART = 'EMPTY_CART'
 const GET_TOTAL_PRICE = 'GET_TOTAL_PRICE'
 
 //action creators
-
-export const getCart = cartData => ({
+export const getCart = cart => ({
   type: GET_CART,
-  cartData
+  cart
 })
 
 export const addToCart = (order, item) => ({
@@ -24,7 +22,7 @@ export const addToCart = (order, item) => ({
 
 export const updateQty = qty => ({
   type: UPDATE_QTY,
-  qtyData
+  qty
 })
 
 export const removeItem = itemId => ({
@@ -43,12 +41,7 @@ export const getTotalPrice = totalPrice => ({
 
 //initial state
 
-const initialState = {
-  orderId: null,
-  item: [],
-  qty: {},
-  total: 0
-}
+const initialState = {}
 
 //thunks
 
@@ -57,12 +50,27 @@ const initialState = {
 
 export const fetchCart = userId => {
   return async dispatch => {
+    console.log('in fetch cart dispatch before request')
     if (!userId) {
       dispatch(getCart(null))
     } else {
-      const {data} = await axios.get(`api/orders/cart/${userId}`)
+      const {data} = await axios.get(`api/orders/${userId}`)
+      console.log('in fetch cart dispatch before request')
       dispatch(getCart(data))
     }
   }
 }
 //****not finish, also think about add-To-Cart button which will use POST, and remove item which will use delete */
+
+//^^^
+//I finished it up to test- so I could use the reducer vvvvvv
+
+export default function cartReducer(state = initialState, action) {
+  switch (action.type) {
+    case GET_CART:
+      return action.cart
+
+    default:
+      return state
+  }
+}

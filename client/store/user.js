@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+// const GET_USER
 
 /**
  * INITIAL STATE
@@ -63,6 +64,7 @@ export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
+
     case REMOVE_USER:
       return defaultUser
     default:

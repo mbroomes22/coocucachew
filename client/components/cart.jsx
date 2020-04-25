@@ -1,26 +1,40 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {AllProducts} from './'
-// import { CartList } from './cartList'
-import axios from 'axios'
+import {fetchCart} from '../store/cart'
 
-const defaultState = {cart: localStorage.cart}
+// const localCart = localStorage.cart
+// const defaultState = { cart: localCart }
 
 export class Cart extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
+  componentDidMount() {
+    // this.props.getCart(this.props.user.id)
+    console.log('dbCart in component did mount', this.props)
+    // if (localCart[0]) {
+    //   this.setState(
+    //     { cart : localCart })
+    // } else {
+    //   this.setState(
+    //     { cart : dbCart })
+    // }
   }
 
-  //   componentDidMount(){
-  //       const userCart = axios.get('api/users')
-  //   }
-
   render() {
-    localStorage.setItem('state', defaultState)
-    console.log(localStorage)
-    return <div>{/* <CartList state={this.state} /> */}</div>
+    // const dbCart = this.props.getCart(this.props.user.id)
+    // localStorage.setItem('state', defaultState)
+    // console.log('local storage in render', localStorage)
+    console.log('props in render', this.props)
+    // console.log('state in render', this.state)
+    return <div />
   }
 }
 
-export default connect(null, null)(Cart)
+const mapState = state => ({
+  cart: state.cart,
+  user: state.user
+})
+
+const mapDispatch = dispatch => ({
+  getCart: userId => dispatch(fetchCart(userId))
+})
+
+export default connect(mapState, mapDispatch)(Cart)
