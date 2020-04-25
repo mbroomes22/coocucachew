@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {fetchProducts, removeAProduct} from '../store/products'
 import {fetchCart} from '../store/cart'
 import AddProductForm from './AddProductForm'
-import {Cart} from './Cart'
+// import {Cart} from './Cart'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
@@ -59,16 +59,16 @@ export class AllProducts extends React.Component {
 const mapState = state => {
   return {
     products: state.products,
-    user: state.user,
-    cart: state.cart
+    user: state.user
+    // cart: state.cart
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     getAllProducts: () => dispatch(fetchProducts()),
-    removeProduct: productId => dispatch(removeAProduct(productId)),
-    getCart: userId => dispatch(fetchCart(userId))
+    removeProduct: productId => dispatch(removeAProduct(productId))
+    // getCart: userId => dispatch(fetchCart(userId))
   }
 }
 
