@@ -102,20 +102,54 @@ export const removeItem = (orderId, productId) => {
 
 //^^^
 //I finished it up to test- so I could use the reducer vvvvvv
-
-// export default function cartReducer(state = initialState, action) {
-//   switch (action.type) {
-//     case GET_CART: {
-//     }
-//     case ADD_TO_CART: {
-//     }
-//     case UPDATE_QTY: {
-//     }
-//     case REMOVE_ITEM: {
-//     }
-//     case EMPTY_CART: {
-//     }
-//     case GET_TOTAL_PRICE: {
-//     }
-//   }
-// }
+//reducers
+export default function cartReducer(state = initialState, action) {
+  switch (action.type) {
+    // case GET_CART: {
+    //   if (!action.cart) {
+    //     return state
+    //   } else {
+    //     const newState = {...state}
+    //     const items = action.cart.items
+    //     items.forEach((item) => {
+    //       if (!newState.qty[item.productId]) {
+    //         newState.qty[item.productId] = item.quantity
+    //       }
+    //     })
+    //     return {
+    //       ...newState,
+    //       currentOrderId: action.cart.id,
+    //       items: action.cart.product,
+    //     }
+    //   }
+    // }
+    case ADD_TO_CART: {
+      const productId = action.item.id
+      const newState = {...state}
+      //try to find the product in qty obj, if it is exist, then qty ++; if not, then create a new one with productiD
+      if (!newState.qty[productId]) {
+        return {
+          ...newState,
+          currentOrderId: action.order.id,
+          qty: {...newState.qty, [productId]: 1},
+          items: [...newState.items, action.item]
+        }
+      } else {
+        let increaseQty = newState.qty[productId] + 1
+        return {
+          ...newState,
+          currentOrderId: action.order.id,
+          qty: {...newState.qty, [productId]: increaseQty}
+        }
+      }
+    }
+    //     case UPDATE_QTY: {
+    //     }
+    //     case REMOVE_ITEM: {
+    //     }
+    //     case EMPTY_CART: {
+    //     }
+    //     case GET_TOTAL_PRICE: {
+    //     }
+  }
+}
