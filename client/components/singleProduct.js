@@ -65,9 +65,13 @@ export class SingleProduct extends Component {
           </div>
         </div>
         <div className="quantity_change">
-          <button onClick={this.Decreament}>-</button>
+          <button type="button" onClick={this.Decreament}>
+            -
+          </button>
           Qty: {this.state.qty}
-          <button onClick={this.Increament}>+</button>
+          <button type="button" onClick={this.Increament}>
+            +
+          </button>
           {/* <div className="quantity_input">
             <form onSubmit={event => this.handleSubmit(event)}>
               <select id="qty">

@@ -10,7 +10,6 @@ import AddProductForm from './AddProductForm'
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getAllProducts()
-    this.props.getCart(this.props.user.id)
   }
 
   handleRemove(productId) {
@@ -48,8 +47,6 @@ export class AllProducts extends React.Component {
         </div>
         <div>
           <AddProductForm props={this.props} />
-          <Cart props={this.props} />
-          {/* user={this.props.user} */}
         </div>
       </div>
     )
@@ -60,7 +57,6 @@ const mapState = state => {
   return {
     products: state.products,
     user: state.user
-    // cart: state.cart
   }
 }
 
@@ -68,7 +64,6 @@ const mapDispatch = dispatch => {
   return {
     getAllProducts: () => dispatch(fetchProducts()),
     removeProduct: productId => dispatch(removeAProduct(productId))
-    // getCart: userId => dispatch(fetchCart(userId))
   }
 }
 
