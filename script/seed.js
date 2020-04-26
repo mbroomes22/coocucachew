@@ -9,6 +9,11 @@ const {
   ProductCategory
 } = require('../server/db/models')
 
+const fakeProducts = require('./seedData/products.json')
+const fakeUsers = require('./seedData/users.json')
+const fakeOrders = require('./seedData/orders.json')
+const fakeOrderProducts = require('./seedData/orderProducts')
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
@@ -29,31 +34,11 @@ async function seed() {
     name: 'cupcakes'
   })
 
-  const snickerDoodle = await Product.create({
-    name: 'snickerDoodle',
-    type: 'cookie',
-    imageUrl:
-      'https://www.foxandbriar.com/wp-content/uploads/2019/09/Snickerdoodles-12-of-12.jpg',
-    price: 0.0,
-    description:
-      'Sweet, soft, cinnamony...uhm, how do you describe perfection?',
-    productCategoryId: 1
-  })
+  const products = await Promise.all(
+    fakeProducts.map(product => Product.create(product))
+  )
 
-  const thinMint = await Product.create({
-    name: 'thinMint',
-    type: 'cookie',
-    imageUrl:
-      'https://www.clipartkey.com/mpngs/m/62-623214_thin-mint-clipart-thin-mint-cookies-transparent.png',
-    price: 0.0,
-    description: 'Minty, soft, refreshing, decadent, ....awesome!',
-    productCategoryId: 1
-  })
-
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const users = await Promise.all(fakeUsers.map(user => User.create(user)))
 
   const guest = await User.create({
     email: 'thinMint@gmail.com',
@@ -69,17 +54,11 @@ async function seed() {
     googleId: ''
   })
 
-  const order = await Order.create({
-    total: 30.0,
-    isActive: true
-  })
+  const orders = await Promise.all(fakeOrders.map(order => Order.create(order)))
 
-  const orderproduct = await OrderProduct.create({
-    quantity: 1,
-    price: 0,
-    productId: 1,
-    orderId: 1
-  })
+  const orderProducts = await Promise.all(
+    fakeOrderProducts.map(orderProduct => OrderProduct.create(orderProduct))
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
