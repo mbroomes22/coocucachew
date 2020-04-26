@@ -1,7 +1,5 @@
 //contains order form -- shipping address, payment info
 import React from 'react'
-import {connect} from 'react-redux'
-import axios from 'axios'
 
 export default class PaymentInfo extends React.Component {
   continue = evt => {
@@ -15,7 +13,6 @@ export default class PaymentInfo extends React.Component {
   }
 
   render() {
-    const {values, handleChange} = this.props
     return (
       <div>
         <button type="submit" onClick={this.goBack}>

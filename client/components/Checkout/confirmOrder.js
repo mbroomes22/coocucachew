@@ -67,13 +67,12 @@ export class ConfirmOrder extends Component {
           </li>
         </ul>
         <h2>Payment Method</h2>
-        <br />
-        <br />
         <ul>
           <li>
-            <h3>Payment:</h3> <br /> <p>Stripe</p>
+            <h3>Payment:</h3> <p>Stripe</p>
           </li>
         </ul>
+        <br />
         <h2>Review Items</h2>
         <br />
         <br />
@@ -99,7 +98,11 @@ export class ConfirmOrder extends Component {
         <br />
         {this.props.total}
 
-        <button type="submit" onClick={this.continue}>
+        <button
+          type="submit"
+          onClick={this.continue}
+          onSubmit={this.handleSubmit}
+        >
           Confirm & Checkout
         </button>
       </div>
@@ -107,7 +110,9 @@ export class ConfirmOrder extends Component {
   }
 }
 
-const mapState = () => {}
+const mapState = state => {
+  console.log('confirmation order State=>', state)
+}
 
 const mapDispatch = dispatch => ({
   addOrder: newOrder => dispatch(updateOrderHistory(newOrder)),

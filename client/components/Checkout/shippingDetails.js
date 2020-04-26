@@ -59,10 +59,10 @@ export default class UserDetails extends Component {
           Zipcode:
           <input
             type="text"
-            name="zipcode"
+            name="zipCode"
             placeholder="Zipcode, eg. 10001"
             onChange={handleChange}
-            value={values.zipcode}
+            value={values.zipCode}
           />
           <br />
         </label>
