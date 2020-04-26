@@ -17,13 +17,13 @@ export default class PaymentInfo extends React.Component {
     return (
       <div>
         <br />
-        <button type="submit" onClick={this.goBack} className="button">
+        <button type="submit" onClick={this.goBack} className="buttonC">
           Return to Shipping Details
         </button>
         <h1 className="header">Enter Payment Details with Stripe</h1>
         <Purchase />
         <br />
-        <button type="submit" onClick={this.continue} className="button">
+        <button type="submit" onClick={this.continue} className="buttonC">
           Continue to Confirmation
         </button>
       </div>

@@ -38,7 +38,7 @@ export class ConfirmOrder extends Component {
     return (
       <div>
         <br />
-        <button type="submit" onClick={this.goBack} className="button">
+        <button type="submit" onClick={this.goBack} className="buttonC">
           Return to Payment Details
         </button>
         <h1 className="header">Confirm Order Details</h1>
@@ -100,7 +100,7 @@ export class ConfirmOrder extends Component {
           type="submit"
           onClick={this.continue}
           onSubmit={this.handleSubmit}
-          className="button"
+          className="buttonC"
         >
           Confirm & Checkout
         </button>

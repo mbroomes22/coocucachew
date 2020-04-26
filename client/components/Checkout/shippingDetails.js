@@ -98,7 +98,7 @@ export default class UserDetails extends Component {
           />
           <br />
         </label>
-        <button type="submit" onClick={this.required} className="button">
+        <button type="submit" onClick={this.required} className="buttonC">
           Continue to Payment Details
         </button>
       </div>

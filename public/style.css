@@ -25,7 +25,7 @@ form div {
   display: inline-block;
 }
 
-.button {
+.buttonC {
   border: none;
   outline: none;
   height: 40px;
@@ -37,7 +37,7 @@ form div {
   margin-top: 15px;
 }
 
-.button:hover {
+.buttonC:hover {
   background: #ffc107;
   color: #000;
 }
