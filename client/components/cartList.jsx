@@ -26,6 +26,7 @@ export class CartList extends React.Component {
     if (this.props.cart.products) {
       ls.set('id', this.props.cart.id)
       ls.set('isPending', this.props.cart.isPending)
+      ls.set('cartProducts', this.props.cart.products)
       this.props.cart.products.map(product => {
         ls.set(`${product.name}`, product)
         subtotal +=
@@ -34,40 +35,52 @@ export class CartList extends React.Component {
       })
       ls.set('subtotal', subtotal)
       ls.set('total', subtotal + 6)
+    } else {
+      ls.set('id', 0)
+      ls.set('isPending', true)
+      ls.set('cartProducts', [])
+      ls.set('subtotal', 0)
+      ls.set('total', 6)
     }
   }
 
   render() {
     this.setPropsToLocalStorage()
+    const lsProducts = ls.get('cartProducts')
     return (
       <div>
-        {this.props.cart.products
-          ? this.props.cart.products.map(product => (
-              <div key={product.id} className="cartproducts">
-                <Link to={`/${product.id}`}>
-                  <img src={product.imageUrl} width="50" />
-                  <h4>{product.name}</h4>
-                </Link>
-                <div>
-                  <button type="button" onClick={this.decreament}>
-                    {' '}
-                    -{' '}
-                  </button>
-                  <p>{product.orderProduct.quantity}</p>
-                  <button type="button" onClick={this.increament}>
-                    {' '}
-                    +{' '}
-                  </button>
-                </div>
-                <div>
-                  <p>{product.price}</p>
-                </div>
-              </div>
-              // <div>
-              //   <h3>Subtotal</h3>
-              // </div>)
-            ))
-          : 'Loading, please wait while I fetch your cart...'}
+        {lsProducts.map(product => (
+          <div key={product.id} className="cartproducts">
+            <Link to={`/${product.id}`}>
+              <img src={product.imageUrl} width="50" />
+              <h4>{product.name}</h4>
+            </Link>
+            <div>
+              <button type="button" onClick={this.decreament}>
+                {' '}
+                -{' '}
+              </button>
+              <p>{product.orderProduct.quantity}</p>
+              <button type="button" onClick={this.increament}>
+                {' '}
+                +{' '}
+              </button>
+            </div>
+            <div>
+              <p>{product.price}</p>
+            </div>
+          </div>
+        ))}
+        <div>
+          <div>
+            <h5>Subtotal: </h5>
+            <h5>{ls.get('subtotal')}</h5>
+          </div>
+          <div>
+            <h4>Total: </h4>
+            <h4>{ls.get('total')}</h4>
+          </div>
+        </div>
       </div>
     )
   }
