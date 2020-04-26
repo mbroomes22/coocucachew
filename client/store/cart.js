@@ -40,7 +40,6 @@ export const getTotalPrice = totalPrice => ({
 })
 
 //initial state
-
 const initialState = {
   currentOrderId: null,
   items: [],
@@ -49,19 +48,10 @@ const initialState = {
 }
 
 //thunks
-
-//- reach cart when click CART button
-//****need to build order component && database . the cart should read the order dateabase, and we should have the routes like /orders/userId. isAdmin can see the /orders, isAuth can see the /orders/userId*/
-
 export const fetchCart = () => async dispatch => {
   try {
-    // if (!userId) {
-    //   dispatch(getCart(null))
-    // } else {
     const res = await axios.get('api/order')
-    console.log('in fetch cart dispatch AFTER request', res)
     dispatch(getCart(res.data))
-    // }
   } catch (error) {
     console.error(error)
   }
@@ -79,15 +69,10 @@ export const addToCart = (userId, orderProduct) => {
   }
 }
 
-//****not finish, also think about add-To-Cart button which will use POST, and remove item which will use delete */
-
-//^^^
-//I finished it up to test- so I could use the reducer vvvvvv
-
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      console.log('inside cart reducer', action.cart)
+      // console.log('inside cart reducer', action.cart)
       return action.cart
 
     case ADD_TO_CART:

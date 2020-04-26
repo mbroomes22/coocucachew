@@ -1,9 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/cart'
-import {Link} from 'react-router-dom'
-
-const localCart = localStorage.cart
+import {CartList} from './cartList'
+// import {userForm} from './Checkout/userForm'
 
 const defaultCart = {
   id: 0,
@@ -11,61 +10,24 @@ const defaultCart = {
   products: []
 }
 export class Cart extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      cart: [
-        {
-          // id: 0,
-          // isPending: false,
-          // products: [],
-          name: 'Snicker Doodle',
-          imageUrl:
-            'https://www.foxandbriar.com/wp-content/uploads/2019/09/Snickerdoodles-12-of-12.jpg',
-          price: 2.0,
-          qty: 1
-        }
-      ]
-    }
-    this.handleChange = this.handleChange.bind(this)
-    console.log('I AM CART COMPONENTs PROPS:', this.props)
-    console.log('I AM CART COMPONENTs STATES:', this.state)
-  }
-
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
   componentDidMount() {
-    if (localCart !== undefined) {
-      this.setState({cart: localCart})
-    } else {
-      this.props.getCart()
-    }
+    this.props.getCart()
+    console.log(this.props)
   }
 
-  Increament = () => {
-    this.setState({
-      qty: this.state.qty + 1
-    })
-  }
-
-  Decreament = () => {
-    this.setState({
-      qty: this.state.qty - 1
-    })
+  handleSubmit(e) {
+    e.preventDefault()
   }
 
   render() {
     let subtotal = 0
+    console.log(this.props)
     return (
       <div>
+        {/* <button type="button" onSubmit={e => this.handleSubmit(e)}> */}
         <h3>C A R T</h3>
-
-        {this.state.cart
-          ? this.state.cart.map(product => (
+        {/* {this.state.cart
+          ? this.state.cart.map((product) => (
               <div key={product.id}>
                 <Link to={`/${product.id}`}>
                   <h4>{product.name}</h4>
@@ -84,6 +46,9 @@ export class Cart extends React.Component {
             ))
           : 'Loading, please wait while I fetch your cart...'}
         <h3>Subtotal</h3>
+        {/* </button> */}
+        {/* <CartList cart={this.props.cart} />
+        <userForm cart={this.props.cart} /> */}{' '}
       </div>
     )
   }

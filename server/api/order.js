@@ -10,7 +10,6 @@ router.get('/', async (req, res, next) => {
       },
       include: Product
     })
-    console.log('inside order router', fetchedOrder)
     res.json(fetchedOrder)
   } catch (err) {
     next(err)
