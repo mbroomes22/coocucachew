@@ -4,7 +4,8 @@ const db = require('../db')
 // const {Product, User, OrderProduct} = require('../db/models')
 
 const Order = db.define('order', {
-  subtotal: {
+  subTotal: {
+    // when and how will we calculate this?
     type: Sequelize.INTEGER
   },
   total: {
