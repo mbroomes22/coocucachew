@@ -14,6 +14,7 @@ export class SingleProduct extends Component {
       qty: 0
     }
     // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -37,12 +38,13 @@ export class SingleProduct extends Component {
   //   this.props.addProduct(productInfo)
   //   console.log('I AM ORDERID:', event.target)
   // }
-  handleClick() {
+  async handleClick(product) {
     console.log('I AM PROPS:', this.props)
-    console.log('I AM EVENT:', event.target)
-    const orderId = this.props.order.id
-    const product = this.props.singleProduct
-    this.props.addToCart(orderId, product)
+    console.log('I AM EVENT:', event.target.value)
+    const orderproduct = this.props.singleProduct
+    const userId = this.props.user.id
+
+    await this.props.addToCart(userId, orderproduct)
   }
 
   Increament = () => {
@@ -105,15 +107,15 @@ const mapStateToProps = state => {
   return {
     singleProduct: state.products,
     cart: state.cart,
-    order: state.order
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     getProduct: productId => dispatch(getAProduct(productId)),
-    addToCart: (orderId, orderProduct) =>
-      dispatch(addToCart(orderId, orderProduct))
+    addToCart: (userId, orderProduct) =>
+      dispatch(addToCart(userId, orderProduct))
   }
 }
 
