@@ -5,7 +5,7 @@
  */
 export {default as AddProductForm} from './AddProductForm'
 export {default as AllProducts} from './AllProducts'
-export {default as Cart} from './Cart'
+export {default as Cart} from './cart'
 export {default as CartList} from './cartList'
 export {default as Navbar} from './navbar'
 export {default as SingleProduct} from './singleProduct'
