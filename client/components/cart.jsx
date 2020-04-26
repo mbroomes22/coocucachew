@@ -1,40 +1,40 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/cart'
-
-// const localCart = localStorage.cart
-// const defaultState = { cart: localCart }
+import {CartList} from './cartList'
+// import {userForm} from './Checkout/userForm'
 
 export class Cart extends React.Component {
   componentDidMount() {
-    // this.props.getCart(this.props.user.id)
-    console.log('dbCart in component did mount', this.props)
-    // if (localCart[0]) {
-    //   this.setState(
-    //     { cart : localCart })
-    // } else {
-    //   this.setState(
-    //     { cart : dbCart })
-    // }
+    this.props.getCart()
+    console.log(this.props)
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
   }
 
   render() {
-    // const dbCart = this.props.getCart(this.props.user.id)
-    // localStorage.setItem('state', defaultState)
-    // console.log('local storage in render', localStorage)
-    console.log('props in render', this.props)
-    // console.log('state in render', this.state)
-    return <div />
+    let subtotal = 0
+    console.log(this.props)
+    return (
+      <div>
+        {/* <button type="button" onSubmit={e => this.handleSubmit(e)}> */}
+        <h3>C A R T</h3>
+        {/* </button> */}
+        <CartList cart={this.props.cart} />
+        {/* <userForm cart={this.props.cart} /> */}
+      </div>
+    )
   }
 }
 
 const mapState = state => ({
-  cart: state.cart,
-  user: state.user
+  cart: state.cart
 })
 
 const mapDispatch = dispatch => ({
-  getCart: userId => dispatch(fetchCart(userId))
+  getCart: () => dispatch(fetchCart())
 })
 
 export default connect(mapState, mapDispatch)(Cart)

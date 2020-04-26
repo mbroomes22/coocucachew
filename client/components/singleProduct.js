@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAProduct} from '../store/products'
+import {addToCart} from '../store/cart'
 
 export class SingleProduct extends Component {
   constructor(props) {
@@ -18,18 +19,23 @@ export class SingleProduct extends Component {
     // console.log('^*^*^', this.props)
     // this.props.match.params.productId ? (
     this.props.getProduct(this.props.match.params.productId)
+
     // : ('loading')
   }
 
-  // handleSubmit(event) {
-  //   console.log('^^^^^^', event.target.value)
-  //   event.preventDefault()
-  //   return this.setState({
-  //     name: this.props.singleProduct.name,
-  //     price: this.props.singleProduct.price,
-  //     qty: 0
-  //   })
-  // }
+  handleSubmit(event) {
+    event.preventDefault()
+
+    const productInfo = {
+      name: singleProduct.name,
+      imageUrl: singleProduct.imageUrl,
+      price: singleProduct.price,
+      description: singleProduct.description
+    }
+
+    this.props.addProduct(productInfo)
+  }
+
   Increament = () => {
     this.setState({
       name: this.props.singleProduct.name,
@@ -37,6 +43,7 @@ export class SingleProduct extends Component {
       qty: this.state.qty + 1
     })
   }
+
   Decreament = () => {
     this.setState({
       name: this.props.singleProduct.name,
@@ -83,9 +90,11 @@ export class SingleProduct extends Component {
                 <option value="9">9</option>
                 <option value="10">10</option>
               </select>
-              <button type="submit">add to cart</button>
-            </form>
-          </div> */}
+              </form>
+            </div> */}
+          <button type="submit" onSubmit={event => this.handleSubmit(event)}>
+            add to cart
+          </button>
         </div>
       </div>
     )
@@ -94,13 +103,16 @@ export class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    singleProduct: state.products
+    singleProduct: state.products,
+    cart: state.cart
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProduct: productId => dispatch(getAProduct(productId))
+    getProduct: productId => dispatch(getAProduct(productId)),
+    addProduct: (orderId, orderProduct) =>
+      dispatch(addToCart(orderId, orderProduct))
   }
 }
 

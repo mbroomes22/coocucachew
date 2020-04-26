@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const isAdmin = require('./isAdmin')
-const {Product, User, orderProduct, Order} = require('../db/models')
+const {Product, User, OrderProduct, Order} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const fetchedOrderProducts = await orderProduct.findAll({
+    const fetchedOrderProducts = await OrderProduct.findAll({
       where: {
         orderId: req.body.orderId
       }
