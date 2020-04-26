@@ -59,23 +59,29 @@ export class CartList extends React.Component {
       <div>
         {this.props.cart.products
           ? this.props.cart.products.map(product => (
-              <div key={product.id} className="cartProducts">
+              <div key={product.id} className="cartproducts">
                 <Link to={`/${product.id}`}>
-                  <h4>{product.name}</h4>
                   <img src={product.imageUrl} width="50" />
+                  <h4>{product.name}</h4>
                 </Link>
-                <button type="button" onClick={this.decreament}>
-                  {' '}
-                  -{' '}
-                </button>
-                <p>{product.orderProduct.quantity}</p>
-                <button type="button" onClick={this.increament}>
-                  {' '}
-                  +{' '}
-                </button>
-                <p>{product.price}</p>
-                <h3>Subtotal</h3>
+                <div>
+                  <button type="button" onClick={this.decreament}>
+                    {' '}
+                    -{' '}
+                  </button>
+                  <p>{product.orderProduct.quantity}</p>
+                  <button type="button" onClick={this.increament}>
+                    {' '}
+                    +{' '}
+                  </button>
+                </div>
+                <div>
+                  <p>{product.price}</p>
+                </div>
               </div>
+              // <div>
+              //   <h3>Subtotal</h3>
+              // </div>)
             ))
           : 'Loading, please wait while I fetch your cart...'}
       </div>
