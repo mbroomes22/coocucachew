@@ -19,58 +19,68 @@ export class CartList extends React.Component {
         products: []
       }
     }
-    this.handleChange = this.handleChange.bind(this)
+
+    ////////////////////////////////////////////////////
+    // Working on adquiring props before render in order
+    // to set the state before render///////////////////
+    ////////////////////////////////////////////////////
+
+    // this.handleChange = this.handleChange.bind(this)
+    // this.increament = this.increament.bind(this)
+    // this.decreament = this.decreament.bind(this)
   }
 
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+  // handleChange(e) {
+  //   this.setState({
+  //     [e.target.name]: e.target.value
+  //   })
+  // }
 
-  componentDidMount() {
-    console.log(this.props)
-    // localStorage.cart = this.state.cart
-  }
+  // componentDidMount() {
+  //   console.log('inside cart list component did mount', this.props)
+  //   // localStorage.cart = this.state.cart
+  // }
 
-  // Increament = () => {
+  // increament = () => {
   //   this.setState({
   //     qty: this.state.qty + 1
   //   })
   // }
 
-  // Decreament = () => {
+  // decreament = () => {
   //   this.setState({
   //     qty: this.state.qty - 1
   //   })
   // }
 
   render() {
+    console.log('inside cart list render', this.props)
     return (
       <div>
-        {/* {this.props.cart.products
+        {this.props.cart.products
           ? this.props.cart.products.map(product => (
-              <div key={product.id}>
+              <div key={product.id} className="cartProducts">
                 <Link to={`/${product.id}`}>
                   <h4>{product.name}</h4>
+                  <img src={product.imageUrl} width="50" />
                 </Link>
-                <button type="button" onClick={this.Decreament}>
+                <button type="button" onClick={this.decreament}>
                   {' '}
                   -{' '}
                 </button>
                 <p>{product.orderProduct.quantity}</p>
-                <button type="button" onClick={this.Increament}>
+                <button type="button" onClick={this.increament}>
                   {' '}
                   +{' '}
                 </button>
                 <p>{product.price}</p>
+                <h3>Subtotal</h3>
               </div>
             ))
           : 'Loading, please wait while I fetch your cart...'}
-        <h3>Subtotal</h3> */}
       </div>
     )
   }
 }
 
-export default connect(mapState, mapDispatch)(CartList)
+export default connect(null, null)(CartList)
