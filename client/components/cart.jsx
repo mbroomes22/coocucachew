@@ -88,32 +88,3 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapState, mapDispatch)(Cart)
-
-// const dbCart = this.props.getProducts()
-// this.props.getCart(this.props.user.userId)
-
-// if (localCart[0]) {
-//   this.setState({
-//     cart : localCart
-//   })
-// } else {
-
-// this.setState({
-//   cart : dbCart
-// })
-// }
-// console.log('local storage in render', localStorage)
-// const dbCart = this.props.getCart(this.props.user.id)
-// localStorage.setItem('state', defaultState)
-// console.log('state in render', this.state)
-
-// const productQuantity = this.state.cart.products.filter(product => {
-//   const printed = new Map()
-//   if (printed[product]) {
-//     printed[product] ++
-//   } else {
-//     printed[product] = 1
-//   }
-//   return printed
-// })
-// console.log('whichcart() productquantity', productQuantity)
