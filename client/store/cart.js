@@ -39,13 +39,11 @@ export const getTotalPrice = totalPrice => ({
 })
 
 //initial state
-
 const initialState = {
   cart: []
 }
 
 //thunks
-
 export const fetchCart = () => async dispatch => {
   try {
     const res = await axios.get('api/order')
