@@ -40,9 +40,7 @@ export const getTotalPrice = totalPrice => ({
 
 //initial state
 
-const initialState = {
-  cart: []
-}
+const initialState = []
 
 //thunks
 
@@ -65,7 +63,7 @@ export const fetchCart = () => async dispatch => {
 
 export const addToCart = (orderId, orderProduct) => {
   return async dispatch => {
-    const {data} = await axios.post(`/api/orders/${orderId}`, orderProduct)
+    const {data} = await axios.post(`/api/order`, {orderId, orderProduct})
     dispatch(addedToCart(data))
   }
 }

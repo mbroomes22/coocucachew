@@ -13,24 +13,25 @@ export class Cart extends React.Component {
     }
   }
   componentDidMount() {
-    const dbCart = this.props.cart
-    if (!localCart[0]) {
-      this.props.getCart()
-      // this.setState({this.state.cart = dbCart})
-    }
-    this.setState(localCart)
+    // const dbCart = this.props.cart
+    // if (!localCart[0]) {
+    //   this.props.getCart()
+    //   // this.setState({this.state.cart = dbCart})
+    // }
+    // this.setState(localCart)
+    console.log('TEST!!')
   }
 
   render() {
-    console.log(this.props)
+    // console.log('^^^HEY! THE PROPS', this.props)
     return (
       <div>
         <h3>C A R T</h3>
-        {this.state.map(order => (
+        {/* {this.state.map((order) => (
           <div key={order.id}>
             <p />
           </div>
-        ))}
+        ))} */}
       </div>
     )
   }

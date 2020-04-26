@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAProduct} from '../store/products'
 import {addToCart} from '../store/cart'
+//need import
 
 export class SingleProduct extends Component {
   constructor(props) {
@@ -23,17 +24,25 @@ export class SingleProduct extends Component {
     // : ('loading')
   }
 
-  handleSubmit(event) {
-    event.preventDefault()
+  // handleSubmit(event) {
+  //   event.preventDefault()
 
-    const productInfo = {
-      name: singleProduct.name,
-      imageUrl: singleProduct.imageUrl,
-      price: singleProduct.price,
-      description: singleProduct.description
-    }
-
-    this.props.addProduct(productInfo)
+  //   const productInfo = {
+  //     name: this.props.singleProduct.name,
+  //     imageUrl: this.props.singleProduct.imageUrl,
+  //     price: this.props.singleProduct.price,
+  //     description: this.props.singleProduct.description,
+  //   }
+  //   console.log('I AM PROPS:', this.props)
+  //   this.props.addProduct(productInfo)
+  //   console.log('I AM ORDERID:', event.target)
+  // }
+  handleClick() {
+    console.log('I AM PROPS:', this.props)
+    console.log('I AM EVENT:', event.target)
+    const orderId = this.props.order.id
+    const product = this.props.singleProduct
+    this.props.addToCart(orderId, product)
   }
 
   Increament = () => {
@@ -53,7 +62,7 @@ export class SingleProduct extends Component {
   }
 
   render() {
-    console.log('THIS STATE: ', this.state)
+    console.log('THIS IS STATE: ', this.state)
     const singleProduct = this.props.singleProduct
     return (
       <div className="singleProduct_page">
@@ -72,27 +81,18 @@ export class SingleProduct extends Component {
           </div>
         </div>
         <div className="quantity_change">
-          <button onClick={this.Decreament}>-</button>
-          Qty: {this.state.qty}
-          <button onClick={this.Increament}>+</button>
-          {/* <div className="quantity_input">
-            <form onSubmit={event => this.handleSubmit(event)}>
-              <select id="qty">
-                <option defaultValue="">Qty</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-              </select>
-              </form>
-            </div> */}
-          <button type="submit" onSubmit={event => this.handleSubmit(event)}>
+          {/* <form onSubmit={(event) => this.handleSubmit(event)}>
+            <button onClick={this.Decreament}>-</button>
+            <div id="selectedQty">{this.state.qty}</div>
+            <button onClick={this.Increament}>+</button>
+          </form> */}
+          <button
+            className="addToCart_button"
+            type="submit"
+            onClick={e => {
+              this.handleClick(e)
+            }}
+          >
             add to cart
           </button>
         </div>
@@ -104,14 +104,15 @@ export class SingleProduct extends Component {
 const mapStateToProps = state => {
   return {
     singleProduct: state.products,
-    cart: state.cart
+    cart: state.cart,
+    order: state.order
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     getProduct: productId => dispatch(getAProduct(productId)),
-    addProduct: (orderId, orderProduct) =>
+    addToCart: (orderId, orderProduct) =>
       dispatch(addToCart(orderId, orderProduct))
   }
 }
