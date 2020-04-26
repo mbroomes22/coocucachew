@@ -1,3 +1,4 @@
+// 'use strict'
 //to create new dummy data, just run:
 //fake-data-generator script/modelsFakeData/MODEL_NAME.json 20(qty of data) script/seedData/SEED_DATA_FILE_NAME.json
 
