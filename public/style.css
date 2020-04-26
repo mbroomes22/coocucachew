@@ -24,3 +24,53 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.buttonC {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #165692;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.buttonC:hover {
+  background: #ffc107;
+  color: #000;
+}
+
+.header {
+  background-color: rgba(26, 155, 194, 0.824);
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.field {
+  padding: 0.42857em;
+  width: 30%;
+  box-sizing: border-box;
+  justify-content: center;
+  margin: 1%;
+  border-radius: 6px;
+  border: 1px transparent solid;
+  font-size: 1em;
+}
+
+:required {
+  border-color: rgb(48, 242, 58);
+}
+
+:invalid {
+  border-color: red;
+}
+
+:required:focus:valid {
+  background: url('https://clipartart.com/images/area-check-clear-clipart-1.jpg')
+    no-repeat 95% 50%;
+  background-size: 25px;
+}
