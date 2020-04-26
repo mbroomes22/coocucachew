@@ -57,7 +57,7 @@ export class CartList extends React.Component {
     console.log('inside cart list render', this.props)
     return (
       <div>
-        {this.props.cart.products
+        {/* {this.props.cart.products
           ? this.props.cart.products.map(product => (
               <div key={product.id} className="cartproducts">
                 <Link to={`/${product.id}`}>
@@ -83,7 +83,7 @@ export class CartList extends React.Component {
               //   <h3>Subtotal</h3>
               // </div>)
             ))
-          : 'Loading, please wait while I fetch your cart...'}
+          : 'Loading, please wait while I fetch your cart...'} */}
       </div>
     )
   }
