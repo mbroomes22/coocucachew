@@ -3,9 +3,13 @@
     "locale": "en"
   },
   "model": {
+    "subTotal": {
+      "type": "randomNumberBetween",
+      "value": [3, 45]
+    },
     "total": {
       "type": "randomNumberBetween",
-      "value": [3, 50]
+      "value": [8, 50]
     },
     "isPending": {
       "type": "faker",

@@ -1,76 +1,91 @@
 [
   {
-    "total": 27,
-    "isPending": true,
+    "subTotal": 18,
+    "total": 38,
+    "isPending": false,
     "userId": 1
   },
   {
-    "total": 9,
-    "isPending": false,
+    "subTotal": 11,
+    "total": 27,
+    "isPending": true,
     "userId": 2
   },
   {
-    "total": 44,
-    "isPending": false,
+    "subTotal": 17,
+    "total": 43,
+    "isPending": true,
     "userId": 3
   },
   {
-    "total": 37,
-    "isPending": true,
+    "subTotal": 39,
+    "total": 27,
+    "isPending": false,
     "userId": 4
   },
   {
-    "total": 30,
-    "isPending": true,
+    "subTotal": 13,
+    "total": 21,
+    "isPending": false,
     "userId": 5
   },
   {
-    "total": 46,
-    "isPending": false,
+    "subTotal": 31,
+    "total": 24,
+    "isPending": true,
     "userId": 6
   },
   {
-    "total": 48,
-    "isPending": false,
+    "subTotal": 25,
+    "total": 25,
+    "isPending": true,
     "userId": 7
   },
   {
-    "total": 45,
+    "subTotal": 22,
+    "total": 26,
     "isPending": false,
     "userId": 8
   },
   {
-    "total": 34,
-    "isPending": false,
+    "subTotal": 7,
+    "total": 27,
+    "isPending": true,
     "userId": 9
   },
   {
-    "total": 33,
+    "subTotal": 33,
+    "total": 43,
     "isPending": true,
     "userId": 10
   },
   {
-    "total": 20,
-    "isPending": true,
+    "subTotal": 41,
+    "total": 11,
+    "isPending": false,
     "userId": 11
   },
   {
-    "total": 16,
+    "subTotal": 37,
+    "total": 31,
     "isPending": true,
     "userId": 12
   },
   {
-    "total": 16,
+    "subTotal": 19,
+    "total": 28,
     "isPending": true,
     "userId": 13
   },
   {
-    "total": 32,
-    "isPending": true,
+    "subTotal": 10,
+    "total": 29,
+    "isPending": false,
     "userId": 14
   },
   {
-    "total": 25,
+    "subTotal": 27,
+    "total": 45,
     "isPending": true,
     "userId": 15
   }
