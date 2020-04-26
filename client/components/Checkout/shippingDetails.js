@@ -32,6 +32,7 @@ export default class UserDetails extends Component {
             onChange={handleChange}
             value={values.firstName}
             className="field"
+            required
           />
           <br />
         </label>
@@ -44,18 +45,20 @@ export default class UserDetails extends Component {
             onChange={handleChange}
             value={values.lastName}
             className="field"
+            required
           />
           <br />
         </label>
         <label>
           Email:
           <input
-            type="text"
+            type="email"
             name="email"
             placeholder="Email Address"
             onChange={handleChange}
             value={values.email}
             className="field"
+            required
           />
           <br />
         </label>

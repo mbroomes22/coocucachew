@@ -60,3 +60,17 @@ form div {
   border: 1px transparent solid;
   font-size: 1em;
 }
+
+:required {
+  border-color: rgb(48, 242, 58);
+}
+
+:invalid {
+  border-color: red;
+}
+
+:required:focus:valid {
+  background: url('https://clipartart.com/images/area-check-clear-clipart-1.jpg')
+    no-repeat 95% 50%;
+  background-size: 25px;
+}

@@ -15,7 +15,6 @@ export const updateUserAddress = newAddress => ({
   newAddress
 })
 
-//should users have an orderHistory col/id?
 //change isPending to false
 //thunk creator
 export const updateOrderHistory = newOrder => {
