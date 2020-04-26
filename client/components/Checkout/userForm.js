@@ -12,7 +12,7 @@ class UserForm extends Component {
     email: '',
     streetAddress: '',
     zipCode: '',
-    country: ''
+    state: ''
   }
 
   //continue to next step
@@ -45,7 +45,7 @@ class UserForm extends Component {
       email,
       streetAddress,
       zipCode,
-      country
+      state
     } = this.state
     const values = {
       firstName,
@@ -53,7 +53,7 @@ class UserForm extends Component {
       email,
       streetAddress,
       zipCode,
-      country
+      state
     }
 
     switch (step) {

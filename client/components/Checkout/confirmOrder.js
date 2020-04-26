@@ -27,50 +27,48 @@ export class ConfirmOrder extends Component {
       email: '',
       streetAddress: '',
       zipCode: '',
-      country: ''
+      state: ''
     })
   }
 
   render() {
     const {
-      values: {firstName, lastName, email, streetAddress, zipCode, country}
+      values: {firstName, lastName, email, streetAddress, zipCode, state}
     } = this.props
     return (
       <div>
+        <br />
         <button type="submit" onClick={this.goBack}>
           Return to Payment Details
         </button>
         <h1>Confirm Order Details</h1>
         <br />
-        <br />
         <h2>Shipping Address</h2>
-        <br />
-        <br />
         <ul>
-          <li>
+          <ol>
             <h3>First Name:</h3> <br /> {firstName}
-          </li>
-          <li>
+          </ol>
+          <ol>
             <h3>Last Name:</h3> <br /> {lastName}
-          </li>
-          <li>
+          </ol>
+          <ol>
             <h3>Email:</h3> <br /> {email}
-          </li>
-          <li>
+          </ol>
+          <ol>
             <h3>Street Address:</h3> <br /> {streetAddress}
-          </li>
-          <li>
+          </ol>
+          <ol>
             <h3>Zipcode:</h3> <br /> {zipCode}
-          </li>
-          <li>
-            <h3>Country:</h3> <br /> {country}
-          </li>
+          </ol>
+          <ol>
+            <h3>State:</h3> <br /> {state}
+          </ol>
         </ul>
         <h2>Payment Method</h2>
         <ul>
-          <li>
-            <h3>Payment:</h3> <p>Stripe</p>
-          </li>
+          <ol>
+            <p>Stripe</p>
+          </ol>
         </ul>
         <br />
         <h2>Review Items</h2>
@@ -79,18 +77,18 @@ export class ConfirmOrder extends Component {
         <ul>
           {this.props.cartItems.map(item => (
             <div key={item.id}>
-              <li>
+              <ol>
                 <h3>{item.name}</h3> <br />
-              </li>
-              <li>
+              </ol>
+              <ol>
                 <h3>{item.description}</h3> <br />
-              </li>
-              <li>
+              </ol>
+              <ol>
                 <h3>{item.qty}</h3> <br />
-              </li>
-              <li>
+              </ol>
+              <ol>
                 <h3>{item.price}</h3> <br />
-              </li>
+              </ol>
             </div>
           ))}
         </ul>

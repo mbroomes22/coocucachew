@@ -6,6 +6,18 @@ export default class UserDetails extends Component {
     this.props.nextStep()
   }
 
+  required = evt => {
+    if (
+      this.props.values.firstName &&
+      this.props.values.lastName &&
+      this.props.values.email
+    ) {
+      this.continue(evt)
+    } else {
+      alert('First Name, Last Name, and Email are required')
+    }
+  }
+
   render() {
     const {values, handleChange} = this.props
     return (
@@ -16,7 +28,7 @@ export default class UserDetails extends Component {
           <input
             type="text"
             name="firstName"
-            placeholder="First Name, eg. John"
+            placeholder="Enter First Name"
             onChange={handleChange}
             value={values.firstName}
           />
@@ -27,7 +39,7 @@ export default class UserDetails extends Component {
           <input
             type="text"
             name="lastName"
-            placeholder="Last Name, eg. Smith"
+            placeholder="Enter Last Name"
             onChange={handleChange}
             value={values.lastName}
           />
@@ -38,7 +50,7 @@ export default class UserDetails extends Component {
           <input
             type="text"
             name="email"
-            placeholder="Email Address, eg. john@gmail.com"
+            placeholder="Enter email Address"
             onChange={handleChange}
             value={values.email}
           />
@@ -49,7 +61,7 @@ export default class UserDetails extends Component {
           <input
             type="text"
             name="streetAddress"
-            placeholder="Street Address, eg. 4 Main St."
+            placeholder="Enter Street Address"
             onChange={handleChange}
             value={values.streetAddress}
           />
@@ -67,17 +79,17 @@ export default class UserDetails extends Component {
           <br />
         </label>
         <label>
-          Country:
+          State:
           <input
             type="text"
-            name="country"
-            placeholder="Country, eg. USA"
+            name="state"
+            placeholder="State, eg. NY"
             onChange={handleChange}
-            value={values.country}
+            value={values.state}
           />
           <br />
         </label>
-        <button type="submit" onClick={this.continue}>
+        <button type="submit" onClick={this.required}>
           Continue to Payment Details
         </button>
       </div>
