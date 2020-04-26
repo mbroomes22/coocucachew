@@ -3,6 +3,9 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  name: {
+    type: Sequelize.STRING
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
@@ -15,6 +18,9 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('password')
     }
+  },
+  address: {
+    type: Sequelize.STRING
   },
   isLoggedIn: {
     type: Sequelize.BOOLEAN,
@@ -46,9 +52,12 @@ User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
+// User.prototype.hasAccess = function()
+
 /**
  * classMethods
  */
+
 User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64')
 }

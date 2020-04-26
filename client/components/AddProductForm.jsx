@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import AllProducts from './AllProducts'
 import {addNewProduct} from '../store/products'
 
 const defaultState = {

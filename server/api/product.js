@@ -13,7 +13,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:productId', async (req, res, next) => {
   try {
-    console.log('inside of server routes', req.params)
     const singleProduct = await Product.findOne({
       where: {id: req.params.productId}
     })
@@ -27,7 +26,7 @@ router.post('/', isAdmin, async (req, res, next) => {
   try {
     await Product.create(req.body)
     const products = await Product.findAll()
-    res.status(201).json(products)
+    res.json(products)
   } catch (err) {
     next(err)
   }

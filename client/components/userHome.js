@@ -1,14 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-// import {AllProducts} from './AllProducts'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
   const {email} = props
-  console.log('PROPS=>', props)
 
   return (
     <div>

@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAProduct} from '../store/products'
+import {addToCart} from '../store/cart'
+//need import
 
 export class SingleProduct extends Component {
   constructor(props) {
@@ -12,24 +14,39 @@ export class SingleProduct extends Component {
       qty: 0
     }
     // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
     // console.log('^*^*^', this.props)
     // this.props.match.params.productId ? (
     this.props.getProduct(this.props.match.params.productId)
+
     // : ('loading')
   }
 
   // handleSubmit(event) {
-  //   console.log('^^^^^^', event.target.value)
   //   event.preventDefault()
-  //   return this.setState({
+
+  //   const productInfo = {
   //     name: this.props.singleProduct.name,
+  //     imageUrl: this.props.singleProduct.imageUrl,
   //     price: this.props.singleProduct.price,
-  //     qty: 0
-  //   })
+  //     description: this.props.singleProduct.description,
+  //   }
+  //   console.log('I AM PROPS:', this.props)
+  //   this.props.addProduct(productInfo)
+  //   console.log('I AM ORDERID:', event.target)
   // }
+  async handleClick(product) {
+    console.log('I AM PROPS:', this.props)
+    console.log('I AM EVENT:', event.target.value)
+    const orderproduct = this.props.singleProduct
+    const userId = this.props.user.id
+
+    await this.props.addToCart(userId, orderproduct)
+  }
+
   Increament = () => {
     this.setState({
       name: this.props.singleProduct.name,
@@ -37,6 +54,7 @@ export class SingleProduct extends Component {
       qty: this.state.qty + 1
     })
   }
+
   Decreament = () => {
     this.setState({
       name: this.props.singleProduct.name,
@@ -46,7 +64,7 @@ export class SingleProduct extends Component {
   }
 
   render() {
-    console.log('THIS STATE: ', this.state)
+    console.log('THIS IS STATE: ', this.state)
     const singleProduct = this.props.singleProduct
     return (
       <div className="singleProduct_page">
@@ -65,27 +83,20 @@ export class SingleProduct extends Component {
           </div>
         </div>
         <div className="quantity_change">
-          <button onClick={this.Decreament}>-</button>
-          Qty: {this.state.qty}
-          <button onClick={this.Increament}>+</button>
-          {/* <div className="quantity_input">
-            <form onSubmit={event => this.handleSubmit(event)}>
-              <select id="qty">
-                <option defaultValue="">Qty</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-              </select>
-              <button type="submit">add to cart</button>
-            </form>
-          </div> */}
+          {/* <form onSubmit={(event) => this.handleSubmit(event)}>
+            <button onClick={this.Decreament}>-</button>
+            <div id="selectedQty">{this.state.qty}</div>
+            <button onClick={this.Increament}>+</button>
+          </form> */}
+          <button
+            className="addToCart_button"
+            type="submit"
+            onClick={e => {
+              this.handleClick(e)
+            }}
+          >
+            add to cart
+          </button>
         </div>
       </div>
     )
@@ -94,13 +105,17 @@ export class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    singleProduct: state.products
+    singleProduct: state.products,
+    cart: state.cart,
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProduct: productId => dispatch(getAProduct(productId))
+    getProduct: productId => dispatch(getAProduct(productId)),
+    addToCart: (userId, orderProduct) =>
+      dispatch(addToCart(userId, orderProduct))
   }
 }
 

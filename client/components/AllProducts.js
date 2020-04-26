@@ -7,7 +7,6 @@ import AddProductForm from './AddProductForm'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
-    console.log('inside allproducts', this.props)
     this.props.getAllProducts()
   }
 

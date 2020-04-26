@@ -60,7 +60,6 @@ export const addNewProduct = productInfo => async dispatch => {
 
 export const removeAProduct = productId => async dispatch => {
   try {
-    console.log('inside thunk, before dispatch')
     const res = await axios.delete(`api/products/${productId}`)
     dispatch(deletedProduct(res.data))
   } catch (error) {
@@ -69,7 +68,7 @@ export const removeAProduct = productId => async dispatch => {
 }
 
 //reducer
-export default function singleProductReducer(state = initialProducts, action) {
+export default function productsReducer(state = initialProducts, action) {
   switch (action.type) {
     case GET_A_PRODUCT:
       return action.product
@@ -78,7 +77,7 @@ export default function singleProductReducer(state = initialProducts, action) {
       return action.products
 
     case ADD_PRODUCT:
-      return action.product
+      return action.products
 
     case DELETE_PRODUCT:
       return action.products
