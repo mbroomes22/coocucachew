@@ -38,10 +38,10 @@ export class ConfirmOrder extends Component {
     return (
       <div>
         <br />
-        <button type="submit" onClick={this.goBack}>
+        <button type="submit" onClick={this.goBack} className="button">
           Return to Payment Details
         </button>
-        <h1>Confirm Order Details</h1>
+        <h1 className="header">Confirm Order Details</h1>
         <br />
         <h2>Shipping Address</h2>
         <ul>
@@ -58,7 +58,7 @@ export class ConfirmOrder extends Component {
             <h3>Street Address:</h3> <br /> {streetAddress}
           </ol>
           <ol>
-            <h3>Zipcode:</h3> <br /> {zipCode}
+            <h3>ZIP code:</h3> <br /> {zipCode}
           </ol>
           <ol>
             <h3>State:</h3> <br /> {state}
@@ -100,6 +100,7 @@ export class ConfirmOrder extends Component {
           type="submit"
           onClick={this.continue}
           onSubmit={this.handleSubmit}
+          className="button"
         >
           Confirm & Checkout
         </button>

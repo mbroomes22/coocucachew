@@ -22,15 +22,16 @@ export default class UserDetails extends Component {
     const {values, handleChange} = this.props
     return (
       <div>
-        <h1>Enter Shipping Details</h1>
+        <h1 className="header">Enter Shipping Details</h1>
         <label>
           First Name:
           <input
             type="text"
             name="firstName"
-            placeholder="Enter First Name"
+            placeholder="First Name"
             onChange={handleChange}
             value={values.firstName}
+            className="field"
           />
           <br />
         </label>
@@ -39,9 +40,10 @@ export default class UserDetails extends Component {
           <input
             type="text"
             name="lastName"
-            placeholder="Enter Last Name"
+            placeholder="Last Name"
             onChange={handleChange}
             value={values.lastName}
+            className="field"
           />
           <br />
         </label>
@@ -50,9 +52,10 @@ export default class UserDetails extends Component {
           <input
             type="text"
             name="email"
-            placeholder="Enter email Address"
+            placeholder="Email Address"
             onChange={handleChange}
             value={values.email}
+            className="field"
           />
           <br />
         </label>
@@ -61,20 +64,22 @@ export default class UserDetails extends Component {
           <input
             type="text"
             name="streetAddress"
-            placeholder="Enter Street Address"
+            placeholder="Address (optional)"
             onChange={handleChange}
             value={values.streetAddress}
+            className="field"
           />
           <br />
         </label>
         <label>
-          Zipcode:
+          ZIP code:
           <input
             type="text"
             name="zipCode"
-            placeholder="Zipcode, eg. 10001"
+            placeholder="ZIP code (optional)"
             onChange={handleChange}
             value={values.zipCode}
+            className="field"
           />
           <br />
         </label>
@@ -83,13 +88,14 @@ export default class UserDetails extends Component {
           <input
             type="text"
             name="state"
-            placeholder="State, eg. NY"
+            placeholder="State (optional)"
             onChange={handleChange}
             value={values.state}
+            className="field"
           />
           <br />
         </label>
-        <button type="submit" onClick={this.required}>
+        <button type="submit" onClick={this.required} className="button">
           Continue to Payment Details
         </button>
       </div>

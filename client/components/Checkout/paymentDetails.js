@@ -35,10 +35,10 @@ export default class PaymentInfo extends React.Component {
     return (
       <div>
         <br />
-        <button type="submit" onClick={this.goBack}>
+        <button type="submit" onClick={this.goBack} className="button">
           Return to Shipping Details
         </button>
-        <h1>Enter Payment Details with Stripe</h1>
+        <h1 className="header">Enter Payment Details with Stripe</h1>
         {/* <StripeCheckout
             stripeKey={pk_test_rKkcEpuxLMde62rJMWZRBUFF00hnMFCbCu}
             token={this.handleToken}
@@ -47,7 +47,7 @@ export default class PaymentInfo extends React.Component {
             amount={this.props.cartItems.item.price}
             name={this.props.cartItems.item.name}
           /> */}
-        <button type="submit" onClick={this.continue}>
+        <button type="submit" onClick={this.continue} className="button">
           Continue to Confirmation
         </button>
       </div>
