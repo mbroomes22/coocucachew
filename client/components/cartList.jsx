@@ -1,63 +1,47 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchCart} from '../store/cart'
 import {Link} from 'react-router-dom'
-
-const defaultCart = {
-  id: 0,
-  isPending: false,
-  products: []
-}
+import ls from 'local-storage'
 
 export class CartList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      cart: {
-        id: 0,
-        isPending: false,
-        products: []
-      }
-    }
-
-    ////////////////////////////////////////////////////
-    // Working on adquiring props before render in order
-    // to set the state before render///////////////////
-    ////////////////////////////////////////////////////
-
-    // this.handleChange = this.handleChange.bind(this)
-    // this.increament = this.increament.bind(this)
-    // this.decreament = this.decreament.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.increment = this.increment.bind(this)
+    this.decreament = this.decreament.bind(this)
+    this.setPropsToLocalStorage = this.setPropsToLocalStorage.bind(this)
   }
 
-  // handleChange(e) {
-  //   this.setState({
-  //     [e.target.name]: e.target.value
-  //   })
-  // }
+  componentDidMount() {}
 
-  // componentDidMount() {
-  //   console.log('inside cart list component did mount', this.props)
-  //   // localStorage.cart = this.state.cart
-  // }
+  handleChange(e) {
+    e.preventDefault()
+  }
 
-  // increament = () => {
-  //   this.setState({
-  //     qty: this.state.qty + 1
-  //   })
-  // }
+  increment(e) {}
+  decreament() {}
 
-  // decreament = () => {
-  //   this.setState({
-  //     qty: this.state.qty - 1
-  //   })
-  // }
+  setPropsToLocalStorage() {
+    let subtotal = 0
+    if (this.props.cart.products) {
+      ls.set('id', this.props.cart.id)
+      ls.set('isPending', this.props.cart.isPending)
+      this.props.cart.products.map(product => {
+        ls.set(`${product.name}`, product)
+        subtotal +=
+          product.orderProduct.quantity *
+          parseInt(product.price.substring(1), 10)
+      })
+      ls.set('subtotal', subtotal)
+      ls.set('total', subtotal + 6)
+    }
+  }
 
   render() {
-    console.log('inside cart list render', this.props)
+    this.setPropsToLocalStorage()
     return (
       <div>
-        {/* {this.props.cart.products
+        {this.props.cart.products
           ? this.props.cart.products.map(product => (
               <div key={product.id} className="cartproducts">
                 <Link to={`/${product.id}`}>
@@ -83,7 +67,7 @@ export class CartList extends React.Component {
               //   <h3>Subtotal</h3>
               // </div>)
             ))
-          : 'Loading, please wait while I fetch your cart...'} */}
+          : 'Loading, please wait while I fetch your cart...'}
       </div>
     )
   }
