@@ -1,6 +1,6 @@
 const router = require('express').Router()
 // const isAuth = require('./isAuth')
-const {Product, User, orderProduct, Order} = require('../db/models')
+const {Product, User, OrderProduct, Order} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -44,7 +44,7 @@ router.post('/', async (req, res, next) => {
     const orderId = order[0].dataValues.id
     const currentOrder = await Order.findByPk(orderId)
     await currentOrder.addProduct(req.body.orderProduct.id)
-    const productOrder = await orderProduct.findOne({
+    const productOrder = await OrderProduct.findOne({
       where: {
         productId: req.body.orderProduct.id,
         orderId: orderId
