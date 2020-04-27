@@ -21,7 +21,7 @@ router.post('/', async (req, res, next) => {
     //if guest
     let order
     if (!req.body.userId) {
-      console.log('^^See Me! I am Req.body:^^', req.body)
+      // console.log('^^See Me! I am Req.body:^^', req.body)
       order = await Order.findOrCreate({
         where: {
           userId: null,
@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
       })
     } else {
       //if user
-      console.log('^^See Me! I am Req.body2:^^', req.body)
+      // console.log('^^See Me! I am Req.body2:^^', req.body)
       order = await Order.findOrCreate({
         where: {
           userId: req.body.userId,
@@ -40,7 +40,7 @@ router.post('/', async (req, res, next) => {
         include: [Product]
       })
     }
-    console.log('$I am order:$', order)
+    // console.log('$I am order:$', order)
     const orderId = order[0].dataValues.id
     const currentOrder = await Order.findByPk(orderId)
     await currentOrder.addProduct(req.body.orderProduct.id)
@@ -50,7 +50,7 @@ router.post('/', async (req, res, next) => {
         orderId: orderId
       }
     })
-    console.log('!!!!PRODUCT_ORDER!!!!', productOrder)
+    // console.log('!!!!PRODUCT_ORDER!!!!', productOrder)
     const qty = productOrder.dataValues.quantity
     await productOrder.update({
       quantity: qty + 1
