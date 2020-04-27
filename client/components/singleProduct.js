@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAProduct} from '../store/products'
 import {addToCart} from '../store/cart'
+import ls from 'local-storage'
 //need import
 
 export class SingleProduct extends Component {
@@ -20,6 +21,7 @@ export class SingleProduct extends Component {
   componentDidMount() {
     // console.log('^*^*^', this.props)
     // this.props.match.params.productId ? (
+    console.log(this.props.match.params.productId)
     this.props.getProduct(this.props.match.params.productId)
 
     // : ('loading')

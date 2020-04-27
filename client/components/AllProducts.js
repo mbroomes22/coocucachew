@@ -32,7 +32,7 @@ export class AllProducts extends React.Component {
                       <h1>X</h1>
                       <h5>delete</h5>
                     </button>
-                    <Link to={`/${product.id}`}>
+                    <Link to={`/products/${product.id}`}>
                       <h4>{product.name}</h4>
                     </Link>
                     <h4>{product.price}</h4>

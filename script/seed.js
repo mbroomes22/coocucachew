@@ -45,6 +45,7 @@ async function seed() {
   const users = await Promise.all(fakeUsers.map(user => User.create(user)))
 
   const admin = await User.create({
+    name: 'Admin',
     email: 'michelle@gmail.com',
     password: '12345',
     isAdmin: true,
