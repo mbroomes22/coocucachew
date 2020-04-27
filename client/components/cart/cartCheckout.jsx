@@ -19,6 +19,7 @@ export class CartCheckout extends React.Component {
     const cartForDb = ls.get('localStorage')
     this.props.updateDbCart(cartForDb, ls.get('id'))
     console.log('handle update works')
+    this.props.nextStep()
   }
 
   //begin checkout cart
@@ -28,21 +29,7 @@ export class CartCheckout extends React.Component {
     this.props.updateDbCart(cartForDb, ls.get('id'))
     ls.set('isPending', false)
     console.log('handle checkout works')
-  }
-
-  nextStep = () => {
-    const {step} = this.state
-    this.setState({
-      step: step + 1
-    })
-  }
-
-  //go back to previous step
-  prevStep = () => {
-    const {step} = this.state
-    this.setState({
-      step: step - 1
-    })
+    this.props.nextStep()
   }
 
   render() {

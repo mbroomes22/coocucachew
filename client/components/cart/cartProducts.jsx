@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import CartQuantity from './cartQuantity'
+import CartCheckout from './cartCheckout'
 import ls from 'local-storage'
 // import SecureLS from 'secure-ls'
 // const ls = new SecureLS()
@@ -25,6 +26,13 @@ export class CartProducts extends React.Component {
               </div>
             ))
           : 'Loading... Please wait while I fetch your cart'}
+        {
+          <CartCheckout
+            cart={this.props.cart}
+            nextStep={this.props.nextStep}
+            prevStep={this.props.prevStep}
+          />
+        }
       </div>
     )
   }

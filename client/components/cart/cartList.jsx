@@ -1,10 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {updateOrder} from '../../store/cartStore'
-import CartQuantity from './cartQuantity'
 import CartProducts from './cartProducts'
-import CartCheckout from './cartCheckout'
 import UserForm from '../Checkout/userForm'
 import ls from 'local-storage'
 // import SecureLS from 'secure-ls'
@@ -63,10 +60,14 @@ export class CartList extends React.Component {
     const {step} = this.state
     switch (step) {
       case 1:
-        return <CartProducts cart={this.props.cart} nextStep={this.nextStep} />
+        return (
+          <CartProducts
+            cart={this.props.cart}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+          />
+        )
       case 2:
-        return <CartCheckout cart={this.props.cart} nextStep={this.nextStep} />
-      case 3:
         return <UserForm cart={this.props.cart} nextStep={this.nextStep} />
       default:
         return 'Loading...'
