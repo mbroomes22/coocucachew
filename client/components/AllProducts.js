@@ -18,11 +18,11 @@ export class AllProducts extends React.Component {
     const {products} = this.props
     return (
       <div>
-        <div>
+        <div className="card-container">
           {this.props.products[0]
             ? products.map(product => {
                 return (
-                  <div key={product.id}>
+                  <div key={product.id} className="card">
                     <button
                       className="button"
                       type="button"

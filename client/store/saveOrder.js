@@ -15,12 +15,12 @@ export const updateUserAddress = newAddress => ({
   newAddress
 })
 
-//change isPending to false
+//change isPending to false in orders db
 //thunk creator
-export const updateOrderHistory = newOrder => {
+export const updateOrderHistory = (orderId, newOrderInfo) => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/orders`, newOrder)
+      const {data} = await axios.put(`/api/orders/${orderId}`, newOrderInfo)
       dispatch(updateUserOrderHistory(data))
     } catch (error) {
       console.error('Sorry, could not process order:', error)
@@ -28,10 +28,10 @@ export const updateOrderHistory = newOrder => {
   }
 }
 
-export const updateUserAddresses = newAddress => {
+export const updateUserAddresses = (userId, newAddress) => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/users`, newAddress)
+      const {data} = await axios.put(`/api/users/${userId}`, newAddress)
       dispatch(updateUserAddress(data))
     } catch (error) {
       console.error('Sorry, could not process address:', error)
