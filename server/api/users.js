@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
-const isAdmin = require('./isAuth')
+const isAdmin = require('../../utils/isAuth')
 module.exports = router
 
 router.get('/', isAdmin, async (req, res, next) => {

@@ -16,6 +16,9 @@ export class AllProducts extends React.Component {
 
   render() {
     const {products} = this.props
+    const isAdmin = this.props.user.isAdmin
+    console.log(isAdmin)
+
     return (
       <div>
         <div className="card-container">
@@ -43,9 +46,11 @@ export class AllProducts extends React.Component {
               })
             : 'loading....'}
         </div>
-        <div>
-          <AddProductForm props={this.props} />
-        </div>
+        {isAdmin ? (
+          <div>
+            <AddProductForm props={this.props} />
+          </div>
+        ) : null}
       </div>
     )
   }
