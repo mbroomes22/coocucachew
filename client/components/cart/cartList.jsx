@@ -19,11 +19,12 @@ export class CartList extends React.Component {
   //set the props in the local window storage & calculate totals
   setPropsToLocalStorage() {
     let subtotal = 0
-    if (this.props.cart.products && ls.get('isPending') === true) {
-      ls.set('id', this.props.cart.id)
-      ls.set('isPending', this.props.cart.isPending)
-      ls.set('cartProducts', this.props.cart.products)
-      this.props.cart.products.map(product => {
+    // console.log('inside of set props to local storage', this.props.cart)
+    if (this.props.cart[0] && ls.get('isPending') === true) {
+      ls.set('id', this.props.cart[0].id)
+      ls.set('isPending', this.props.cart[0].isPending)
+      ls.set('cartProducts', this.props.cart[0].products)
+      this.props.cart[0].products.map(product => {
         ls.set(`${product.name}`, product)
         subtotal +=
           product.orderProduct.quantity *
@@ -56,16 +57,22 @@ export class CartList extends React.Component {
   }
 
   render() {
+    // console.log('inside cartlist render',this.props)
     this.setPropsToLocalStorage()
+    // console.log('local storage in cartlist', ls.get('cartProducts'))
     const {step} = this.state
+
+    // return (<div></div>)
     switch (step) {
       case 1:
-        return (
+        return this.props.cart[0] ? (
           <CartProducts
             cart={this.props.cart}
             nextStep={this.nextStep}
             prevStep={this.prevStep}
           />
+        ) : (
+          'Loading Products'
         )
       case 2:
         return <UserForm cart={this.props.cart} nextStep={this.nextStep} />

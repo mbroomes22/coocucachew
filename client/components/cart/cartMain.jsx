@@ -9,11 +9,14 @@ export class CartMain extends React.Component {
   }
 
   render() {
-    return (
+    // console.log('cart main props cart', this.props.cart)
+    return this.props.cart ? (
       <div>
         <h3>C A R T</h3>
         <CartList cart={this.props.cart} />
       </div>
+    ) : (
+      'Loading Cart...'
     )
   }
 }

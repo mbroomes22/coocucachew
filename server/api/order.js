@@ -2,11 +2,16 @@ const router = require('express').Router()
 // const isAuth = require('./isAuth')
 const {Product, User, orderProduct, Order} = require('../db/models')
 
+//is auth or isAdmin
+// authorizations folder with isAdmin and isAuth plus any others
+//authhelpers.js
 router.get('/', async (req, res, next) => {
   try {
-    const fetchedOrder = await Order.findOne({
+    const fetchedOrder = await Order.findAll({
       where: {
-        userId: req.session.passport.user
+        ///ISPENDING TRUE OR FALSE
+        userId: req.session.passport.user,
+        isPending: true
       },
       include: Product
     })
@@ -19,11 +24,14 @@ router.get('/', async (req, res, next) => {
 router.put('/:orderId', async (req, res, next) => {
   console.log('REQ.BODY IN ORDER PUT ROUTE')
   try {
+    //check object and update
     const orderToUpdate = await Order.findByPk(req.params.id)
   } catch (err) {
     next(err)
   }
 })
+
+// implement delete route
 
 router.post('/', async (req, res, next) => {
   try {
