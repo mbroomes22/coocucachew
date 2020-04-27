@@ -40,7 +40,12 @@ export const getTotalPrice = totalPrice => ({
 })
 
 //initial state
-const initialState = {}
+const initialState = {
+  currentOrderId: null,
+  items: [],
+  qty: {},
+  total: 0
+}
 
 //thunks
 export const fetchCart = () => async dispatch => {

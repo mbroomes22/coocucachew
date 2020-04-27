@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAProduct} from '../store/products'
 import {addToCart} from '../store/cart'
+import ls from 'local-storage'
 //need import
 
 export class SingleProduct extends Component {
