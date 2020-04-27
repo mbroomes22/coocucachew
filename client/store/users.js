@@ -13,7 +13,6 @@ const getUsers = users => ({
 //Thunk
 
 export const fetchUsers = () => async dispatch => {
-  console.log('PROBLEM IS HERE')
   try {
     const {data} = await axios.get('/api/users')
     dispatch(getUsers(data))

@@ -15,12 +15,14 @@ export class AllUsers extends React.Component {
           <h1>Users</h1>
         </main>
         <div id="users">
-          {this.props.users.map(user => (
-            <div key={user.id}>
-              <p>{user.name}</p>
-              <p>{user.email}</p>
-            </div>
-          ))}
+          <tbody>
+            {this.props.users.map(user => (
+              <tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+              </tr>
+            ))}
+          </tbody>
         </div>
       </div>
     )
