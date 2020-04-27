@@ -46,13 +46,15 @@ export class AddProductForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={e => this.handleSubmit(e)}>
+        <h3 className="header">Add A New Product</h3>
+        <form onSubmit={e => this.handleSubmit(e)} className="form">
           <label htmlFor="name"> Name: </label>
           <input
             onChange={e => this.handleChange(e)}
             name="name"
             type="text"
             value={this.state.name}
+            className="product-field"
           />
 
           <label htmlFor="imageUrl"> Image URL: </label>
@@ -61,6 +63,7 @@ export class AddProductForm extends React.Component {
             name="imageUrl"
             type="text"
             value={this.state.imageUrl}
+            className="product-field"
           />
 
           <label htmlFor="price"> Price: </label>
@@ -69,6 +72,7 @@ export class AddProductForm extends React.Component {
             name="price"
             type="number"
             value={this.state.price}
+            className="product-field"
           />
 
           <label htmlFor="description"> Description: </label>
@@ -77,9 +81,12 @@ export class AddProductForm extends React.Component {
             name="description"
             type="text"
             value={this.state.description}
+            className="product-field"
           />
 
-          <button type="submit">Submit</button>
+          <button type="submit" className="buttonC">
+            Submit
+          </button>
         </form>
       </div>
     )

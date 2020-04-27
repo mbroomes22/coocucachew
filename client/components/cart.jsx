@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/cart'
 import {CartList} from './cartList'
-// import {userForm} from './Checkout/userForm'
+import UserForm from './Checkout/userForm'
 
 export class Cart extends React.Component {
   componentDidMount() {
@@ -23,7 +23,7 @@ export class Cart extends React.Component {
         <h3>C A R T</h3>
         {/* </button> */}
         <CartList cart={this.props.cart} />
-        {/* <userForm cart={this.props.cart} /> */}
+        <UserForm cart={this.props.cart} />
       </div>
     )
   }
