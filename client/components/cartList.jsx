@@ -54,7 +54,6 @@ export class CartList extends React.Component {
   // }
 
   render() {
-    console.log('inside cart list render', this.props)
     return (
       <div>
         {this.props.cart.products

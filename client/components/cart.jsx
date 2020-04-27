@@ -7,7 +7,6 @@ import {CartList} from './cartList'
 export class Cart extends React.Component {
   componentDidMount() {
     this.props.getCart()
-    console.log(this.props)
   }
 
   handleSubmit(e) {
@@ -16,7 +15,6 @@ export class Cart extends React.Component {
 
   render() {
     let subtotal = 0
-    console.log(this.props)
     return (
       <div>
         {/* <button type="button" onSubmit={e => this.handleSubmit(e)}> */}

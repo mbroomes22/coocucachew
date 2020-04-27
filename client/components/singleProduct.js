@@ -53,7 +53,6 @@ export class SingleProduct extends Component {
   }
 
   render() {
-    console.log('THIS STATE: ', this.state)
     const singleProduct = this.props.singleProduct
     return (
       <div className="singleProduct_page">
