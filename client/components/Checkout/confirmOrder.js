@@ -90,7 +90,7 @@ export class ConfirmOrder extends Component {
         <h2>Review Items</h2>
         <br />
         <br />
-        <ul>
+        {/* <ul>
           {this.props.cartItems.map(item => (
             <div key={item.id}>
               <ol>
@@ -107,11 +107,12 @@ export class ConfirmOrder extends Component {
               </ol>
             </div>
           ))}
-        </ul>
+        </ul> */}
         <h2>Order Total</h2>
         <br />
-        {this.props.total}
-
+        {/* {total} */}
+        9.99
+        <br />
         <button
           type="submit"
           onClick={this.continue}
