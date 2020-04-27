@@ -40,12 +40,7 @@ export const getTotalPrice = totalPrice => ({
 })
 
 //initial state
-const initialState = {
-  currentOrderId: null,
-  items: [],
-  qty: {},
-  total: 0
-}
+const initialState = {}
 
 //thunks
 export const fetchCart = () => async dispatch => {
@@ -72,33 +67,32 @@ export const addToCart = (userId, orderProduct) => {
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      // console.log('inside cart reducer', action.cart)
       return action.cart
 
-    case ADD_TO_CART:
-      const productId = action.orderProduct.id
-      const newState = {...state}
-      if (!newState.qty[productId]) {
-        return {
-          ...newState,
-          currentOrderId: action.order.id,
-          qty: {
-            ...newState.qty,
-            [productId]: 1
-          },
-          items: [...newState.items, action.item]
-        }
-      } else {
-        let increase = newState.qty[productId] + 1
-        return {
-          ...newState,
-          currentOrderId: action.order.id,
-          qty: {
-            ...newState.qty,
-            [productId]: increase
-          }
-        }
-      }
+    // case ADD_TO_CART:
+    //   const productId = action.orderProduct.id
+    //   const newState = {...state}
+    //   if (!newState.qty[productId]) {
+    //     return {
+    //       ...newState,
+    //       currentOrderId: action.order.id,
+    //       qty: {
+    //         ...newState.qty,
+    //         [productId]: 1
+    //       },
+    //       items: [...newState.items, action.item]
+    //     }
+    //   } else {
+    //     let increase = newState.qty[productId] + 1
+    //     return {
+    //       ...newState,
+    //       currentOrderId: action.order.id,
+    //       qty: {
+    //         ...newState.qty,
+    //         [productId]: increase
+    //       }
+    //     }
+    //   }
 
     default:
       return state

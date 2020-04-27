@@ -16,6 +16,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.put('/:orderId', async (req, res, next) => {
+  console.log('REQ.BODY IN ORDER PUT ROUTE')
+  try {
+    const orderToUpdate = await Order.findByPk(req.params.id)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     //if guest
