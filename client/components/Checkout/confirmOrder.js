@@ -38,8 +38,7 @@ export class ConfirmOrder extends Component {
       this.state.state
     )
     this.setState({
-      firstName: '',
-      lastName: '',
+      name: '',
       email: '',
       streetAddress: '',
       zipCode: '',
@@ -48,9 +47,7 @@ export class ConfirmOrder extends Component {
   }
 
   render() {
-    const {
-      values: {firstName, lastName, email, streetAddress, zipCode, state}
-    } = this.props
+    const {values: {name, email, streetAddress, zipCode, state}} = this.props
     return (
       <div>
         <br />
@@ -62,10 +59,7 @@ export class ConfirmOrder extends Component {
         <h2>Shipping Address</h2>
         <ul>
           <ol>
-            <h3>First Name:</h3> <br /> {firstName}
-          </ol>
-          <ol>
-            <h3>Last Name:</h3> <br /> {lastName}
+            <h3>Name:</h3> <br /> {name}
           </ol>
           <ol>
             <h3>Email:</h3> <br /> {email}

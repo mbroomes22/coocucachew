@@ -9,8 +9,7 @@ class UserForm extends Component {
     super(props)
     this.state = {
       step: 1,
-      firstName: '',
-      lastName: '',
+      name: '',
       email: '',
       streetAddress: '',
       zipCode: '',
@@ -41,18 +40,9 @@ class UserForm extends Component {
   }
 
   render() {
-    const {
-      step,
-      firstName,
-      lastName,
-      email,
-      streetAddress,
-      zipCode,
-      state
-    } = this.state
+    const {step, name, email, streetAddress, zipCode, state} = this.state
     const values = {
-      firstName,
-      lastName,
+      name,
       email,
       streetAddress,
       zipCode,
