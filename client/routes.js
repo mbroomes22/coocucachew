@@ -6,6 +6,7 @@ import CartMain from './components/cart/cartMain'
 import CartList from './components/cart/cartList'
 import CartProducts from './components/cart/cartProducts'
 import CartQuantity from './components/cart/cartQuantity'
+import UserForm from './components/Checkout/userForm'
 import {Login, Signup, UserHome, SingleProduct, AllProducts} from './components'
 import {me} from './store'
 
