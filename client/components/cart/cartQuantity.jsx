@@ -70,6 +70,7 @@ export class CartQuantity extends React.Component {
     }
   }
   render() {
+    console.log('inside of cart quantity render', this.props)
     return (
       <div>
         <form onSubmit={e => this.handleUpdate(e)}>

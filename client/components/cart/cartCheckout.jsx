@@ -35,7 +35,7 @@ export class CartCheckout extends React.Component {
   render() {
     return (
       <div>
-        {this.props.cart.products ? (
+        {this.props.cart[0].products ? (
           <div>
             <div>
               <h5>Subtotal: </h5>
