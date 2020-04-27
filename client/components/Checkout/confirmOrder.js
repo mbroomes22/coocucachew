@@ -1,5 +1,4 @@
-// confirmation page confirming address, payment info, and cart items/cart total
-//needs to be passed props from '../cart', bc props should access name, price, qty of items in cart and confirm a calculated total
+//needs to be passed props from '../cart and userForm', bc props should access userid, item name, price, qty of items in cart and confirm a calculated total
 //clicking 'Confirm&Checkout' button should send user's address, cart, and payment to db
 import React, {Component} from 'react'
 import {updateOrderHistory, updateUserAddresses} from '../../store/saveOrder'
@@ -8,7 +7,6 @@ import {connect} from 'react-redux'
 export class ConfirmOrder extends Component {
   continue = evt => {
     evt.preventDefault()
-    //Process form -send data to DB
     this.props.nextStep()
   }
 
@@ -17,10 +15,28 @@ export class ConfirmOrder extends Component {
     this.props.prevStep()
   }
 
+  checkoutSubTotal = cartItemsArr => {
+    let subTotal = 0
+    cartItemsArr.forEach(item => {
+      subTotal += item.price * item.qty
+    })
+    return subTotal
+  }
+
+  checkoutTotal = subTotal => {
+    return subTotal + 6
+  }
+
   handleSubmit = evt => {
     evt.preventDefault()
-    this.props.addOrder(this.props.userId, this.props.total)
-    this.props.addAddress(this.state.streetAddress)
+    const subTotal = checkoutSubTotal(this.props.cart) //not sure if the user's cart prop is an arr named cart
+    const total = checkoutTotal(subTotal)
+    this.props.addOrder(subTotal, total, this.props.cart.userId) //not sure if user's id is named userId and located in cart
+    this.props.addAddress(
+      this.state.streetAddress,
+      this.state.zipCode,
+      this.state.state
+    )
     this.setState({
       firstName: '',
       lastName: '',
@@ -114,8 +130,10 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => ({
-  addOrder: newOrder => dispatch(updateOrderHistory(newOrder)),
-  addAddress: newAddress => dispatch(updateUserAddresses(newAddress))
+  addOrder: (orderSubTotal, orderTotal, orderUserID) =>
+    dispatch(updateOrderHistory(orderSubTotal, orderTotal, orderUserID)),
+  addAddress: (newAddress, newZip, newState) =>
+    dispatch(updateUserAddresses(newAddress, newZip, newState))
 })
 
 export default connect(mapState, mapDispatch)(ConfirmOrder)

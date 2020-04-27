@@ -3,7 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, removeAProduct} from '../store/products'
-import AddProductForm from './AddProductForm'
+import AddProductForm from './addProductForm'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
@@ -18,11 +18,11 @@ export class AllProducts extends React.Component {
     const {products} = this.props
     return (
       <div>
-        <div>
+        <div className="card-container">
           {this.props.products[0]
             ? products.map(product => {
                 return (
-                  <div key={product.id}>
+                  <div key={product.id} className="card">
                     <button
                       className="button"
                       type="button"
