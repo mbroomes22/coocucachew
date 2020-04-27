@@ -3,87 +3,34 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 // import SecureLS from 'secure-ls'
 import ls from 'local-storage'
-// import { totalFromStringAndNum } from '../../utils/handlestringPricing'
-// import {updateCartinDb} from '../store/cartStore'
+import {updateOrder} from '../store/cartStore'
 // const ls = new SecureLS()
-
-const totalFromStringAndNum = (num, str) => {
-  return num + parseInt(str.substring(1), 10)
-}
-
-const defaultState = {
-  id: 0,
-  total: 6,
-  subtotal: 0,
-  cartProducts: [],
-  product: {}
-}
+import CartQuantity from './CartQuantity'
+import userForm from './Checkout/userForm'
 
 export class CartList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = defaultState
-
-    this.handleUpdate = this.handleUpdate.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    // this.increment = this.increment.bind(this)
-    // this.decrement = this.decrement.bind(this)
     this.setPropsToLocalStorage = this.setPropsToLocalStorage.bind(this)
+    this.handleCheckout = this.handleCheckout.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
-
-  handleChange(e, source) {
-    e.preventDefault()
-  }
-
-  handleUpdate(e) {
-    console.log([e.target.name])
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  // increment(e, source) {
-  //   let productToIncrement = ls.get(`${source}`)
-  //   if(productToIncrement.orderProduct.quantity < 20){
-  //     productToIncrement.orderProduct.quantity += 1
-  //     ls.set(`${source}`, productToIncrement)
-  //     console.log(` total inside increment` ,ls.get('total'))
-  //     const newPrice = totalFromStringAndNum( ls.get('subtotal'), productToIncrement.price )
-  //     ls.set('subtotal', newPrice)
-  //     ls.set('total', newPrice + 6)
-  //     this.setState({subtotal:newPrice, total:(newPrice+6), [source] : productToIncrement})
-  //   } else {
-  //     alert(`Sorry, we don't have move than 50 ${source}s in stock :(`)
-  //   }
-  // }
-
-  // decrement(e, source) {
-  //   e.preventDefault()
-  //   let productToDecrement = ls.get(`${source}`)
-  //   if(productToDecrement.orderProduct.quantity !== 0){
-  //     productToDecrement.orderProduct.quantity --
-  //     ls.set(`${source}`, productToDecrement)
-  //     const newPrice = totalFromStringAndNum( ls.get('subtotal'), productToDecrement.price )
-  //     ls.set('subtotal', newPrice)
-  //     ls.set('total', newPrice + 6)
-  //     this.setState({subtotal:newPrice, total:(newPrice + 6), [source] : productToDecrement})
-  //   } else {
-  //     alert("You can't purchase less than 0 products")
-  //   }
-  // }
 
   setPropsToLocalStorage() {
     let subtotal = 0
+
     if (this.props.cart.products && ls.get('isPending') === true) {
       ls.set('id', this.props.cart.id)
       ls.set('isPending', this.props.cart.isPending)
       ls.set('cartProducts', this.props.cart.products)
+
       this.props.cart.products.map(product => {
         ls.set(`${product.name}`, product)
         subtotal +=
           product.orderProduct.quantity *
           parseInt(product.price.substring(1), 10)
       })
+
       ls.set('subtotal', subtotal)
       ls.set('total', subtotal + 6)
     } else {
@@ -95,24 +42,24 @@ export class CartList extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    // const updateCartInfo = {
-    //   id : ls.get('id'),
-    //   isPending : ls.get('isPending'),
-    //   products : () => {
-    //     ls.get
-    //   },
-    //   subTotal : ls.get('subtotal'),
-    //   total : ls.get('total')
-    // }
-    // updateDbCart()
+  handleUpdate(e) {
+    e.preventDefault()
+    const cartForDb = ls.get('localStorage')
+    this.props.updateDbCart(cartForDb, ls.get('id'))
+    console.log('handle update works')
+  }
+
+  handleCheckout(e) {
+    e.preventDefault()
+    const cartForDb = ls.get('localStorage')
+    this.props.updateDbCart(cartForDb, ls.get('id'))
+    ls.set('isPending', false)
+    console.log('handle checkout works')
   }
 
   render() {
     this.setPropsToLocalStorage()
-    // console.log('cartlist render cartproducts in local storage:', ls.get('cartProducts'))
     const lsProducts = ls.get('cartProducts')
-
     return (
       <div>
         {this.props.cart.products
@@ -122,33 +69,7 @@ export class CartList extends React.Component {
                   <img src={product.imageUrl} width="50" />
                   <h4>{product.name}</h4>
                 </Link>
-                <div>
-                  <form onSubmit={e => this.handleUpdate(e)}>
-                    <button
-                      type="button"
-                      onClick={e => this.decrement(e, product.name)}
-                    >
-                      {' '}
-                      -{' '}
-                    </button>
-                    <input
-                      onChange={e => this.handleChange(e)}
-                      type="number"
-                      value={
-                        this.state.cartProducts[product].orderProduct.quantity
-                      }
-                      name="quantity"
-                    />
-                    <p>{product.orderProduct.quantity}</p>
-                    <button
-                      type="button"
-                      onClick={e => this.increment(e, product.name)}
-                    >
-                      {' '}
-                      +{' '}
-                    </button>
-                  </form>
-                </div>
+                <CartQuantity product={product} />
                 <div>
                   <p>{product.price}</p>
                 </div>
@@ -164,18 +85,34 @@ export class CartList extends React.Component {
             <div>
               <h4>Total: </h4>
               <h4>{ls.get('total')}</h4>
+              <button type="submit" onSubmit={e => this.handleUpdate(e)}>
+                U P D A T E
+              </button>
+              <button type="submit" onSubmit={e => this.handleCheckout(e)}>
+                C H E C K O U T
+              </button>
+              <button type="submit" onSubmit={e => this.handleUpdate(e)}>
+                S A V E F O R L A T E R
+              </button>
             </div>
           </div>
         ) : (
           'Loading your total...'
         )}
+        <div>
+          {!ls.get('isPending') ? (
+            <userForm cart={this.props.cart} />
+          ) : (
+            'Redirecting'
+          )}
+        </div>
       </div>
     )
   }
 }
 
-// const mapDispatch = dispatch => ({
-//   updateDbCart : () => dispatch(updateCartinDb())
-// })
+const mapDispatch = dispatch => ({
+  updateDbCart: (order, orderId) => dispatch(updateOrder(order, orderId))
+})
 
-export default connect(null, null)(CartList)
+export default connect(null, mapDispatch)(CartList)
