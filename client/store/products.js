@@ -33,7 +33,7 @@ const deletedProduct = products => ({
 //thunk
 export const getAProduct = productId => async dispatch => {
   try {
-    const res = await axios.get(`api/products/${productId}`)
+    const res = await axios.get(`/api/products/${productId}`)
     dispatch(gotAProduct(res.data))
   } catch (err) {
     console.error(err)

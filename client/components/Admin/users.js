@@ -4,11 +4,13 @@ import {fetchUsers} from '../../store/users'
 
 export class AllUsers extends React.Component {
   componentDidMount() {
+    console.log('USERS COMPONENT')
     this.props.getUsers()
   }
 
   render() {
     console.log(this.props)
+
     return (
       <div>
         <main>
