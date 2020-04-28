@@ -38,6 +38,7 @@ export class CartQuantity extends React.Component {
       orderProduct: {
         ...this.props.product.orderProduct,
         quantity: this.state.quantity
+        //maybe can add a this.setState to change the qty when click delete btn
       }
     }
     ls.set(`${this.props.product.name}`, updatedProduct)
@@ -98,6 +99,13 @@ export class CartQuantity extends React.Component {
     }
   }
 
+  clearAll(e) {
+    e.preventDefault()
+    this.setState({
+      quantity: 0
+    })
+  }
+
   render() {
     // console.log('inside of cart quantity render', this.props)
     return (
@@ -118,6 +126,9 @@ export class CartQuantity extends React.Component {
             +{' '}
           </button>
           <button type="submit">Update</button>
+          <button type="submit" onClick={e => this.clearAll(e)}>
+            Delete
+          </button>
         </form>
       </div>
     )
