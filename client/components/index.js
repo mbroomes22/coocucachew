@@ -9,6 +9,7 @@ export {default as CartMain} from './cart/cartMain'
 export {default as CartList} from './cart/cartList'
 export {default as CartProducts} from './cart/cartProducts'
 export {default as CartQuantity} from './cart/cartQuantity'
+export {default as AllUsers} from './Admin/users'
 
 export {default as Navbar} from './navbar'
 export {default as SingleProduct} from './singleProduct'

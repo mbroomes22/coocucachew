@@ -41,7 +41,8 @@ const Purchase = props => (
     stripeKey="pk_test_rKkcEpuxLMde62rJMWZRBUFF00hnMFCbCu" //or {pk_test_rKkcEpuxLMde62rJMWZRBUFF00hnMFCbCu}
     token={onToken}
     billingAddress
-    amount={props.cartItems.item.price * 100}
+    // amount={props.cartItems.item.price * 100}
+    amount={999}
   />
 )
 
