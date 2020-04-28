@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import ls from 'local-storage'
+import updateCartDbProduct from '../../store/cartStore'
+import deleteProductFromDbCart from '../../store/cartStore'
 
 export class CartQuantity extends React.Component {
   constructor(props) {
@@ -15,6 +17,13 @@ export class CartQuantity extends React.Component {
     this.decrement = this.decrement.bind(this)
   }
 
+  componentDidMount() {
+    console.log('cart quantity component did mount', this.props.product)
+    this.setState({
+      quantity: this.props.product.orderProduct.quantity
+    })
+  }
+
   handleUpdate(e) {
     e.preventDefault()
     const updatedProduct = {
@@ -26,7 +35,7 @@ export class CartQuantity extends React.Component {
     }
 
     ls.set(`${this.props.product.name}`, updatedProduct)
-    console.log(this.props.product.price)
+
     const newPrice =
       ls.get('subtotal') +
       this.state.quantity * parseInt(this.props.product.price.substring(1), 10)
@@ -40,7 +49,6 @@ export class CartQuantity extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-    this.handleUpdate(e)
   }
 
   increment(e) {
@@ -60,11 +68,13 @@ export class CartQuantity extends React.Component {
   }
   decrement(e) {
     e.preventDefault()
-    if (this.state.quantity !== 0) {
+    if (this.state.quantity > 0) {
       const quantity = this.state.quantity
       this.setState({
         quantity: quantity - 1
       })
+    } else if (this.state.quantity > 0) {
+      this.props.deleteProduct(this.props.product.id, this.props.cart.id)
     } else {
       alert(`Sorry, you can't purchase less than 0 ${this.props.product.name}`)
     }
@@ -95,4 +105,11 @@ export class CartQuantity extends React.Component {
   }
 }
 
-export default connect(null, null)(CartQuantity)
+const mapDispatch = dispatch => ({
+  updateCartProduct: (productId, Qty) =>
+    dispatch(updateCartDbProduct(productId, Qty)),
+  deleteProduct: (productId, orderId) =>
+    dispatch(deleteProductFromDbCart(productId, orderId))
+})
+
+export default connect(null, mapDispatch)(CartQuantity)

@@ -20,7 +20,7 @@ export class CartProducts extends React.Component {
                   <img src={product.imageUrl} width="50" />
                   <h4>{product.name}</h4>
                 </Link>
-                <CartQuantity product={product} />
+                <CartQuantity product={product} cart={this.props.cart[0]} />
                 <div>
                   <p>{product.price}</p>
                 </div>
