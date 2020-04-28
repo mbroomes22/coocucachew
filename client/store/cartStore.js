@@ -4,7 +4,7 @@ import axios from 'axios'
 const GET_CART = 'GET_CART'
 const UPDATE_CART = 'UPDATE_CART'
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
-const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const DELETE_ORDER_PRODUCT = 'DELETE_ORDER_PRODUCT'
 const DELETE_ORDER = 'DELETE_ORDER'
 const CREATE_ORDER = 'CREATE_ORDER'
 const UPDATE_ORDERPRODUCT = 'UPDATE_ORDERPRODUCT'
@@ -26,7 +26,7 @@ export const updatedProduct = cart => ({
 })
 
 export const deletedProduct = cart => ({
-  type: DELETE_PRODUCT,
+  type: DELETE_ORDER_PRODUCT,
   cart
 })
 
@@ -92,8 +92,8 @@ export const deleteProductFromDbCart = (
 
 export const deleteOrderFromDb = orderId => async dispatch => {
   try {
-    const res = await axios.delete(`/api/order/${orderId}`)
-    dispatch(deletedOrder(res.data))
+    const {data} = await axios.delete(`/api/order/${orderId}`)
+    dispatch(deletedOrder(data))
   } catch (error) {
     console.error(error)
   }
@@ -135,7 +135,7 @@ export default function cartStoreReducer(state = initialState, action) {
     case UPDATE_PRODUCT:
       return action.cart
 
-    case DELETE_PRODUCT:
+    case DELETE_ORDER_PRODUCT:
       return action.cart
 
     case DELETE_ORDER:

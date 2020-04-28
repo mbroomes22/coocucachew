@@ -76,18 +76,10 @@ router.put('/:orderId', async (req, res, next) => {
 router.delete('/:orderId', async (req, res, next) => {
   try {
     if (req.session.passport.user) {
-      console.log(
-        'ORDER ID',
-        req.params.orderId,
-        'PRODUCT ID',
-        req.body.productId
-      )
       await OrderProduct.destroy({
         where: {
-          // userId: req.session.passport.user,
           orderId: req.params.orderId,
           productId: req.body.productId
-          // isPending: true
         }
       })
       const loggedUserOrder = await Order.findOne({
@@ -97,8 +89,8 @@ router.delete('/:orderId', async (req, res, next) => {
         },
         include: Product
       })
+      console.log('--->  DELETED AN ORDER W A USER  <---', loggedUserOrder)
       res.status(200).json(loggedUserOrder)
-      console.log('--->  DELETED AN ORDER W A USER  <---')
     } else {
       await OrderProduct.destroy({
         where: {
