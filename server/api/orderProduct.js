@@ -18,17 +18,18 @@ router.get('/', async (req, res, next) => {
 router.put('/:orderId', async (req, res, next) => {
   const {quantity, productId, orderId} = req.body
   try {
+    // console.log('INSIDE THE UPDATE PRODUCT WORKS', orderId, productId, quantity)
     if (req.session.passport.user) {
       const productToUpdate = await OrderProduct.findOne({
         where: {
           orderId: req.params.orderId,
-          productId: OrderProduct.productId
+          productId: productId
         }
       })
       const loggedUserOrder = await Order.findOne({
         where: {
           userId: req.session.passport.user,
-          id: req.params.id
+          id: req.params.orderId
         }
       })
       if (productToUpdate.orderId !== loggedUserOrder.id) {
@@ -41,7 +42,7 @@ router.put('/:orderId', async (req, res, next) => {
         })
         res.status(200).json(productToUpdate)
       }
-      console.log('--->  FOUND AN ORDER W A USER  <---')
+      // console.log('--->  FOUND AN ORDER W A USER  <---')
     } else {
       const productToUpdate = await OrderProduct.findOne({
         where: {
@@ -49,7 +50,7 @@ router.put('/:orderId', async (req, res, next) => {
           productId: OrderProduct.productId
         }
       })
-      console.log('--->  FOUND AN ORDER W/O A USER  <---')
+      // console.log('--->  FOUND AN ORDER W/O A USER  <---')
       await productToUpdate.update({
         quantity: quantity,
         productId: productId,
@@ -57,7 +58,7 @@ router.put('/:orderId', async (req, res, next) => {
       })
       res.status(200).json(productToUpdate)
     }
-    console.log('-------->  UPDATED AN ORDER  <--------')
+    // console.log('-------->  UPDATED AN ORDER  <--------')
   } catch (err) {
     next(err)
   }

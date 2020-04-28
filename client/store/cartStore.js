@@ -68,6 +68,7 @@ export const updateCartDbProduct = (
   orderProduct
 ) => async dispatch => {
   try {
+    // console.log('INSIDE THE UPDATE PRODUCT WORKS', orderId, orderProduct)
     const res = await axios.put(`api/orderProduct/${orderId}`, orderProduct)
     dispatch(updatedProduct(res.data))
     console.log('INSIDE THE UPDATE PRODUCT WORKS', res.data)
@@ -118,7 +119,7 @@ export default function cartStoreReducer(state = initialState, action) {
       return action.cart
 
     case UPDATE_PRODUCT:
-      return action.cart
+      return action.orderProduct
 
     case DELETE_PRODUCT:
       return action.cart
