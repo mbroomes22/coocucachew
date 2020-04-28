@@ -30,7 +30,8 @@ router.put('/:orderId', async (req, res, next) => {
         where: {
           userId: req.session.passport.user,
           id: req.params.orderId
-        }
+        },
+        include: Product
       })
       if (productToUpdate.orderId !== loggedUserOrder.id) {
         console.error('You are not authoritzed to update this order')
@@ -40,7 +41,7 @@ router.put('/:orderId', async (req, res, next) => {
           productId: productId,
           orderId: orderId
         })
-        res.status(200).json(productToUpdate)
+        res.status(200).json(loggedUserOrder)
       }
       // console.log('--->  FOUND AN ORDER W A USER  <---')
     } else {
@@ -48,7 +49,8 @@ router.put('/:orderId', async (req, res, next) => {
         where: {
           orderId: req.params.orderId,
           productId: OrderProduct.productId
-        }
+        },
+        include: Product
       })
       // console.log('--->  FOUND AN ORDER W/O A USER  <---')
       await productToUpdate.update({
@@ -56,7 +58,14 @@ router.put('/:orderId', async (req, res, next) => {
         productId: productId,
         orderId: orderId
       })
-      res.status(200).json(productToUpdate)
+      const loggedUserOrder = await Order.findOne({
+        where: {
+          userId: req.session.passport.user,
+          id: req.params.orderId
+        },
+        include: Product
+      })
+      res.status(200).json(loggedUserOrder)
     }
     // console.log('-------->  UPDATED AN ORDER  <--------')
   } catch (err) {
