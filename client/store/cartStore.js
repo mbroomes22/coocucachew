@@ -58,7 +58,7 @@ export const updateOrderinDb = (order, orderId) => async dispatch => {
   try {
     const res = await axios.put(`/api/order/${orderId}`, order)
     dispatch(updatedCart(res.data))
-    console.log('INSIDE UPDATE ORDER WORKS', res.data)
+    // console.log('INSIDE UPDATE ORDER WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -69,7 +69,7 @@ export const updateCartDbProduct = (
   orderProduct
 ) => async dispatch => {
   try {
-    console.log('-------> INSIDE THE UPDATE PRODUCT WORKS', orderId)
+    // console.log('-------> INSIDE THE UPDATE PRODUCT WORKS', orderId)
     // console.log('INSIDE THE UPDATE PRODUCT WORKS', orderId, orderProduct)
     const res = await axios.put(`/api/orderProduct/${orderId}`, orderProduct)
 

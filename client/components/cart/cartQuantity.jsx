@@ -47,10 +47,7 @@ export class CartQuantity extends React.Component {
     ls.set('subtotal', newPrice)
     ls.set('total', newPrice + 6)
 
-    console.log(
-      '----------->  ORDER ID IN CART QUANTITY COMPONENT',
-      this.props.cart[0].id
-    )
+    // console.log('----------->  ORDER ID IN CART QUANTITY COMPONENT', this.props.cart[0].id)
 
     this.props.updateCartProduct(
       this.props.cart[0].id,
@@ -101,7 +98,7 @@ export class CartQuantity extends React.Component {
   }
 
   render() {
-    console.log('inside of cart quantity render', this.props)
+    // console.log('inside of cart quantity render', this.props)
     return (
       <div>
         <form onSubmit={e => this.handleUpdate(e)}>

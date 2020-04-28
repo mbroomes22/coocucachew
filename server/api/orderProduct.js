@@ -83,7 +83,7 @@ router.delete('/:orderId', async (req, res, next) => {
           isPending: true
         }
       })
-      console.log('--->  DELETED AN ORDER W A USER  <---')
+      // console.log('--->  DELETED AN ORDER W A USER  <---')
       res.json(fetchedOrder)
     } else {
       const fetchedOrder = await Order.destroy({
@@ -92,7 +92,7 @@ router.delete('/:orderId', async (req, res, next) => {
           isPending: true
         }
       })
-      console.log('--->  DELETED AN ORDER W/O A USER  <---')
+      // console.log('--->  DELETED AN ORDER W/O A USER  <---')
       res.status(201).json(fetchedOrder)
     }
   } catch (err) {
