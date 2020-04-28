@@ -7,35 +7,79 @@ const {Product, User, OrderProduct, Order} = require('../db/models')
 //authhelpers.js
 router.get('/', async (req, res, next) => {
   try {
-    const fetchedOrder = await Order.findAll({
-      where: {
-        ///ISPENDING TRUE OR FALSE
-        userId: req.session.passport.user,
-        isPending: true
-      },
-      include: Product
-    })
-    res.json(fetchedOrder)
+    if (req.session.passport.user) {
+      const fetchedOrder = await Order.findOrCreate({
+        where: {
+          userId: req.session.passport.user,
+          isPending: true
+        },
+        include: Product
+      })
+      console.log('--->  FETCHED OR CREATED AN ORDER W A USER  <---')
+      res.json(fetchedOrder)
+    } else {
+      const fetchedOrder = await Order.create({
+        isPending: true,
+        userId: null
+      })
+      console.log('--->  CREATED AN ORDER W/O A USER  <---')
+      res.json(fetchedOrder)
+    }
   } catch (err) {
     next(err)
   }
 })
 
 router.put('/:orderId', async (req, res, next) => {
-  console.log('REQ.BODY IN ORDER PUT ROUTE')
+  console.log('REQ.BODY IN ORDER PUT ROUTE', req.body)
   try {
     //check object and update
-    const orderToUpdate = await Order.findByPk(req.params.id)
+    const orderToUpdate = await Order.findOne(req.params.id, {
+      where: {
+        // userId: req.session.passport.user,
+        isPending: true,
+        orderId: req.params.orderId
+      },
+      include: Product
+    })
+    const updatedOrder = await Order.update(req.body)
+    res.send(updatedOrder)
+
+    console.log('SEE ME!!', updatedOrder)
   } catch (err) {
     next(err)
   }
 })
 
-// implement delete route
+router.delete('/:orderId', async (req, res, next) => {
+  try {
+    if (req.session.passport.user) {
+      const fetchedOrder = await Order.destroy({
+        where: {
+          userId: req.session.passport.user,
+          orderId: req.params.id,
+          isPending: true
+        }
+      })
+      console.log('--->  DELETED AN ORDER W A USER  <---')
+      res.json(fetchedOrder)
+    } else {
+      const fetchedOrder = await Order.destroy({
+        where: {
+          orderId: req.params.id,
+          isPending: true
+        }
+      })
+      console.log('--->  DELETED AN ORDER W/O A USER  <---')
+      res.status(201).json(fetchedOrder)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.post('/', async (req, res, next) => {
   try {
-    //if guest
     let order
     if (!req.body.userId) {
       // console.log('^^See Me! I am Req.body:^^', req.body)
@@ -47,31 +91,46 @@ router.post('/', async (req, res, next) => {
         include: [Product]
       })
     } else {
-      //if user
       // console.log('^^See Me! I am Req.body2:^^', req.body)
       order = await Order.findOrCreate({
         where: {
           userId: req.body.userId,
           isPending: 'True'
         },
-        include: [Product]
+        include: Product
       })
     }
-    // console.log('$I am order:$', order)
+    // console.log('I AM ORDER', order)
     const orderId = order[0].dataValues.id
     const currentOrder = await Order.findByPk(orderId)
-    await currentOrder.addProduct(req.body.orderProduct.id)
-    const productOrder = await OrderProduct.findOne({
+    // console.log('$I am CURRENTORDER:$', req.body)
+    // console.log('ORDER ID ~~', orderId)
+    // console.log('CURRENT ORDER', currentOrder)
+    const newOrderProduct = await OrderProduct.findOrCreate({
       where: {
         productId: req.body.orderProduct.id,
-        orderId: orderId
+        orderId: currentOrder.dataValues.id
+      }
+    })
+    // console.log('NEW ORDER PRODUCT', newOrderProduct)
+    const productOrder = await OrderProduct.findOne({
+      where: {
+        orderId: orderId,
+        productId: req.body.orderProduct.id
       }
     })
     // console.log('!!!!PRODUCT_ORDER!!!!', productOrder)
     const qty = productOrder.dataValues.quantity
-    await productOrder.update({
-      quantity: qty + 1
-    })
+    // console.log('Q-T-Y', qty)
+    if (qty === null) {
+      await productOrder.update({
+        quantity: 1
+      })
+    } else {
+      await productOrder.update({
+        quantity: qty + 1
+      })
+    }
     res.json(order)
   } catch (err) {
     next(err)

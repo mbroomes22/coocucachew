@@ -2,6 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import ls from 'local-storage'
+import {
+  updateCartDbProduct,
+  deleteProductFromDbCart,
+  deleteOrderFromDb
+} from '../../store/cartStore'
+import {quantityAlert} from '../../utils'
 
 export class CartQuantity extends React.Component {
   constructor(props) {
@@ -15,8 +21,18 @@ export class CartQuantity extends React.Component {
     this.decrement = this.decrement.bind(this)
   }
 
+  componentDidMount() {
+    console.log('cart quantity component did mount', this.props.product)
+    this.setState({
+      quantity: this.props.product.orderProduct.quantity
+    })
+  }
+
   handleUpdate(e) {
     e.preventDefault()
+    this.setState({
+      [e.target.name]: e.target.value
+    })
     const updatedProduct = {
       ...this.props.product,
       orderProduct: {
@@ -30,6 +46,12 @@ export class CartQuantity extends React.Component {
       this.state.quantity * parseInt(this.props.product.price.substring(1), 10)
     ls.set('subtotal', newPrice)
     ls.set('total', newPrice + 6)
+    console.log(this.props)
+
+    this.props.updateCartProduct(
+      this.props.cart.id,
+      updatedProduct.orderProduct
+    )
   }
 
   handleChange(e) {
@@ -37,36 +59,45 @@ export class CartQuantity extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+    const {product, cart, deleteProduct} = this.props
+    quantityAlert(
+      this.state.quantity,
+      product.id,
+      cart.id,
+      product.name,
+      deleteProduct
+    )
   }
 
   increment(e) {
     e.preventDefault()
-    if (this.state.quantity < 20) {
-      const quantity = this.state.quantity
-      this.setState({
-        quantity: quantity + 1
-      })
-    } else {
-      alert(
-        `Sorry, we don't have more than 20 ${
-          this.props.product.name
-        }s in stock :(`
-      )
-    }
+    const quantity = this.state.quantity
+    this.setState({
+      quantity: quantity + 1
+    })
+    const {product, cart, deleteProduct} = this.props
+    //
+    // DOUBLE CHECK THAT THIS HELPER FUNCTION CAN BE USED HERE WITH DELETE
+    //
+    quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   }
+
   decrement(e) {
     e.preventDefault()
-    if (this.state.quantity !== 0) {
-      const quantity = this.state.quantity
-      this.setState({
-        quantity: quantity - 1
-      })
-    } else {
-      alert(`Sorry, you can't purchase less than 0 ${this.props.product.name}`)
+    const quantity = this.state.quantity
+    this.setState({
+      quantity: quantity - 1
+    })
+    const {product, cart, deleteProduct, deleteOrder} = this.props
+    quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
+    if (cart.products.length < 1) {
+      deleteOrder(cart.id)
     }
   }
+
   render() {
-    console.log('inside of cart quantity render', this.props)
+    // console.log('inside of cart quantity render', this.props)
     return (
       <div>
         <form onSubmit={e => this.handleUpdate(e)}>
@@ -91,4 +122,12 @@ export class CartQuantity extends React.Component {
   }
 }
 
-export default connect(null, null)(CartQuantity)
+const mapDispatch = dispatch => ({
+  updateCartProduct: (orderId, orderProduct) =>
+    dispatch(updateCartDbProduct(orderId, orderProduct)),
+  deleteProduct: (productId, orderId) =>
+    dispatch(deleteProductFromDbCart(productId, orderId)),
+  deleteOrder: orderId => dispatch(deleteOrderFromDb(orderId))
+})
+
+export default connect(null, mapDispatch)(CartQuantity)

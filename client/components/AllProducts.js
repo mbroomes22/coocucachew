@@ -3,7 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, removeAProduct} from '../store/products'
-import AddProductForm from './addProductForm'
+import AddProductForm from './AddProductForm'
 
 export class AllProducts extends React.Component {
   componentDidMount() {

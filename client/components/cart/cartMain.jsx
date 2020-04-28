@@ -9,7 +9,7 @@ export class CartMain extends React.Component {
   }
 
   render() {
-    // console.log('cart main props cart', this.props.cart)
+    console.log('cart main props cart', this.props.cart)
     return this.props.cart ? (
       <div>
         <h3>C A R T</h3>

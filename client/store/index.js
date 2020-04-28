@@ -11,7 +11,8 @@ const reducer = combineReducers({
   user: userReducer,
   products: productsReducer,
   users: usersReducer,
-  cart: cartStoreReducer
+  cart: cartStoreReducer,
+  orderProduct: cartStoreReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
