@@ -14,7 +14,7 @@ export class CartProducts extends React.Component {
     return (
       <div>
         {this.props.cart[0].products
-          ? lsProducts.map(product => (
+          ? this.props.cart[0].products.map(product => (
               <div key={product.id} className="cartproducts">
                 <Link to={`/${product.id}`}>
                   <img src={product.imageUrl} width="50" />
