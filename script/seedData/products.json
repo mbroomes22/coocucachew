@@ -1,53 +1,55 @@
 [
   {
-    "name": "quos",
-    "description": "Id modi et.",
-    "price": 3,
-    "productCategoryId": 1
-  },
-  {
-    "name": "optio",
-    "description": "Quia voluptatem modi ullam provident nesciunt.",
-    "price": 5,
-    "productCategoryId": 1
-  },
-  {
-    "name": "dolor",
-    "description": "Veniam beatae ipsa vel a est quaerat.",
-    "price": 5,
-    "productCategoryId": 2
-  },
-  {
-    "name": "et",
-    "description": "Totam voluptatem aut eos dolorum architecto labore.",
-    "price": 10,
-    "productCategoryId": 2
-  },
-  {
-    "name": "dolores",
-    "description": "Quo totam ut omnis eaque nemo.",
-    "price": 7,
-    "productCategoryId": 2
-  },
-  {
-    "name": "sint",
+    "name": "Apple Platz",
     "description":
-      "Qui dolor nisi doloremque fuga praesentium repudiandae blanditiis natus.",
-    "price": 7,
+      "Platz occupies the sweet spot between cake and pie in a cupcake",
+    "price": 3,
+    "productCategoryId": 4
+  },
+  {
+    "name": "Summer Berry'",
+    "description": "A delicious vanilla cupcake with a mix of berries",
+    "price": 5,
+    "productCategoryId": 4
+  },
+  {
+    "name": "Damson Plum",
+    "description":
+      "Plums are folded into a thick custardy batter that makes a delicious cookie",
+    "price": 5,
     "productCategoryId": 1
   },
   {
-    "name": "vel",
-    "description": "Commodi est ratione aut qui.",
+    "name": "Tiny Raspberry",
+    "description":
+      "Cookies made with the tart, sweet goodness of totally fresh raspberries",
+    "price": 10,
+    "productCategoryId": 1
+  },
+  {
+    "name": "Cherry truffle",
+    "description":
+      "Cherry, meringue, and dark chocolate are all mixed together in this amazing truffle",
+    "price": 7,
+    "productCategoryId": 2
+  },
+  {
+    "name": "Peach Brown",
+    "description": "Peach covered in milk chocolate",
+    "price": 7,
+    "productCategoryId": 2
+  },
+  {
+    "name": "Blueberry Pop",
+    "description": "Wild Maine Blueberries mixed in this delicious cake pop",
     "price": 6,
     "productCategoryId": 3
   },
   {
-    "name": "et",
-    "description":
-      "Dolorem iure quam eos error debitis necessitatibus est iste suscipit.",
+    "name": "Just chocolate'",
+    "description": "Chocolate cake pop covered in dark chocolate frosting",
     "price": 10,
-    "productCategoryId": 1
+    "productCategoryId": 3
   },
   {
     "name": "consequuntur",
