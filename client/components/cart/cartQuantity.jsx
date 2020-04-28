@@ -22,7 +22,7 @@ export class CartQuantity extends React.Component {
   }
 
   componentDidMount() {
-    console.log('cart quantity component did mount', this.props.product)
+    // console.log('cart quantity component did mount', this.props.product)
     this.setState({
       quantity: this.props.product.orderProduct.quantity
     })
@@ -47,7 +47,7 @@ export class CartQuantity extends React.Component {
       this.state.quantity * parseInt(this.props.product.price.substring(1), 10)
     ls.set('subtotal', newPrice)
     ls.set('total', newPrice + 6)
-    console.log(this.props)
+    // console.log(this.props)
 
     this.props.updateCartProduct(
       this.props.cart.id,
@@ -104,6 +104,10 @@ export class CartQuantity extends React.Component {
     this.setState({
       quantity: 0
     })
+
+    const {product, cart, deleteProduct} = this.props
+    console.log('PROPS-------------', product.id, cart.id)
+    deleteProduct(product.id, cart.id)
   }
 
   render() {
@@ -126,7 +130,7 @@ export class CartQuantity extends React.Component {
             +{' '}
           </button>
           <button type="submit">Update</button>
-          <button type="submit" onClick={e => this.clearAll(e)}>
+          <button type="button" onClick={e => this.clearAll(e)}>
             Delete
           </button>
         </form>

@@ -76,24 +76,46 @@ router.put('/:orderId', async (req, res, next) => {
 router.delete('/:orderId', async (req, res, next) => {
   try {
     if (req.session.passport.user) {
-      const fetchedOrder = await Order.destroy({
+      console.log(
+        'ORDER ID',
+        req.params.orderId,
+        'PRODUCT ID',
+        req.body.productId
+      )
+      await OrderProduct.destroy({
+        where: {
+          // userId: req.session.passport.user,
+          orderId: req.params.orderId,
+          productId: req.body.productId
+          // isPending: true
+        }
+      })
+      res.status(200)
+      const loggedUserOrder = await Order.findOne({
         where: {
           userId: req.session.passport.user,
-          orderId: req.params.id,
-          isPending: true
-        }
+          id: req.params.orderId
+        },
+        include: Product
       })
+      res.status(200).json(loggedUserOrder)
       console.log('--->  DELETED AN ORDER W A USER  <---')
-      res.json(fetchedOrder)
     } else {
-      const fetchedOrder = await Order.destroy({
+      await OrderProduct.destroy({
         where: {
-          orderId: req.params.id,
-          isPending: true
+          orderId: req.params.orderId
+          // isPending: true
         }
       })
+      const loggedUserOrder = await Order.findOne({
+        where: {
+          userId: req.session.passport.user,
+          id: req.params.orderId
+        },
+        include: Product
+      })
+      res.status(200).json(loggedUserOrder)
       console.log('--->  DELETED AN ORDER W/O A USER  <---')
-      res.status(201).json(fetchedOrder)
     }
   } catch (err) {
     next(err)

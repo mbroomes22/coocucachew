@@ -80,7 +80,10 @@ export const deleteProductFromDbCart = (
   orderId
 ) => async dispatch => {
   try {
-    const res = await axios.delete(`/api/orderProduct/${orderId}`, productId)
+    const res = await axios.delete(`/api/orderProduct/${orderId}`, {
+      data: {productId: productId}
+    })
+    console.log('RES DATA', res.data)
     dispatch(deletedProduct(res.data))
   } catch (error) {
     console.error(error)
