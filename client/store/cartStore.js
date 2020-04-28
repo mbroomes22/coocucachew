@@ -19,9 +19,9 @@ export const updatedCart = cart => ({
   cart
 })
 
-export const updatedProducrCart = cart => ({
+export const updatedProduct = orderProduct => ({
   type: UPDATE_PRODUCT,
-  cart
+  orderProduct
 })
 
 export const deletedProduct = cart => ({
@@ -47,7 +47,7 @@ export const fetchCart = () => async dispatch => {
   try {
     const res = await axios.get('api/order')
     dispatch(gotCart(res.data))
-    // console.log('inside fetch cart',res.data)
+    console.log('INSIDE FETCH CART WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -57,6 +57,7 @@ export const updateOrder = (order, orderId) => async dispatch => {
   try {
     const res = await axios.put(`api/order/${orderId}`, order)
     dispatch(updatedCart(res.data))
+    console.log('INSIDE UPDATE ORDER WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -68,8 +69,8 @@ export const updateCartDbProduct = (
 ) => async dispatch => {
   try {
     const res = await axios.put(`api/orderProduct/${orderId}`, orderProduct)
-    dispatch(updatedProducrCart(res.data))
-    console.log('INSIDE THE UPDATE THUNK', res.data)
+    dispatch(updatedProduct(res.data))
+    console.log('INSIDE THE UPDATE PRODUCT WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -82,6 +83,7 @@ export const deleteProductFromDbCart = (
   try {
     const res = await axios.delete(`api/orderProduct/${orderId}`, productId)
     dispatch(deletedProduct(res.data))
+    console.log('INSIDE DELETE PRODUCT WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -91,6 +93,17 @@ export const deleteOrderFromDb = orderId => async dispatch => {
   try {
     const res = await axios.delete(`api/order/${orderId}`)
     dispatch(deletedOrder(res.data))
+    console.log('INSIDE DELETE ORDER WORKS', res.data)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const createDbOrder = order => async dispatch => {
+  try {
+    const res = await axios.post(`api/order/`, order)
+    dispatch(newOrder(res.data))
+    console.log('INSIDE CREATE ORDER WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -108,6 +121,12 @@ export default function cartStoreReducer(state = initialState, action) {
       return action.cart
 
     case DELETE_PRODUCT:
+      return action.cart
+
+    case DELETE_ORDER:
+      return action
+
+    case CREATE_ORDER:
       return action.cart
 
     default:

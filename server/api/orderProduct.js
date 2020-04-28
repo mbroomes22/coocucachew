@@ -33,6 +33,13 @@ router.put('/:orderId', async (req, res, next) => {
       })
       if (productToUpdate.orderId !== loggedUserOrder.id) {
         console.error('You are not authoritzed to update this order')
+      } else {
+        await productToUpdate.update({
+          quantity: quantity,
+          productId: productId,
+          orderId: orderId
+        })
+        res.status(200).json(productToUpdate)
       }
       console.log('--->  FOUND AN ORDER W A USER  <---')
     } else {
@@ -43,14 +50,13 @@ router.put('/:orderId', async (req, res, next) => {
         }
       })
       console.log('--->  FOUND AN ORDER W/O A USER  <---')
+      await productToUpdate.update({
+        quantity: quantity,
+        productId: productId,
+        orderId: orderId
+      })
+      res.status(200).json(productToUpdate)
     }
-
-    await productToUpdate.update({
-      quantity: quantity,
-      productId: productId,
-      orderId: orderId
-    })
-    res.status(200).json(productToUpdate)
     console.log('-------->  UPDATED AN ORDER  <--------')
   } catch (err) {
     next(err)

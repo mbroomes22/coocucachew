@@ -42,6 +42,16 @@ router.put('/:orderId', async (req, res, next) => {
         include: Product
       })
       console.log('---->  GOT AN ORDER W A USER  <----')
+      await orderToUpdate.update({
+        id: id,
+        isPending: isPending,
+        userId: userId,
+        total: total,
+        subtotal: subtotal,
+        products: products
+      })
+      console.log('---->  UPDATED AN ORDER   <----')
+      res.status(200).json(orderToUpdate)
     } else {
       const orderToUpdate = await Order.findOne({
         where: {
@@ -50,17 +60,17 @@ router.put('/:orderId', async (req, res, next) => {
         include: Product
       })
       console.log('---->  GOT AN ORDER WITHOUT A USER  <----')
+      await orderToUpdate.update({
+        id: id,
+        isPending: isPending,
+        userId: userId,
+        total: total,
+        subtotal: subtotal,
+        products: products
+      })
+      console.log('---->  UPDATED AN ORDER   <----')
+      res.status(200).json(orderToUpdate)
     }
-    await orderToUpdate.update({
-      id: id,
-      isPending: isPending,
-      userId: userId,
-      total: total,
-      subtotal: subtotal,
-      products: products
-    })
-    console.log('---->  UPDATED AN ORDER   <----')
-    res.status(200).json(orderToUpdate)
   } catch (err) {
     next(err)
   }
