@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import ls from 'local-storage'
+import {updateDbOrderProduct} from '../../store/cartStore'
 
 export class CartQuantity extends React.Component {
   constructor(props) {
@@ -25,14 +26,14 @@ export class CartQuantity extends React.Component {
       }
     }
 
-    ls.set(`${this.props.product.name}`, updatedProduct)
-    console.log(this.props.product.price)
-    const newPrice =
-      ls.get('subtotal') +
-      this.state.quantity * parseInt(this.props.product.price.substring(1), 10)
+    if (!this.props.cart.id) {
+      const orderId = this.props.cart.orderId
+      this.props.updateOrderProduct(orderId, updatedProduct)
 
-    ls.set('subtotal', newPrice)
-    ls.set('total', newPrice + 6)
+      const newPrice =
+        this.state.quantity *
+        parseInt(this.props.product.price.substring(1), 10)
+    }
   }
 
   handleChange(e) {
@@ -40,7 +41,6 @@ export class CartQuantity extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-    this.handleUpdate(e)
   }
 
   increment(e) {
@@ -95,4 +95,11 @@ export class CartQuantity extends React.Component {
   }
 }
 
-export default connect(null, null)(CartQuantity)
+const mapDispatchToProps = dispatch => {
+  return {
+    updateOrderProduct: (orderId, orderProduct) =>
+      dispatch(updateDbOrderProduct(orderId, orderProduct))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CartQuantity)
