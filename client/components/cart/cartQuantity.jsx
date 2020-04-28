@@ -29,7 +29,7 @@ export class CartQuantity extends React.Component {
   }
 
   handleUpdate(e) {
-    e.preventDefault()
+    // e.preventDefault()
     this.setState({
       [e.target.name]: e.target.value
     })
