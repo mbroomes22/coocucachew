@@ -53,7 +53,7 @@ export const fetchCart = () => async dispatch => {
   }
 }
 
-export const updateOrder = (order, orderId) => async dispatch => {
+export const updateOrderinDb = (order, orderId) => async dispatch => {
   try {
     const res = await axios.put(`api/order/${orderId}`, order)
     dispatch(updatedCart(res.data))
