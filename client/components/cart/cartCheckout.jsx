@@ -47,9 +47,11 @@ export class CartCheckout extends React.Component {
               <button type="submit" onSubmit={e => this.handleUpdate(e)}>
                 U P D A T E
               </button>
-              <button type="submit" onSubmit={e => this.handleCheckout(e)}>
-                C H E C K O U T
-              </button>
+              <Link to="/cart/checkout">
+                <button type="submit" onSubmit={e => this.handleCheckout(e)}>
+                  C H E C K O U T
+                </button>
+              </Link>
               <button type="submit" onSubmit={e => this.handleUpdate(e)}>
                 S A V E F O R L A T E R
               </button>

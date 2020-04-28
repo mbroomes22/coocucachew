@@ -1,5 +1,5 @@
 const router = require('express').Router()
-// const isAuth = require('./isAuth')
+// const isAuth = require('../../utils/isAuth)
 const {Product, User, OrderProduct, Order} = require('../db/models')
 
 //is auth or isAdmin

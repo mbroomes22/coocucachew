@@ -7,14 +7,10 @@ export default class UserDetails extends Component {
   }
 
   required = evt => {
-    if (
-      this.props.values.firstName &&
-      this.props.values.lastName &&
-      this.props.values.email
-    ) {
+    if (this.props.values.name && this.props.values.email) {
       this.continue(evt)
     } else {
-      alert('First Name, Last Name, and Email are required')
+      alert('First Name and Email are required')
     }
   }
 
@@ -24,26 +20,13 @@ export default class UserDetails extends Component {
       <div>
         <h1 className="header">Enter Shipping Details</h1>
         <label>
-          First Name:
+          Name:
           <input
             type="text"
-            name="firstName"
-            placeholder="First Name"
+            name="name"
+            placeholder="Name"
             onChange={handleChange}
-            value={values.firstName}
-            className="field"
-            required
-          />
-          <br />
-        </label>
-        <label>
-          Last Name:
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            onChange={handleChange}
-            value={values.lastName}
+            value={values.name}
             className="field"
             required
           />
