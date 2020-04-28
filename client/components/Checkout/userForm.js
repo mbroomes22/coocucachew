@@ -5,14 +5,16 @@ import ConfirmOrder from './confirmOrder'
 import Success from './success'
 
 class UserForm extends Component {
-  state = {
-    step: 1,
-    firstName: '',
-    lastName: '',
-    email: '',
-    streetAddress: '',
-    zipCode: '',
-    state: ''
+  constructor(props) {
+    super(props)
+    this.state = {
+      step: 1,
+      name: '',
+      email: '',
+      streetAddress: '',
+      zipCode: '',
+      state: ''
+    }
   }
 
   //continue to next step
@@ -38,18 +40,9 @@ class UserForm extends Component {
   }
 
   render() {
-    const {
-      step,
-      firstName,
-      lastName,
-      email,
-      streetAddress,
-      zipCode,
-      state
-    } = this.state
+    const {step, name, email, streetAddress, zipCode, state} = this.state
     const values = {
-      firstName,
-      lastName,
+      name,
       email,
       streetAddress,
       zipCode,
@@ -79,6 +72,7 @@ class UserForm extends Component {
           <ConfirmOrder
             nextStep={this.nextStep}
             prevStep={this.prevStep}
+            cart={this.props.cart}
             values={values}
           />
         )

@@ -5,9 +5,14 @@
  */
 export {default as AddProductForm} from './AddProductForm'
 export {default as AllProducts} from './AllProducts'
-export {default as Cart} from './cart'
-export {default as CartList} from './cartList'
+export {default as CartMain} from './cart/cartMain'
+export {default as CartList} from './cart/cartList'
+export {default as CartProducts} from './cart/cartProducts'
+export {default as CartQuantity} from './cart/cartQuantity'
+export {default as AllUsers} from './Admin/users'
+
 export {default as Navbar} from './navbar'
 export {default as SingleProduct} from './singleProduct'
 export {default as UserHome} from './userHome'
+export {default as UserForm} from './Checkout/userForm'
 export {Login, Signup} from './authForm'

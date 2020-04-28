@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAProduct} from '../store/products'
 import {addToCart} from '../store/cart'
+import ls from 'local-storage'
 //need import
 
 export class SingleProduct extends Component {
@@ -20,6 +21,7 @@ export class SingleProduct extends Component {
   componentDidMount() {
     // console.log('^*^*^', this.props)
     // this.props.match.params.productId ? (
+    console.log(this.props.match.params.productId)
     this.props.getProduct(this.props.match.params.productId)
 
     // : ('loading')
@@ -45,23 +47,34 @@ export class SingleProduct extends Component {
     const userId = this.props.user.id
 
     await this.props.addToCart(userId, orderproduct)
+    let updatedProduct = {
+      [this.state.name]: this.props.singleProduct,
+      quantity: this.state.qty
+    }
+    ls.set(`${this.state.name}`, updatedProduct)
   }
 
-  Increament = () => {
-    this.setState({
-      name: this.props.singleProduct.name,
-      price: this.props.singleProduct.price,
-      qty: this.state.qty + 1
-    })
-  }
+  // Increament = () => {
+  //   this.setState({
+  //     name: this.props.singleProduct.name,
+  //     price: this.props.singleProduct.price,
+  //     qty: this.state.qty + 1,
+  //   })
+  //   ls.set(`${name}`, this.props.singleProduct)
+  //   ls.set('price', this.props.singleProduct.price)
+  //   ls.set('quantity', this.state.qty + 1)
+  // }
 
-  Decreament = () => {
-    this.setState({
-      name: this.props.singleProduct.name,
-      price: this.props.singleProduct.price,
-      qty: this.state.qty - 1
-    })
-  }
+  // Decreament = () => {
+  //   this.setState({
+  //     name: this.props.singleProduct.name,
+  //     price: this.props.singleProduct.price,
+  //     qty: this.state.qty - 1,
+  //   })
+  //   ls.set('name', this.props.singleProduct.name)
+  //   ls.set('price', this.props.singleProduct.price)
+  //   ls.set('quantity', this.state.qty - 1)
+  // }
 
   render() {
     console.log('THIS IS STATE: ', this.state)

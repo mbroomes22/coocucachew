@@ -72,7 +72,6 @@ export const addToCart = (userId, orderProduct) => {
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      // console.log('inside cart reducer', action.cart)
       return action.cart
 
     case ADD_TO_CART:

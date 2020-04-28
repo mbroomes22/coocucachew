@@ -1,5 +1,4 @@
-// confirmation page confirming address, payment info, and cart items/cart total
-//needs to be passed props from '../cart', bc props should access name, price, qty of items in cart and confirm a calculated total
+//needs to be passed props from '../cart and userForm', bc props should access userid, item name, price, qty of items in cart and confirm a calculated total
 //clicking 'Confirm&Checkout' button should send user's address, cart, and payment to db
 import React, {Component} from 'react'
 import {updateOrderHistory, updateUserAddresses} from '../../store/saveOrder'
@@ -8,7 +7,6 @@ import {connect} from 'react-redux'
 export class ConfirmOrder extends Component {
   continue = evt => {
     evt.preventDefault()
-    //Process form -send data to DB
     this.props.nextStep()
   }
 
@@ -17,13 +15,30 @@ export class ConfirmOrder extends Component {
     this.props.prevStep()
   }
 
+  checkoutSubTotal = cartItemsArr => {
+    let subTotal = 0
+    cartItemsArr.forEach(item => {
+      subTotal += item.price * item.qty
+    })
+    return subTotal
+  }
+
+  checkoutTotal = subTotal => {
+    return subTotal + 6
+  }
+
   handleSubmit = evt => {
     evt.preventDefault()
-    this.props.addOrder(this.props.userId, this.props.total)
-    this.props.addAddress(this.state.streetAddress)
+    const subTotal = checkoutSubTotal(this.props.cart) //not sure if the user's cart prop is an arr named cart
+    const total = checkoutTotal(subTotal)
+    this.props.addOrder(subTotal, total, this.props.cart.userId) //not sure if user's id is named userId and located in cart
+    this.props.addAddress(
+      this.state.streetAddress,
+      this.state.zipCode,
+      this.state.state
+    )
     this.setState({
-      firstName: '',
-      lastName: '',
+      name: '',
       email: '',
       streetAddress: '',
       zipCode: '',
@@ -32,9 +47,7 @@ export class ConfirmOrder extends Component {
   }
 
   render() {
-    const {
-      values: {firstName, lastName, email, streetAddress, zipCode, state}
-    } = this.props
+    const {values: {name, email, streetAddress, zipCode, state}} = this.props
     return (
       <div>
         <br />
@@ -46,10 +59,7 @@ export class ConfirmOrder extends Component {
         <h2>Shipping Address</h2>
         <ul>
           <ol>
-            <h3>First Name:</h3> <br /> {firstName}
-          </ol>
-          <ol>
-            <h3>Last Name:</h3> <br /> {lastName}
+            <h3>Name:</h3> <br /> {name}
           </ol>
           <ol>
             <h3>Email:</h3> <br /> {email}
@@ -74,7 +84,7 @@ export class ConfirmOrder extends Component {
         <h2>Review Items</h2>
         <br />
         <br />
-        <ul>
+        {/* <ul>
           {this.props.cartItems.map(item => (
             <div key={item.id}>
               <ol>
@@ -91,11 +101,12 @@ export class ConfirmOrder extends Component {
               </ol>
             </div>
           ))}
-        </ul>
+        </ul> */}
         <h2>Order Total</h2>
         <br />
-        {this.props.total}
-
+        {/* {total} */}
+        9.99
+        <br />
         <button
           type="submit"
           onClick={this.continue}
@@ -114,8 +125,10 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => ({
-  addOrder: newOrder => dispatch(updateOrderHistory(newOrder)),
-  addAddress: newAddress => dispatch(updateUserAddresses(newAddress))
+  addOrder: (orderSubTotal, orderTotal, orderUserID) =>
+    dispatch(updateOrderHistory(orderSubTotal, orderTotal, orderUserID)),
+  addAddress: (newAddress, newZip, newState) =>
+    dispatch(updateUserAddresses(newAddress, newZip, newState))
 })
 
 export default connect(mapState, mapDispatch)(ConfirmOrder)
