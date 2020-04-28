@@ -7,7 +7,7 @@ import AddProductForm from './AddProductForm'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
-    this.props.getAllProducts()
+    this.props.getAllProducts(this.props.user.id)
   }
 
   handleRemove(productId) {
