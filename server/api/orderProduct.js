@@ -57,4 +57,31 @@ router.put('/:orderId', async (req, res, next) => {
   }
 })
 
+router.delete('/:orderId', async (req, res, next) => {
+  try {
+    if (req.session.passport.user) {
+      const fetchedOrder = await Order.destroy({
+        where: {
+          userId: req.session.passport.user,
+          orderId: req.params.id,
+          isPending: true
+        }
+      })
+      console.log('--->  DELETED AN ORDER W A USER  <---')
+      res.json(fetchedOrder)
+    } else {
+      const fetchedOrder = await Order.destroy({
+        where: {
+          orderId: req.params.id,
+          isPending: true
+        }
+      })
+      console.log('--->  DELETED AN ORDER W/O A USER  <---')
+      res.status(201).json(fetchedOrder)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

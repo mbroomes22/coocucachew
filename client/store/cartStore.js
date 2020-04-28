@@ -5,6 +5,7 @@ const GET_CART = 'GET_CART'
 const UPDATE_CART = 'UPDATE_CART'
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const DELETE_ORDER = 'DELETE_ORDER'
 const CREATE_ORDER = 'CREATE_ORDER'
 
 //action creators
@@ -25,6 +26,11 @@ export const updatedProducrCart = cart => ({
 
 export const deletedProduct = cart => ({
   type: DELETE_PRODUCT,
+  cart
+})
+
+export const deletedOrder = cart => ({
+  type: DELETE_ORDER,
   cart
 })
 
@@ -74,8 +80,17 @@ export const deleteProductFromDbCart = (
   orderId
 ) => async dispatch => {
   try {
-    const res = await axios.delete(`api/order/${orderId}`, productId, qty)
+    const res = await axios.delete(`api/orderProduct/${orderId}`, productId)
     dispatch(deletedProduct(res.data))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const deleteOrderFromDb = orderId => async dispatch => {
+  try {
+    const res = await axios.delete(`api/order/${orderId}`)
+    dispatch(deletedOrder(res.data))
   } catch (error) {
     console.error(error)
   }
