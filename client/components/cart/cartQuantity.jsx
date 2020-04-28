@@ -4,7 +4,8 @@ import {Link} from 'react-router-dom'
 import ls from 'local-storage'
 import {
   updateCartDbProduct,
-  deleteProductFromDbCart
+  deleteProductFromDbCart,
+  deleteOrderFromDb
 } from '../../store/cartStore'
 import {quantityAlert} from '../../utils'
 
@@ -16,8 +17,8 @@ export class CartQuantity extends React.Component {
     }
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    // this.increment = this.increment.bind(this)
-    // this.decrement = this.decrement.bind(this)
+    this.increment = this.increment.bind(this)
+    this.decrement = this.decrement.bind(this)
   }
 
   componentDidMount() {
@@ -68,45 +69,52 @@ export class CartQuantity extends React.Component {
     )
   }
 
-  // increment(e) {
-  //   e.preventDefault()
-  //   const quantity = this.state.quantity
-  //   this.setState({
-  //     quantity: quantity + 1
-  //   })
-  //   const {product, cart, deleteProduct} = this.props
-  //   quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
-  // }
+  increment(e) {
+    e.preventDefault()
+    const quantity = this.state.quantity
+    this.setState({
+      quantity: quantity + 1
+    })
+    const {product, cart, deleteProduct} = this.props
+    //
+    // DOUBLE CHECK THAT THIS HELPER FUNCTION CAN BE USED HERE WITH DELETE
+    //
+    quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  }
 
-  // decrement(e) {
-  //   e.preventDefault()
-  //   const quantity = this.state.quantity
-  //   this.setState({
-  //     quantity: quantity - 1
-  //   })
-  //   const {product, cart, deleteProduct} = this.props
-  //   quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
-  // }
+  decrement(e) {
+    e.preventDefault()
+    const quantity = this.state.quantity
+    this.setState({
+      quantity: quantity - 1
+    })
+    const {product, cart, deleteProduct, deleteOrder} = this.props
+    quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
+    if (cart.products.length < 1) {
+      deleteOrder(cart.id)
+    }
+  }
 
   render() {
     // console.log('inside of cart quantity render', this.props)
     return (
       <div>
         <form onSubmit={e => this.handleUpdate(e)}>
-          {/* <button type="button" onClick={e => this.decrement(e)}>
+          <button type="button" onClick={e => this.decrement(e)}>
             {' '}
             -{' '}
-          </button> */}
+          </button>
           <input
             onChange={e => this.handleChange(e)}
             type="number"
             value={this.state.quantity}
             name="quantity"
           />
-          {/* <button type="button" onClick={e => this.increment(e)}>
+          <button type="button" onClick={e => this.increment(e)}>
             {' '}
             +{' '}
-          </button> */}
+          </button>
           <button type="submit">Update</button>
         </form>
       </div>
@@ -118,7 +126,8 @@ const mapDispatch = dispatch => ({
   updateCartProduct: (orderId, orderProduct) =>
     dispatch(updateCartDbProduct(orderId, orderProduct)),
   deleteProduct: (productId, orderId) =>
-    dispatch(deleteProductFromDbCart(productId, orderId))
+    dispatch(deleteProductFromDbCart(productId, orderId)),
+  deleteOrder: orderId => dispatch(deleteOrderFromDb(orderId))
 })
 
 export default connect(null, mapDispatch)(CartQuantity)
