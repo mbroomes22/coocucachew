@@ -7,6 +7,7 @@ const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const DELETE_ORDER = 'DELETE_ORDER'
 const CREATE_ORDER = 'CREATE_ORDER'
+const UPDATE_ORDERPRODUCT = 'UPDATE_ORDERPRODUCT'
 
 //action creators
 export const gotCart = cart => ({
@@ -110,9 +111,26 @@ export const createDbOrder = order => async dispatch => {
   }
 }
 
+export const updateDbOrderProduct = (
+  orderId,
+  orderProduct
+) => async dispatch => {
+  console.log('START RUNING THUNK', orderId)
+  try {
+    const res = await axios.put(`api/order/${orderId}`, orderProduct)
+    dispatch(updatedDbOrderProduct(res.data))
+    console.log('FINISH RUNING THUNK', res.data)
+  } catch (error) {
+    next(error)
+  }
+}
+
 export default function cartStoreReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
+      return action.cart
+
+    case UPDATE_ORDERPRODUCT:
       return action.cart
 
     case UPDATE_CART:
