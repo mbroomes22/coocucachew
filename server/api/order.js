@@ -7,73 +7,91 @@ const {Product, User, OrderProduct, Order} = require('../db/models')
 //authhelpers.js
 router.get('/', async (req, res, next) => {
   try {
-    const fetchedOrder = await Order.findAll({
-      where: {
-        ///ISPENDING TRUE OR FALSE
-        userId: req.session.passport.user,
-        isPending: true
-      },
-      include: Product
-    })
-    res.json(fetchedOrder)
+    if (req.session.passport.user) {
+      const fetchedOrder = await Order.findOrCreate({
+        where: {
+          userId: req.session.passport.user,
+          isPending: true
+        },
+        include: Product
+      })
+      console.log('--->  FETCHED OR CREATED AN ORDER W A USER  <---')
+      res.json(fetchedOrder)
+    } else {
+      const fetchedOrder = await Order.create({
+        isPending: true,
+        userId: null
+      })
+      console.log('--->  CREATED AN ORDER W/O A USER  <---')
+      res.json(fetchedOrder)
+    }
   } catch (err) {
     next(err)
   }
 })
 
 router.put('/:orderId', async (req, res, next) => {
-  console.log('REQ.BODY IN ORDER PUT ROUTE')
+  const {id, isPending, userId, total, subtotal, products} = req.body
   try {
-    //check object and update
-    const orderToUpdate = await Order.findByPk(req.params.id)
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.put('/:orderId', async (req, res, next) => {
-  try {
-    const {productId, qty} = req.body
-    const orderToUpdate = await Order.findOne({
-      where: {
-        id: req.params.id,
-        userId: req.session.passport.user
-      },
-      include: {
-        Product: {
-          where: {
-            id: productId
-          }
-        }
-      }
-    })
-    console.log('REQ.BODY IN ORDER PUT ROUTE', req.params)
+    if (req.session.passport.user) {
+      const orderToUpdate = await Order.findOne({
+        where: {
+          id: req.params.id,
+          userId: req.session.passport.user
+        },
+        include: Product
+      })
+      console.log('---->  GOT AN ORDER W A USER  <----')
+    } else {
+      const orderToUpdate = await Order.findOne({
+        where: {
+          id: req.params.id
+        },
+        include: Product
+      })
+      console.log('---->  GOT AN ORDER WITHOUT A USER  <----')
+    }
     await orderToUpdate.update({
-      quantity: qty
+      id: id,
+      isPending: isPending,
+      userId: userId,
+      total: total,
+      subtotal: subtotal,
+      products: products
     })
+    console.log('---->  UPDATED AN ORDER   <----')
     res.status(200).json(orderToUpdate)
   } catch (err) {
     next(err)
   }
 })
 
-// export const updateProduct = (orderId, productId, qty) => async dispatch => {
-//   try {
-//     const res = await axios.put(`api/order/${orderId}`, productId, qty)
-//     dispatch(updatedProducrCart(res.data))
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
-
-// export const deleteProduct = (productId, orderId) => async dispatch => {
-//   try {
-//     const res = await axios.delete(`api/order/${orderId}`, productId, qty)
-//     dispatch(deletedProduct(res.data))
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
+router.delete('/:orderId', async (req, res, next) => {
+  try {
+    if (req.session.passport.user) {
+      const fetchedOrder = await Order.destroy({
+        where: {
+          userId: req.session.passport.user,
+          orderId: req.params.id,
+          isPending: true
+        }
+      })
+      console.log('--->  DELETED AN ORDER W A USER  <---')
+      res.json(fetchedOrder)
+    } else {
+      const fetchedOrder = await Order.destroy({
+        where: {
+          orderId: req.params.id,
+          isPending: true
+        }
+      })
+      console.log('--->  DELETED AN ORDER W/O A USER  <---')
+      res.status(201).json(fetchedOrder)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.post('/', async (req, res, next) => {
   try {

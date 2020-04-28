@@ -16,8 +16,8 @@ export class CartQuantity extends React.Component {
     }
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.increment = this.increment.bind(this)
-    this.decrement = this.decrement.bind(this)
+    // this.increment = this.increment.bind(this)
+    // this.decrement = this.decrement.bind(this)
   }
 
   componentDidMount() {
@@ -29,6 +29,9 @@ export class CartQuantity extends React.Component {
 
   handleUpdate(e) {
     e.preventDefault()
+    this.setState({
+      [e.target.name]: e.target.value
+    })
     const updatedProduct = {
       ...this.props.product,
       orderProduct: {
@@ -42,10 +45,11 @@ export class CartQuantity extends React.Component {
       this.state.quantity * parseInt(this.props.product.price.substring(1), 10)
     ls.set('subtotal', newPrice)
     ls.set('total', newPrice + 6)
+    console.log(this.props)
+
     this.props.updateCartProduct(
       this.props.cart.id,
-      this.props.product.id,
-      this.state.quantity
+      updatedProduct.orderProduct
     )
   }
 
@@ -64,45 +68,45 @@ export class CartQuantity extends React.Component {
     )
   }
 
-  increment(e) {
-    e.preventDefault()
-    const quantity = this.state.quantity
-    this.setState({
-      quantity: quantity + 1
-    })
-    const {product, cart, deleteProduct} = this.props
-    quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
-  }
+  // increment(e) {
+  //   e.preventDefault()
+  //   const quantity = this.state.quantity
+  //   this.setState({
+  //     quantity: quantity + 1
+  //   })
+  //   const {product, cart, deleteProduct} = this.props
+  //   quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
+  // }
 
-  decrement(e) {
-    e.preventDefault()
-    const quantity = this.state.quantity
-    this.setState({
-      quantity: quantity - 1
-    })
-    const {product, cart, deleteProduct} = this.props
-    quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
-  }
+  // decrement(e) {
+  //   e.preventDefault()
+  //   const quantity = this.state.quantity
+  //   this.setState({
+  //     quantity: quantity - 1
+  //   })
+  //   const {product, cart, deleteProduct} = this.props
+  //   quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
+  // }
 
   render() {
     // console.log('inside of cart quantity render', this.props)
     return (
       <div>
         <form onSubmit={e => this.handleUpdate(e)}>
-          <button type="button" onClick={e => this.decrement(e)}>
+          {/* <button type="button" onClick={e => this.decrement(e)}>
             {' '}
             -{' '}
-          </button>
+          </button> */}
           <input
             onChange={e => this.handleChange(e)}
             type="number"
             value={this.state.quantity}
             name="quantity"
           />
-          <button type="button" onClick={e => this.increment(e)}>
+          {/* <button type="button" onClick={e => this.increment(e)}>
             {' '}
             +{' '}
-          </button>
+          </button> */}
           <button type="submit">Update</button>
         </form>
       </div>
@@ -111,8 +115,8 @@ export class CartQuantity extends React.Component {
 }
 
 const mapDispatch = dispatch => ({
-  updateCartProduct: (orderId, productId, Qty) =>
-    dispatch(updateCartDbProduct(orderId, productId, Qty)),
+  updateCartProduct: (orderId, orderProduct) =>
+    dispatch(updateCartDbProduct(orderId, orderProduct)),
   deleteProduct: (productId, orderId) =>
     dispatch(deleteProductFromDbCart(productId, orderId))
 })

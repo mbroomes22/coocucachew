@@ -58,11 +58,10 @@ export const updateOrder = (order, orderId) => async dispatch => {
 
 export const updateCartDbProduct = (
   orderId,
-  productId,
-  qty
+  orderProduct
 ) => async dispatch => {
   try {
-    const res = await axios.put(`api/order/${orderId}`, productId, qty)
+    const res = await axios.put(`api/orderProduct/${orderId}`, orderProduct)
     dispatch(updatedProducrCart(res.data))
     console.log('INSIDE THE UPDATE THUNK', res.data)
   } catch (error) {

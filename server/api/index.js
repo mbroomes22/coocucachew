@@ -7,6 +7,8 @@ router.use('/products', require('./product'))
 
 router.use('/orderProduct', require('./orderProduct'))
 
+router.use('/oderProduct/:orderId', require('./orderProduct'))
+
 router.use('/order', require('./order'))
 
 router.use((req, res, next) => {
