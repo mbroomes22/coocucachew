@@ -7,7 +7,7 @@ export class CartQuantity extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantity: 0
+      quantity: this.props.product.orderProduct.quantity
     }
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -24,13 +24,10 @@ export class CartQuantity extends React.Component {
         quantity: this.state.quantity
       }
     }
-
     ls.set(`${this.props.product.name}`, updatedProduct)
-    console.log(this.props.product.price)
     const newPrice =
       ls.get('subtotal') +
       this.state.quantity * parseInt(this.props.product.price.substring(1), 10)
-
     ls.set('subtotal', newPrice)
     ls.set('total', newPrice + 6)
   }
@@ -40,7 +37,6 @@ export class CartQuantity extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-    this.handleUpdate(e)
   }
 
   increment(e) {
