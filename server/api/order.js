@@ -31,7 +31,49 @@ router.put('/:orderId', async (req, res, next) => {
   }
 })
 
-// implement delete route
+router.put('/:orderId', async (req, res, next) => {
+  try {
+    const {productId, qty} = req.body
+    const orderToUpdate = await Order.findOne({
+      where: {
+        id: req.params.id,
+        userId: req.session.passport.user
+      },
+      include: {
+        Product: {
+          where: {
+            id: productId
+          }
+        }
+      }
+    })
+    console.log('REQ.BODY IN ORDER PUT ROUTE', req.params)
+    await orderToUpdate.update({
+      quantity: qty
+    })
+    res.status(200).json(orderToUpdate)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// export const updateProduct = (orderId, productId, qty) => async dispatch => {
+//   try {
+//     const res = await axios.put(`api/order/${orderId}`, productId, qty)
+//     dispatch(updatedProducrCart(res.data))
+//   } catch (error) {
+//     console.error(error)
+//   }
+// }
+
+// export const deleteProduct = (productId, orderId) => async dispatch => {
+//   try {
+//     const res = await axios.delete(`api/order/${orderId}`, productId, qty)
+//     dispatch(deletedProduct(res.data))
+//   } catch (error) {
+//     console.error(error)
+//   }
+// }
 
 router.post('/', async (req, res, next) => {
   try {
