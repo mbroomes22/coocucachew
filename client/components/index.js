@@ -3,7 +3,7 @@
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-export {default as AddProductForm} from './addProductForm'
+export {default as AddProductForm} from './AddProductForm'
 export {default as AllProducts} from './allProducts'
 export {default as CartMain} from './cart/cartMain'
 export {default as CartList} from './cart/cartList'
