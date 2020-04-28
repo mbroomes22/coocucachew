@@ -47,23 +47,34 @@ export class SingleProduct extends Component {
     const userId = this.props.user.id
 
     await this.props.addToCart(userId, orderproduct)
+    let updatedProduct = {
+      [this.state.name]: this.props.singleProduct,
+      quantity: this.state.qty
+    }
+    ls.set(`${this.state.name}`, updatedProduct)
   }
 
-  Increament = () => {
-    this.setState({
-      name: this.props.singleProduct.name,
-      price: this.props.singleProduct.price,
-      qty: this.state.qty + 1
-    })
-  }
+  // Increament = () => {
+  //   this.setState({
+  //     name: this.props.singleProduct.name,
+  //     price: this.props.singleProduct.price,
+  //     qty: this.state.qty + 1,
+  //   })
+  //   ls.set(`${name}`, this.props.singleProduct)
+  //   ls.set('price', this.props.singleProduct.price)
+  //   ls.set('quantity', this.state.qty + 1)
+  // }
 
-  Decreament = () => {
-    this.setState({
-      name: this.props.singleProduct.name,
-      price: this.props.singleProduct.price,
-      qty: this.state.qty - 1
-    })
-  }
+  // Decreament = () => {
+  //   this.setState({
+  //     name: this.props.singleProduct.name,
+  //     price: this.props.singleProduct.price,
+  //     qty: this.state.qty - 1,
+  //   })
+  //   ls.set('name', this.props.singleProduct.name)
+  //   ls.set('price', this.props.singleProduct.price)
+  //   ls.set('quantity', this.state.qty - 1)
+  // }
 
   render() {
     console.log('THIS IS STATE: ', this.state)

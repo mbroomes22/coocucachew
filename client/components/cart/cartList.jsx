@@ -57,7 +57,8 @@ export class CartList extends React.Component {
   }
 
   render() {
-    // console.log('inside cartlist render',this.props)
+    console.log('inside cartlist render', this.props)
+
     this.setPropsToLocalStorage()
     // console.log('local storage in cartlist', ls.get('cartProducts'))
     const {step} = this.state
@@ -70,6 +71,7 @@ export class CartList extends React.Component {
             cart={this.props.cart}
             nextStep={this.nextStep}
             prevStep={this.prevStep}
+            orderId={this.props.cartId}
           />
         ) : (
           'Loading Products'
