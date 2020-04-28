@@ -58,30 +58,22 @@ export class CartList extends React.Component {
   }
 
   render() {
-    console.log('inside cartlist render', this.props)
+    // console.log('inside cartlist render', this.props)
 
     this.setPropsToLocalStorage()
     // console.log('local storage in cartlist', ls.get('cartProducts'))
     const {step} = this.state
-
-    // return (<div></div>)
-    switch (step) {
-      case 1:
-        return this.props.cart[0] ? (
-          <CartProducts
-            cart={this.props.cart}
-            nextStep={this.nextStep}
-            prevStep={this.prevStep}
-            orderId={this.props.cartId}
-          />
-        ) : (
-          'Loading Products'
-        )
-      case 2:
-        return <UserForm cart={this.props.cart} nextStep={this.nextStep} />
-      default:
-        return 'Loading...'
-    }
+    console.log('CART LIST PROPS', this.props)
+    return this.props.cart[0] ? (
+      <CartProducts
+        cart={this.props.cart}
+        nextStep={this.nextStep}
+        prevStep={this.prevStep}
+        orderId={this.props.cartId}
+      />
+    ) : (
+      'Loading Products'
+    )
   }
 }
 

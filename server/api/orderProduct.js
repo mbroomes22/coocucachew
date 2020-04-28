@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
 router.put('/:orderId', async (req, res, next) => {
   const {quantity, productId, orderId} = req.body
   try {
-    // console.log('INSIDE THE UPDATE PRODUCT WORKS', orderId, productId, quantity)
+    // console.log('INSIDE THE UPDATE PRODUCT WORKS', orderId)
     if (req.session.passport.user) {
       const productToUpdate = await OrderProduct.findOne({
         where: {
@@ -40,7 +40,8 @@ router.put('/:orderId', async (req, res, next) => {
           productId: productId,
           orderId: orderId
         })
-        res.status(200).json(productToUpdate)
+        console.log('------------------>>', loggedUserOrder)
+        res.status(200).json(loggedUserOrder)
       }
       // console.log('--->  FOUND AN ORDER W A USER  <---')
     } else {
@@ -56,7 +57,15 @@ router.put('/:orderId', async (req, res, next) => {
         productId: productId,
         orderId: orderId
       })
-      res.status(200).json(productToUpdate)
+
+      const loggedUserOrder = await Order.findOne({
+        where: {
+          userId: req.session.passport.user,
+          id: req.params.orderId
+        }
+      })
+
+      res.status(200).json(loggedUserOrder)
     }
     // console.log('-------->  UPDATED AN ORDER  <--------')
   } catch (err) {

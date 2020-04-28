@@ -46,10 +46,14 @@ export class CartQuantity extends React.Component {
       this.state.quantity * parseInt(this.props.product.price.substring(1), 10)
     ls.set('subtotal', newPrice)
     ls.set('total', newPrice + 6)
-    console.log(this.props)
+
+    console.log(
+      '----------->  ORDER ID IN CART QUANTITY COMPONENT',
+      this.props.cart[0].id
+    )
 
     this.props.updateCartProduct(
-      this.props.cart.id,
+      this.props.cart[0].id,
       updatedProduct.orderProduct
     )
   }
@@ -97,7 +101,7 @@ export class CartQuantity extends React.Component {
   }
 
   render() {
-    // console.log('inside of cart quantity render', this.props)
+    console.log('inside of cart quantity render', this.props)
     return (
       <div>
         <form onSubmit={e => this.handleUpdate(e)}>
@@ -122,6 +126,10 @@ export class CartQuantity extends React.Component {
   }
 }
 
+const mapState = state => ({
+  cart: state.cart
+})
+
 const mapDispatch = dispatch => ({
   updateCartProduct: (orderId, orderProduct) =>
     dispatch(updateCartDbProduct(orderId, orderProduct)),
@@ -130,4 +138,4 @@ const mapDispatch = dispatch => ({
   deleteOrder: orderId => dispatch(deleteOrderFromDb(orderId))
 })
 
-export default connect(null, mapDispatch)(CartQuantity)
+export default connect(mapState, mapDispatch)(CartQuantity)
