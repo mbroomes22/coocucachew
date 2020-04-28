@@ -1,0 +1,125 @@
+[
+  {
+    "name": "quos",
+    "description": "Id modi et.",
+    "price": 3,
+    "productCategoryId": 1
+  },
+  {
+    "name": "optio",
+    "description": "Quia voluptatem modi ullam provident nesciunt.",
+    "price": 5,
+    "productCategoryId": 1
+  },
+  {
+    "name": "dolor",
+    "description": "Veniam beatae ipsa vel a est quaerat.",
+    "price": 5,
+    "productCategoryId": 2
+  },
+  {
+    "name": "et",
+    "description": "Totam voluptatem aut eos dolorum architecto labore.",
+    "price": 10,
+    "productCategoryId": 2
+  },
+  {
+    "name": "dolores",
+    "description": "Quo totam ut omnis eaque nemo.",
+    "price": 7,
+    "productCategoryId": 2
+  },
+  {
+    "name": "sint",
+    "description":
+      "Qui dolor nisi doloremque fuga praesentium repudiandae blanditiis natus.",
+    "price": 7,
+    "productCategoryId": 1
+  },
+  {
+    "name": "vel",
+    "description": "Commodi est ratione aut qui.",
+    "price": 6,
+    "productCategoryId": 3
+  },
+  {
+    "name": "et",
+    "description":
+      "Dolorem iure quam eos error debitis necessitatibus est iste suscipit.",
+    "price": 10,
+    "productCategoryId": 1
+  },
+  {
+    "name": "consequuntur",
+    "description": "Atque ea optio omnis vero autem ducimus et.",
+    "price": 3,
+    "productCategoryId": 2
+  },
+  {
+    "name": "ut",
+    "description":
+      "Aperiam repudiandae nesciunt soluta deserunt quia voluptatem qui.",
+    "price": 4,
+    "productCategoryId": 4
+  },
+  {
+    "name": "vero",
+    "description": "Quia provident itaque beatae enim veniam.",
+    "price": 5,
+    "productCategoryId": 2
+  },
+  {
+    "name": "voluptatem",
+    "description": "Nisi et aut beatae.",
+    "price": 7,
+    "productCategoryId": 1
+  },
+  {
+    "name": "placeat",
+    "description": "Nostrum quaerat voluptatem asperiores facilis omnis.",
+    "price": 4,
+    "productCategoryId": 1
+  },
+  {
+    "name": "dolorum",
+    "description": "Necessitatibus voluptas rerum repellendus qui sed animi.",
+    "price": 10,
+    "productCategoryId": 2
+  },
+  {
+    "name": "doloremque",
+    "description": "Vel ut minus.",
+    "price": 3,
+    "productCategoryId": 1
+  },
+  {
+    "name": "vel",
+    "description": "Sequi porro sint aliquam in ut.",
+    "price": 9,
+    "productCategoryId": 2
+  },
+  {
+    "name": "ut",
+    "description": "Voluptas in ratione est ut itaque amet ratione ullam.",
+    "price": 8,
+    "productCategoryId": 3
+  },
+  {
+    "name": "officiis",
+    "description": "Ea perspiciatis odio laborum.",
+    "price": 3,
+    "productCategoryId": 4
+  },
+  {
+    "name": "deserunt",
+    "description": "Qui maxime aut tenetur.",
+    "price": 8,
+    "productCategoryId": 4
+  },
+  {
+    "name": "ex",
+    "description": "Neque aut praesentium adipisci voluptatem assumenda atque.",
+    "price": 9,
+    "productCategoryId": 4
+  }
+]
