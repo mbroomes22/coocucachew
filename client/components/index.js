@@ -4,7 +4,7 @@
  * having to figure out which file they belong to!
  */
 export {default as AddProductForm} from './AddProductForm'
-export {default as AllProducts} from './allProducts'
+export {default as AllProducts} from './AllProducts'
 export {default as CartMain} from './cart/cartMain'
 export {default as CartList} from './cart/cartList'
 export {default as CartProducts} from './cart/cartProducts'
