@@ -22,14 +22,14 @@ export class CartQuantity extends React.Component {
   }
 
   componentDidMount() {
-    console.log('cart quantity component did mount', this.props.product)
+    // console.log('cart quantity component did mount', this.props.product)
     this.setState({
       quantity: this.props.product.orderProduct.quantity
     })
   }
 
   handleUpdate(e) {
-    e.preventDefault()
+    // e.preventDefault()
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -38,6 +38,7 @@ export class CartQuantity extends React.Component {
       orderProduct: {
         ...this.props.product.orderProduct,
         quantity: this.state.quantity
+        //maybe can add a this.setState to change the qty when click delete btn
       }
     }
     ls.set(`${this.props.product.name}`, updatedProduct)
@@ -46,7 +47,7 @@ export class CartQuantity extends React.Component {
       this.state.quantity * parseInt(this.props.product.price.substring(1), 10)
     ls.set('subtotal', newPrice)
     ls.set('total', newPrice + 6)
-    console.log(this.props)
+    // console.log(this.props)
 
     this.props.updateCartProduct(
       this.props.cart.id,
@@ -72,9 +73,10 @@ export class CartQuantity extends React.Component {
   increment(e) {
     e.preventDefault()
     const quantity = this.state.quantity
-    this.setState({
-      quantity: quantity + 1
-    })
+    quantity < 20 &&
+      this.setState({
+        quantity: quantity + 1
+      })
     const {product, cart, deleteProduct} = this.props
     //
     // DOUBLE CHECK THAT THIS HELPER FUNCTION CAN BE USED HERE WITH DELETE
@@ -86,14 +88,26 @@ export class CartQuantity extends React.Component {
   decrement(e) {
     e.preventDefault()
     const quantity = this.state.quantity
-    this.setState({
-      quantity: quantity - 1
-    })
+    quantity >= 1 &&
+      this.setState({
+        quantity: quantity - 1
+      })
     const {product, cart, deleteProduct, deleteOrder} = this.props
     quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
     if (cart.products.length < 1) {
       deleteOrder(cart.id)
     }
+  }
+
+  clearAll(e) {
+    e.preventDefault()
+    this.setState({
+      quantity: 0
+    })
+
+    const {product, cart, deleteProduct} = this.props
+    console.log('PROPS-------------', product.id, cart.id)
+    deleteProduct(product.id, cart.id)
   }
 
   render() {
@@ -116,6 +130,9 @@ export class CartQuantity extends React.Component {
             +{' '}
           </button>
           <button type="submit">Update</button>
+          <button type="button" onClick={e => this.clearAll(e)}>
+            Delete
+          </button>
         </form>
       </div>
     )

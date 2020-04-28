@@ -20,9 +20,9 @@ export const updatedCart = cart => ({
   cart
 })
 
-export const updatedProduct = orderProduct => ({
+export const updatedProduct = cart => ({
   type: UPDATE_PRODUCT,
-  orderProduct
+  cart
 })
 
 export const deletedProduct = cart => ({
@@ -46,9 +46,8 @@ const initialState = {}
 //thunks
 export const fetchCart = () => async dispatch => {
   try {
-    const res = await axios.get('api/order')
+    const res = await axios.get('/api/order')
     dispatch(gotCart(res.data))
-    console.log('INSIDE FETCH CART WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -56,9 +55,8 @@ export const fetchCart = () => async dispatch => {
 
 export const updateOrderinDb = (order, orderId) => async dispatch => {
   try {
-    const res = await axios.put(`api/order/${orderId}`, order)
+    const res = await axios.put(`/api/order/${orderId}`, order)
     dispatch(updatedCart(res.data))
-    console.log('INSIDE UPDATE ORDER WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -70,9 +68,8 @@ export const updateCartDbProduct = (
 ) => async dispatch => {
   try {
     // console.log('INSIDE THE UPDATE PRODUCT WORKS', orderId, orderProduct)
-    const res = await axios.put(`api/orderProduct/${orderId}`, orderProduct)
+    const res = await axios.put(`/api/orderProduct/${orderId}`, orderProduct)
     dispatch(updatedProduct(res.data))
-    console.log('INSIDE THE UPDATE PRODUCT WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -83,9 +80,11 @@ export const deleteProductFromDbCart = (
   orderId
 ) => async dispatch => {
   try {
-    const res = await axios.delete(`api/orderProduct/${orderId}`, productId)
+    const res = await axios.delete(`/api/orderProduct/${orderId}`, {
+      data: {productId: productId}
+    })
+    console.log('RES DATA', res.data)
     dispatch(deletedProduct(res.data))
-    console.log('INSIDE DELETE PRODUCT WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -93,9 +92,8 @@ export const deleteProductFromDbCart = (
 
 export const deleteOrderFromDb = orderId => async dispatch => {
   try {
-    const res = await axios.delete(`api/order/${orderId}`)
+    const res = await axios.delete(`/api/order/${orderId}`)
     dispatch(deletedOrder(res.data))
-    console.log('INSIDE DELETE ORDER WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -103,9 +101,8 @@ export const deleteOrderFromDb = orderId => async dispatch => {
 
 export const createDbOrder = order => async dispatch => {
   try {
-    const res = await axios.post(`api/order/`, order)
+    const res = await axios.post(`/api/order/`, order)
     dispatch(newOrder(res.data))
-    console.log('INSIDE CREATE ORDER WORKS', res.data)
   } catch (error) {
     console.error(error)
   }
@@ -117,9 +114,8 @@ export const updateDbOrderProduct = (
 ) => async dispatch => {
   console.log('START RUNING THUNK', orderId)
   try {
-    const res = await axios.put(`api/order/${orderId}`, orderProduct)
+    const res = await axios.put(`/api/order/${orderId}`, orderProduct)
     dispatch(updatedDbOrderProduct(res.data))
-    console.log('FINISH RUNING THUNK', res.data)
   } catch (error) {
     next(error)
   }
@@ -137,13 +133,13 @@ export default function cartStoreReducer(state = initialState, action) {
       return action.cart
 
     case UPDATE_PRODUCT:
-      return action.orderProduct
+      return action.cart
 
     case DELETE_PRODUCT:
       return action.cart
 
     case DELETE_ORDER:
-      return action
+      return action.cart
 
     case CREATE_ORDER:
       return action.cart
