@@ -50,7 +50,7 @@ const initialState = {
 //thunks
 export const fetchCart = () => async dispatch => {
   try {
-    const res = await axios.get('api/order')
+    const res = await axios.get('/api/order')
     dispatch(getCart(res.data))
   } catch (error) {
     console.error(error)
