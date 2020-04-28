@@ -90,7 +90,6 @@ router.delete('/:orderId', async (req, res, next) => {
           // isPending: true
         }
       })
-      res.status(200)
       const loggedUserOrder = await Order.findOne({
         where: {
           userId: req.session.passport.user,
