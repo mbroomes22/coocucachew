@@ -72,9 +72,10 @@ export class CartQuantity extends React.Component {
   increment(e) {
     e.preventDefault()
     const quantity = this.state.quantity
-    this.setState({
-      quantity: quantity + 1
-    })
+    quantity < 20 &&
+      this.setState({
+        quantity: quantity + 1
+      })
     const {product, cart, deleteProduct} = this.props
     //
     // DOUBLE CHECK THAT THIS HELPER FUNCTION CAN BE USED HERE WITH DELETE
@@ -86,9 +87,10 @@ export class CartQuantity extends React.Component {
   decrement(e) {
     e.preventDefault()
     const quantity = this.state.quantity
-    this.setState({
-      quantity: quantity - 1
-    })
+    quantity >= 1 &&
+      this.setState({
+        quantity: quantity - 1
+      })
     const {product, cart, deleteProduct, deleteOrder} = this.props
     quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
     if (cart.products.length < 1) {
