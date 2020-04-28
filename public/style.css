@@ -104,9 +104,15 @@ form div {
 }
 
 .navbar {
-  background: linear-gradient(to left, #ba7453, #d1a984);
+  background: linear-gradient(to left, #c52c06, #97d30c);
+  display: grid;
 }
 
 .navbar a {
   color: white;
+}
+
+.navbar h1 {
+  display: flex;
+  justify-content: center;
 }
