@@ -27,7 +27,7 @@ const Product = db.define('product', {
       isUrl: true
     },
     defaultValue:
-      'https://cdn.shopify.com/s/files/1/0034/7550/5225/products/Birthday_Cake_6in_Overhead-1_800x.jpg?v=1579840506'
+      'https://cdn2.vectorstock.com/i/1000x1000/84/01/candy-set-sweet-desserts-chocolate-candies-vector-26628401.jpg'
   },
   description: {
     type: Sequelize.TEXT,

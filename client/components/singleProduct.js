@@ -21,6 +21,7 @@ export class SingleProduct extends Component {
   componentDidMount() {
     // console.log('^*^*^', this.props)
     // this.props.match.params.productId ? (
+    console.log(this.props.match.params.productId)
     this.props.getProduct(this.props.match.params.productId)
 
     // : ('loading')

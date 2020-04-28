@@ -16,6 +16,9 @@ export class AllProducts extends React.Component {
 
   render() {
     const {products} = this.props
+    const isAdmin = this.props.user.isAdmin
+    console.log(isAdmin)
+
     return (
       <div>
         <div className="card-container">
@@ -23,29 +26,32 @@ export class AllProducts extends React.Component {
             ? products.map(product => {
                 return (
                   <div key={product.id} className="card">
-                    <button
-                      className="button"
-                      type="button"
-                      onClick={() => this.handleRemove(product.id)}
-                      width="100px"
-                    >
-                      <h1>X</h1>
-                      <h5>delete</h5>
-                    </button>
-                    <Link to={`/${product.id}`}>
+                    <Link to={`/products/${product.id}`}>
                       <h4>{product.name}</h4>
                     </Link>
                     <h4>{product.price}</h4>
                     <img src={product.imageUrl} width="200" />
                     <p>{product.description}</p>
+                    {isAdmin ? (
+                      <button
+                        className="button"
+                        type="button"
+                        onClick={() => this.handleRemove(product.id)}
+                        width="100px"
+                      >
+                        <h4>remove</h4>
+                      </button>
+                    ) : null}
                   </div>
                 )
               })
             : 'loading....'}
         </div>
-        <div>
-          <AddProductForm props={this.props} />
-        </div>
+        {isAdmin ? (
+          <div>
+            <AddProductForm props={this.props} />
+          </div>
+        ) : null}
       </div>
     )
   }
