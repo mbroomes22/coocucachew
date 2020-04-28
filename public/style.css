@@ -102,3 +102,11 @@ form div {
 .form {
   margin: 2%;
 }
+
+.navbar {
+  background: linear-gradient(to left, #ba7453, #d1a984);
+}
+
+.navbar a {
+  color: white;
+}
