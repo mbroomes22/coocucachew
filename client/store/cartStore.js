@@ -44,7 +44,7 @@ export const newOrder = cart => ({
 const initialState = {}
 
 //thunks
-export const fetchCart = () => async dispatch => {
+export const fetchCart = orderId => async dispatch => {
   try {
     const res = await axios.get('/api/order')
     dispatch(gotCart(res.data))

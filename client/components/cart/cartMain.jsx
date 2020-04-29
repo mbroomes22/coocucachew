@@ -10,6 +10,7 @@ export class CartMain extends React.Component {
 
   render() {
     console.log('CART MAIN', this.props.cart)
+    console.log('USERRRRRRR', this.props.user)
     return this.props.cart ? (
       <div>
         <h3>C A R T</h3>
@@ -22,7 +23,8 @@ export class CartMain extends React.Component {
 }
 
 const mapState = state => ({
-  cart: state.cart
+  cart: state.cart,
+  user: state.user
 })
 
 const mapDispatch = dispatch => ({
