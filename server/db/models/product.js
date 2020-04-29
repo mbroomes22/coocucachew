@@ -23,11 +23,8 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.TEXT,
-    validate: {
-      isUrl: true
-    },
     defaultValue:
-      'https://cdn2.vectorstock.com/i/1000x1000/84/01/candy-set-sweet-desserts-chocolate-candies-vector-26628401.jpg'
+      'candy-set-sweet-desserts-chocolate-candies-vector-26628401.jpg'
   },
   description: {
     type: Sequelize.TEXT,

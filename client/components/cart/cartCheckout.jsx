@@ -45,8 +45,7 @@ export class CartCheckout extends React.Component {
               <h5>$6</h5>
             </div> */}
             <div>
-              <h4>Total: </h4>
-              <h4>{'$' + ls.get('total')}</h4>
+              <h4>Total: {'$' + ls.get('total')}</h4>
               <form onSubmit={e => this.handleUpdate(e)}>
                 {/* <button type="submit">
                   U P D A T E

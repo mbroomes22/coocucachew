@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-image: url('sweet-desserts-chocolate-candies.jpg');
 }
 
 .title {
@@ -11,6 +12,7 @@ h1 {
   text-align: center;
   font-family: Chalkduster, fantasy;
   font-weight: 900;
+  text-shadow: 2px 2px white;
 }
 
 a {
@@ -71,10 +73,12 @@ form div {
   padding: 20px;
   margin-bottom: 20px;
   font-family: Chalkduster, fantasy;
+  text-shadow: 1px 1px grey;
 }
 
 .cartproducts {
   font-family: Chalkduster, fantasy;
+  text-shadow: 1px 1px white;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
@@ -84,6 +88,7 @@ form div {
 #cart_total {
   font-family: Chalkduster, fantasy;
   padding: 1rem;
+  text-shadow: 1px 1px white;
 }
 
 .field {
@@ -154,9 +159,12 @@ form div {
 }
 
 .navbar {
-  background: linear-gradient(to left, #ba7453, #d1a984);
+  /* background: linear-gradient(to left, #ba7453, #d1a984); */
+  background-color: transparent;
 }
 
 .navbar a {
-  color: white;
+  color: black;
+  font-weight: bold;
+  text-shadow: 1px 1px white;
 }
