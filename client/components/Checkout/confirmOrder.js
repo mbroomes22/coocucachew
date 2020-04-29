@@ -62,23 +62,30 @@ export class ConfirmOrder extends Component {
         <h1 className="header">Confirm Order Details</h1>
         <br />
         <h2>Shipping Address</h2>
-        <ul>
-          <ol>
-            <h3>Name:</h3> <br /> {name}
-          </ol>
-          <ol>
-            <h3>Email:</h3> <br /> {email}
-          </ol>
-          <ol>
-            <h3>Street Address:</h3> <br /> {streetAddress}
-          </ol>
-          <ol>
-            <h3>ZIP code:</h3> <br /> {zipCode}
-          </ol>
-          <ol>
-            <h3>State:</h3> <br /> {state}
-          </ol>
-        </ul>
+        <div className="card-container">
+          <ul className="card">
+            <ol>
+              <h3>Name:</h3> {name}
+              <br />
+            </ol>
+            <ol>
+              <h3>Email:</h3> {email}
+              <br />
+            </ol>
+            <ol>
+              <h3>Street Address:</h3> {streetAddress}
+              <br />
+            </ol>
+            <ol>
+              <h3>ZIP code:</h3> {zipCode}
+              <br />
+            </ol>
+            <ol>
+              <h3>State:</h3> {state}
+              <br />
+            </ol>
+          </ul>
+        </div>
         <h2>Payment Method</h2>
         <ul>
           <ol>
@@ -89,24 +96,23 @@ export class ConfirmOrder extends Component {
         <h2>Review Items</h2>
         <br />
         <br />
-        <ul>
+        <ul className="checkout-card-container">
           {cart[0].products &&
             cart[0].products.map(item => (
               <div key={item.id} className="checkout-card">
                 <ol>
-                  <h3>{item.name}</h3> <br />
+                  <h3>{item.name}</h3>
                 </ol>
                 <ol>
                   <h3>
                     <img src={item.imageUrl} width="75px" />
                   </h3>
-                  <br />
                 </ol>
                 <ol>
-                  <h3>Qty: {item.orderProduct.quantity}</h3> <br />
+                  <h3>Qty: {item.orderProduct.quantity}</h3>
                 </ol>
                 <ol>
-                  <h3>{item.price}</h3> <br />
+                  <h3>{item.price}</h3>
                 </ol>
               </div>
             ))}
