@@ -2,13 +2,18 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import ls from 'local-storage'
-import {updateDbOrderProduct} from '../../store/cartStore'
+import {
+  updateCartDbProduct,
+  deleteProductFromDbCart,
+  deleteOrderFromDb
+} from '../../store/cartStore'
+import {quantityAlert} from '../../utils'
 
 export class CartQuantity extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantity: 0
+      quantity: this.props.product.orderProduct.quantity
     }
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -16,24 +21,38 @@ export class CartQuantity extends React.Component {
     this.decrement = this.decrement.bind(this)
   }
 
+  componentDidMount() {
+    // console.log('cart quantity component did mount', this.props.product)
+    this.setState({
+      quantity: this.props.product.orderProduct.quantity
+    })
+  }
+
   handleUpdate(e) {
-    e.preventDefault()
+    // e.preventDefault()
+    this.setState({
+      [e.target.name]: e.target.value
+    })
     const updatedProduct = {
       ...this.props.product,
       orderProduct: {
         ...this.props.product.orderProduct,
         quantity: this.state.quantity
+        //maybe can add a this.setState to change the qty when click delete btn
       }
     }
+    ls.set(`${this.props.product.name}`, updatedProduct)
+    const newPrice =
+      ls.get('subtotal') +
+      this.state.quantity * parseInt(this.props.product.price.substring(1), 10)
+    ls.set('subtotal', newPrice)
+    ls.set('total', newPrice + 6)
+    // console.log(this.props)
 
-    if (!this.props.cart.id) {
-      const orderId = this.props.cart.orderId
-      this.props.updateOrderProduct(orderId, updatedProduct)
-
-      const newPrice =
-        this.state.quantity *
-        parseInt(this.props.product.price.substring(1), 10)
-    }
+    this.props.updateCartProduct(
+      this.props.cart.id,
+      updatedProduct.orderProduct
+    )
   }
 
   handleChange(e) {
@@ -41,36 +60,58 @@ export class CartQuantity extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+    const {product, cart, deleteProduct} = this.props
+    quantityAlert(
+      this.state.quantity,
+      product.id,
+      cart.id,
+      product.name,
+      deleteProduct
+    )
   }
 
   increment(e) {
     e.preventDefault()
-    if (this.state.quantity < 20) {
-      const quantity = this.state.quantity
+    const quantity = this.state.quantity
+    quantity < 20 &&
       this.setState({
         quantity: quantity + 1
       })
-    } else {
-      alert(
-        `Sorry, we don't have more than 20 ${
-          this.props.product.name
-        }s in stock :(`
-      )
-    }
+    const {product, cart, deleteProduct} = this.props
+    //
+    // DOUBLE CHECK THAT THIS HELPER FUNCTION CAN BE USED HERE WITH DELETE
+    //
+    quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   }
+
   decrement(e) {
     e.preventDefault()
-    if (this.state.quantity !== 0) {
-      const quantity = this.state.quantity
+    const quantity = this.state.quantity
+    quantity >= 1 &&
       this.setState({
         quantity: quantity - 1
       })
-    } else {
-      alert(`Sorry, you can't purchase less than 0 ${this.props.product.name}`)
+    const {product, cart, deleteProduct, deleteOrder} = this.props
+    quantityAlert(quantity, product.id, cart.id, product.name, deleteProduct)
+    if (cart.products.length < 1) {
+      deleteOrder(cart.id)
     }
   }
+
+  clearAll(e) {
+    e.preventDefault()
+    this.setState({
+      quantity: 0
+    })
+
+    const {product, cart, deleteProduct} = this.props
+    console.log('PROPS-------------', product.id, cart.id)
+    deleteProduct(product.id, cart.id)
+  }
+
   render() {
-    console.log('inside of cart quantity render', this.props)
+    // console.log('inside of cart quantity render', this.props)
     return (
       <div>
         <form onSubmit={e => this.handleUpdate(e)}>
@@ -89,17 +130,21 @@ export class CartQuantity extends React.Component {
             +{' '}
           </button>
           <button type="submit">Update</button>
+          <button type="button" onClick={e => this.clearAll(e)}>
+            Delete
+          </button>
         </form>
       </div>
     )
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateOrderProduct: (orderId, orderProduct) =>
-      dispatch(updateDbOrderProduct(orderId, orderProduct))
-  }
-}
+const mapDispatch = dispatch => ({
+  updateCartProduct: (orderId, orderProduct) =>
+    dispatch(updateCartDbProduct(orderId, orderProduct)),
+  deleteProduct: (productId, orderId) =>
+    dispatch(deleteProductFromDbCart(productId, orderId)),
+  deleteOrder: orderId => dispatch(deleteOrderFromDb(orderId))
+})
 
-export default connect(null, mapDispatchToProps)(CartQuantity)
+export default connect(null, mapDispatch)(CartQuantity)

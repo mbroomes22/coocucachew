@@ -52,6 +52,7 @@ export class SingleProduct extends Component {
       quantity: this.state.qty
     }
     ls.set(`${this.state.name}`, updatedProduct)
+    alert('Added to cart')
   }
 
   // Increament = () => {

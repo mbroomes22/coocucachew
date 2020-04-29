@@ -5,26 +5,30 @@ const {Product, User, OrderProduct, Order} = require('../db/models')
 //is auth or isAdmin
 // authorizations folder with isAdmin and isAuth plus any others
 //authhelpers.js
-// router.get('/', async (req, res, next) => {
-//   try {
-//     if (req.session.passport.user) {
-//       const fetchedOrder = await Order.findAll({
-//         where: {
-//           ///ISPENDING TRUE OR FALSE
-//           userId: req.session.passport.user,
-//           isPending: true,
-//         },
-//         include: Product,
-//       })
-//       res.json(fetchedOrder)
-//     } else {
-//       const newOrder = await Order.create(req.body)
-//       res.json(newOrder)
-//     }
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+router.get('/', async (req, res, next) => {
+  try {
+    if (req.session.passport.user) {
+      const fetchedOrder = await Order.findOrCreate({
+        where: {
+          userId: req.session.passport.user,
+          isPending: true
+        },
+        include: Product
+      })
+      console.log('--->  FETCHED OR CREATED AN ORDER W A USER  <---')
+      res.json(fetchedOrder)
+    } else {
+      const fetchedOrder = await Order.create({
+        isPending: true,
+        userId: null
+      })
+      console.log('--->  CREATED AN ORDER W/O A USER  <---')
+      res.json(fetchedOrder)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.put('/:orderId', async (req, res, next) => {
   console.log('REQ.BODY IN ORDER PUT ROUTE', req.body)
@@ -47,7 +51,32 @@ router.put('/:orderId', async (req, res, next) => {
   }
 })
 
-// implement delete route
+router.delete('/:orderId', async (req, res, next) => {
+  try {
+    if (req.session.passport.user) {
+      const fetchedOrder = await Order.destroy({
+        where: {
+          userId: req.session.passport.user,
+          orderId: req.params.id,
+          isPending: true
+        }
+      })
+      console.log('--->  DELETED AN ORDER W A USER  <---')
+      res.json(fetchedOrder)
+    } else {
+      const fetchedOrder = await Order.destroy({
+        where: {
+          orderId: req.params.id,
+          isPending: true
+        }
+      })
+      console.log('--->  DELETED AN ORDER W/O A USER  <---')
+      res.status(201).json(fetchedOrder)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.post('/', async (req, res, next) => {
   try {
