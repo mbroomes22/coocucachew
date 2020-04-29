@@ -11,7 +11,7 @@ export class CartMain extends React.Component {
   render() {
     console.log('CART MAIN', this.props.cart)
     return this.props.cart ? (
-      <div>
+      <div id="cart">
         <h3>C A R T</h3>
         <CartList cart={this.props.cart} />
       </div>
