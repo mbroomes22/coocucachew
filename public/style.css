@@ -3,6 +3,10 @@ body {
   background-image: url('sweet-desserts-chocolate-candies.jpg');
 }
 
+.neutral {
+  background-color: rgb(247, 227, 240);
+}
+
 .title {
   font-family: 'Satisfy', cursive;
   color: #fe00fe;

@@ -2,13 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {getOrderHistory} from '../store/saveOrder'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
   const {name, isLoggedIn} = props
-
+  console.log('USER HOME Props=>', props)
+  console.log('USER HOME GET ORDERS=>', props.getOrders)
   return (
     <div>
       {isLoggedIn ? (
@@ -54,6 +56,12 @@ export const UserHome = props => {
               </Link>
             </div>
           </div>
+          <h2>See Your Order History:</h2>
+          <h3>Coming Soon</h3>
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
       ) : (
         <div>
@@ -114,7 +122,13 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    getOrders: () => dispatch(getOrderHistory())
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
 
 /**
  * PROP TYPES
