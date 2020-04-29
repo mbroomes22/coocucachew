@@ -136,6 +136,21 @@ form div {
   padding: 1rem;
 }
 
+.checkout-card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 3rem;
+  padding: 1rem;
+}
+
 .form {
   margin: 2%;
+}
+
+.navbar {
+  background: linear-gradient(to left, #ba7453, #d1a984);
+}
+
+.navbar a {
+  color: white;
 }

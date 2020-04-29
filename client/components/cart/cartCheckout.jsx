@@ -18,7 +18,6 @@ export class CartCheckout extends React.Component {
     e.preventDefault()
     // const cartForDb = ls.get('localStorage')
     const {cart, id, updateDbCart} = this.props
-    console.log('handle update works')
     updateDbCart(cart, id)
   }
 
@@ -40,8 +39,14 @@ export class CartCheckout extends React.Component {
               <h4>Subtotal: {'$' + ls.get('subtotal')}</h4>
               <h5>+ shipping: $6 </h5>
             </div>
-            <div>
+            {/* <div>
               <h4>Total: {'$' + ls.get('total')} </h4>
+              <h5>Shipping: </h5>
+              <h5>$6</h5>
+            </div> */}
+            <div>
+              <h4>Total: </h4>
+              <h4>{'$' + ls.get('total')}</h4>
               <form onSubmit={e => this.handleUpdate(e)}>
                 {/* <button type="submit">
                   U P D A T E
