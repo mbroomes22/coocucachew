@@ -48,6 +48,9 @@ export class ConfirmOrder extends Component {
 
   render() {
     const {values: {name, email, streetAddress, zipCode, state}} = this.props
+    const {cart} = this.props
+    console.log('cart products', cart[0].products)
+    console.log('cart', cart[0])
     return (
       <div>
         <br />
@@ -84,28 +87,35 @@ export class ConfirmOrder extends Component {
         <h2>Review Items</h2>
         <br />
         <br />
-        {/* <ul>
-          {this.props.cartItems.map(item => (
-            <div key={item.id}>
-              <ol>
-                <h3>{item.name}</h3> <br />
-              </ol>
-              <ol>
-                <h3>{item.description}</h3> <br />
-              </ol>
-              <ol>
-                <h3>{item.qty}</h3> <br />
-              </ol>
-              <ol>
-                <h3>{item.price}</h3> <br />
-              </ol>
-            </div>
-          ))}
-        </ul> */}
+        <ul>
+          {cart[0].products &&
+            cart[0].products.map(item => (
+              <div key={item.id} className="checkout-card">
+                <ol>
+                  <h3>{item.name}</h3> <br />
+                </ol>
+                <ol>
+                  <h3>{item.description}</h3> <br />
+                </ol>
+                <ol>
+                  <h3>
+                    <img src={item.imageUrl} width="75px" />
+                  </h3>{' '}
+                  <br />
+                </ol>
+                <ol>
+                  <h3>{item.orderProduct.quantity}</h3> <br />
+                </ol>
+                <ol>
+                  <h3>{item.price}</h3> <br />
+                </ol>
+              </div>
+            ))}
+        </ul>
         <h2>Order Total</h2>
         <br />
-        {/* {total} */}
-        9.99
+        {/* cart[0].products.map(item => total += item.price) */}
+        $9.99
         <br />
         <button
           type="submit"
@@ -120,9 +130,9 @@ export class ConfirmOrder extends Component {
   }
 }
 
-const mapState = state => {
-  console.log('confirmation order State=>', state)
-}
+const mapState = state => ({
+  cart: state.cart
+})
 
 const mapDispatch = dispatch => ({
   addOrder: (orderSubTotal, orderTotal, orderUserID) =>
