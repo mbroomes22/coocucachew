@@ -10,7 +10,7 @@ export class CartMain extends React.Component {
 
   render() {
     return this.props.cart ? (
-      <div>
+      <div id="cart">
         <h3>C A R T</h3>
         <CartList cart={this.props.cart} />
       </div>
