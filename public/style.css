@@ -155,7 +155,7 @@ form div {
 
 .singleProduct-description {
   font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
-  font-size: 27px;
+  font-size: 30px;
   letter-spacing: 0.2px;
   word-spacing: 2px;
   color: #5c0b70;
@@ -163,5 +163,18 @@ form div {
   text-decoration: none solid rgb(68, 68, 68);
   font-style: normal;
   font-variant: normal;
+  text-transform: none;
+}
+
+#navBar-container {
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  font-size: 25px;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: #362f47;
+  font-weight: 700;
+  text-decoration: underline solid rgb(68, 68, 68);
+  font-style: normal;
+  font-variant: small-caps;
   text-transform: none;
 }
