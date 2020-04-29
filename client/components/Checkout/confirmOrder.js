@@ -49,8 +49,10 @@ export class ConfirmOrder extends Component {
   render() {
     const {values: {name, email, streetAddress, zipCode, state}} = this.props
     const {cart} = this.props
-    console.log('cart products', cart[0].products)
-    console.log('cart', cart[0])
+    let total = 0
+    cart[0].products.map(
+      item => (total += item.price.slice(1) * item.orderProduct.quantity)
+    )
     return (
       <div>
         <br />
@@ -95,16 +97,13 @@ export class ConfirmOrder extends Component {
                   <h3>{item.name}</h3> <br />
                 </ol>
                 <ol>
-                  <h3>{item.description}</h3> <br />
-                </ol>
-                <ol>
                   <h3>
                     <img src={item.imageUrl} width="75px" />
-                  </h3>{' '}
+                  </h3>
                   <br />
                 </ol>
                 <ol>
-                  <h3>{item.orderProduct.quantity}</h3> <br />
+                  <h3>Qty: {item.orderProduct.quantity}</h3> <br />
                 </ol>
                 <ol>
                   <h3>{item.price}</h3> <br />
@@ -112,10 +111,12 @@ export class ConfirmOrder extends Component {
               </div>
             ))}
         </ul>
-        <h2>Order Total</h2>
+        <h3>Subtotal</h3>
+        ${total}
         <br />
-        {/* cart[0].products.map(item => total += item.price) */}
-        $9.99
+        <h2>Total</h2>
+        ${total + 6}
+        <br />
         <br />
         <button
           type="submit"
