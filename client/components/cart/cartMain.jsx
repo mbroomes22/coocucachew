@@ -2,10 +2,11 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchCart} from '../../store/cartStore'
 import {CartList} from './cartList'
+import GuestCart from './guestCart'
 
 export class CartMain extends React.Component {
   async componentDidMount() {
-    await this.props.getCart()
+    // await this.props.getCart()
   }
 
   render() {

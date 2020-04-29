@@ -14,71 +14,47 @@ export class SingleProduct extends Component {
       price: '',
       qty: 0
     }
-    // this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
-    // console.log('^*^*^', this.props)
-    // this.props.match.params.productId ? (
-    console.log(this.props.match.params.productId)
     this.props.getProduct(this.props.match.params.productId)
-
-    // : ('loading')
   }
 
-  // handleSubmit(event) {
-  //   event.preventDefault()
-
-  //   const productInfo = {
-  //     name: this.props.singleProduct.name,
-  //     imageUrl: this.props.singleProduct.imageUrl,
-  //     price: this.props.singleProduct.price,
-  //     description: this.props.singleProduct.description,
-  //   }
-  //   console.log('I AM PROPS:', this.props)
-  //   this.props.addProduct(productInfo)
-  //   console.log('I AM ORDERID:', event.target)
-  // }
   async handleClick(product) {
-    console.log('I AM PROPS:', this.props)
-    console.log('I AM EVENT:', event.target.value)
     const orderproduct = this.props.singleProduct
     const userId = this.props.user.id
-
     await this.props.addToCart(userId, orderproduct)
     let updatedProduct = {
-      [this.state.name]: this.props.singleProduct,
-      quantity: this.state.qty
+      [this.state.name]: this.props.singleProduct
     }
-    ls.set(`${this.state.name}`, updatedProduct)
+
+    const cartProducts = ls.get('cart')
+
+    if (cartProducts !== null || (undefined && cartProducts.length > 1)) {
+      const cart = Array.from(cartProducts)
+      cart.filter(prod => {
+        if (prod[0].name === this.props.singleProduct.name) {
+          prod[1] += 1
+        }
+        if (
+          prod === cart[cart.length - 1] &&
+          prod[0].name !== this.props.singleProduct.name
+        )
+          cart.push([this.props.singleProduct, 1])
+      })
+      ls.set('cart', cart)
+      // console.log('IF STATEMENT',cart)
+    } else {
+      let cart = []
+      cart[0] = [this.props.singleProduct, 1]
+      ls.set('cart', cart)
+      // console.log('ELSE STATEMENT',cart)
+    }
     alert('Added to cart')
   }
 
-  // Increament = () => {
-  //   this.setState({
-  //     name: this.props.singleProduct.name,
-  //     price: this.props.singleProduct.price,
-  //     qty: this.state.qty + 1,
-  //   })
-  //   ls.set(`${name}`, this.props.singleProduct)
-  //   ls.set('price', this.props.singleProduct.price)
-  //   ls.set('quantity', this.state.qty + 1)
-  // }
-
-  // Decreament = () => {
-  //   this.setState({
-  //     name: this.props.singleProduct.name,
-  //     price: this.props.singleProduct.price,
-  //     qty: this.state.qty - 1,
-  //   })
-  //   ls.set('name', this.props.singleProduct.name)
-  //   ls.set('price', this.props.singleProduct.price)
-  //   ls.set('quantity', this.state.qty - 1)
-  // }
-
   render() {
-    console.log('THIS IS STATE: ', this.state)
     const singleProduct = this.props.singleProduct
     return (
       <div className="singleProduct_page">
@@ -97,11 +73,6 @@ export class SingleProduct extends Component {
           </div>
         </div>
         <div className="quantity_change">
-          {/* <form onSubmit={(event) => this.handleSubmit(event)}>
-            <button onClick={this.Decreament}>-</button>
-            <div id="selectedQty">{this.state.qty}</div>
-            <button onClick={this.Increament}>+</button>
-          </form> */}
           <button
             className="addToCart_button"
             type="submit"

@@ -6,6 +6,7 @@ import CartMain from './components/cart/cartMain'
 import CartList from './components/cart/cartList'
 import CartProducts from './components/cart/cartProducts'
 import CartQuantity from './components/cart/cartQuantity'
+import GuestCart from './components/cart/guestCart'
 import UserForm from './components/Checkout/userForm'
 import AllUsers from './components/Admin/users'
 import {Login, Signup, UserHome, SingleProduct, AllProducts} from './components'
@@ -32,7 +33,7 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/cart/checkout" component={UserForm} />
-        <Route exact path="/cart" component={CartMain} />
+        <Route exact path="/cart" component={GuestCart} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -44,6 +45,7 @@ class Routes extends Component {
               path="/products/:productId"
               component={SingleProduct}
             />
+            <Route exact path="/cart" component={CartMain} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
