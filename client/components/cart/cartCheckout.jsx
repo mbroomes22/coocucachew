@@ -37,13 +37,11 @@ export class CartCheckout extends React.Component {
         {this.props.cart[0].products ? (
           <div id="cart_total">
             <div>
-              <h4>Subtotal: </h4>
-              <h4>{'$' + ls.get('subtotal')}</h4>
+              <h4>Subtotal: {'$' + ls.get('subtotal')}</h4>
               <h5>+ shipping: $6 </h5>
             </div>
             <div>
-              <h3>Total: </h3>
-              <h4>{'$' + ls.get('total')}</h4>
+              <h4>Total: {'$' + ls.get('total')} </h4>
               <form onSubmit={e => this.handleUpdate(e)}>
                 {/* <button type="submit">
                   U P D A T E
