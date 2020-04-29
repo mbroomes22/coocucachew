@@ -32,11 +32,11 @@ export class ConfirmOrder extends Component {
     const subTotal = checkoutSubTotal(this.props.cart) //not sure if the user's cart prop is an arr named cart
     const total = checkoutTotal(subTotal)
     this.props.addOrder(subTotal, total, this.props.cart.userId) //not sure if user's id is named userId and located in cart
-    this.props.addAddress(
-      this.state.streetAddress,
-      this.state.zipCode,
-      this.state.state
-    )
+    // this.props.addAddress(
+    //   this.state.streetAddress,
+    //   this.state.zipCode,
+    //   this.state.state
+    // )
     this.setState({
       name: '',
       email: '',
@@ -146,9 +146,9 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   addOrder: (orderSubTotal, orderTotal, orderUserID) =>
-    dispatch(updateOrderHistory(orderSubTotal, orderTotal, orderUserID)),
-  addAddress: (newAddress, newZip, newState) =>
-    dispatch(updateUserAddresses(newAddress, newZip, newState))
+    dispatch(updateOrderHistory(orderSubTotal, orderTotal, orderUserID))
+  // addAddress: (newAddress, newZip, newState) =>
+  //   dispatch(updateUserAddresses(newAddress, newZip, newState))
 })
 
 export default connect(mapState, mapDispatch)(ConfirmOrder)
