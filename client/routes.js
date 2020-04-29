@@ -23,32 +23,34 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        {/* <Route exact path="/" component={Home} /> */}
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/home" component={UserHome} />
-        <Route exact path="/products" component={AllProducts} />
-        <Route exact path="/products/:productId" component={SingleProduct} />
-        <Route exact path="/cart/checkout" component={UserForm} />
-        <Route exact path="/cart" component={CartMain} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route exact path="/home" component={UserHome} />
-            <Route exact path="/users" component={AllUsers} />
-            <Route exact path="/products" component={AllProducts} />
-            <Route
-              exact
-              path="/products/:productId"
-              component={SingleProduct}
-            />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch>
+      <div className="neutral">
+        <Switch>
+          {/* Routes placed here are available to all visitors */}
+          {/* <Route exact path="/" component={Home} /> */}
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/" component={AllProducts} />
+          <Route exact path="/products" component={AllProducts} />
+          <Route exact path="/products/:productId" component={SingleProduct} />
+          <Route exact path="/cart/checkout" component={UserForm} />
+          <Route exact path="/cart" component={CartMain} />
+          {isLoggedIn && (
+            <Switch>
+              {/* Routes placed here are only available after logging in */}
+              <Route exact path="/home" component={UserHome} />
+              <Route exact path="/users" component={AllUsers} />
+              <Route exact path="/products" component={AllProducts} />
+              <Route
+                exact
+                path="/products/:productId"
+                component={SingleProduct}
+              />
+            </Switch>
+          )}
+          {/* Displays our Login component as a fallback */}
+          <Route component={Login} />
+        </Switch>
+      </div>
     )
   }
 }

@@ -1,10 +1,22 @@
 body {
   font-family: sans-serif;
+  background-image: url('sweet-desserts-chocolate-candies.jpg');
+}
+
+.neutral {
+  background-color: rgb(247, 227, 240);
 }
 
 .title {
   font-family: 'Satisfy', cursive;
   color: #fe00fe;
+}
+
+h1 {
+  text-align: center;
+  font-family: Chalkduster, fantasy;
+  font-weight: 900;
+  text-shadow: 2px 2px white;
 }
 
 a {
@@ -18,6 +30,7 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  font-family: Chalkduster, fantasy;
 }
 
 form div {
@@ -46,19 +59,40 @@ form div {
   background-color: #dfb3bd;
   display: flex;
   justify-content: center;
-  padding: 15px;
-  margin-bottom: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  font-family: Chalkduster, fantasy;
+}
 
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-size: 30px;
-  letter-spacing: 2px;
-  word-spacing: 2px;
-  color: #362f47;
-  font-weight: 700;
-  text-decoration: overline solid rgb(68, 68, 68);
-  font-style: normal;
-  font-variant: small-caps;
-  text-transform: none;
+.singleProduct_page {
+  font-family: Chalkduster, fantasy;
+  padding: 1rem;
+  justify-content: center;
+}
+
+#cart h3 {
+  background-color: rgba(26, 155, 194, 0.824);
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  font-family: Chalkduster, fantasy;
+  text-shadow: 1px 1px grey;
+}
+
+.cartproducts {
+  font-family: Chalkduster, fantasy;
+  text-shadow: 1px 1px white;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+  padding: 1rem;
+}
+
+#cart_total {
+  font-family: Chalkduster, fantasy;
+  padding: 1rem;
+  text-shadow: 1px 1px white;
 }
 
 .field {
@@ -102,9 +136,23 @@ form div {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 3rem;
   padding: 1rem;
+  font-family: Chalkduster, fantasy;
 }
 
 .card {
+  box-shadow: 0px 1px 5px #555;
+  background-color: white;
+  padding: 1rem;
+}
+
+.checkout-card-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 1rem;
+  padding: 1rem;
+}
+
+.checkout-card {
   box-shadow: 0px 1px 5px #555;
   background-color: white;
   padding: 1rem;
@@ -177,4 +225,15 @@ form div {
   font-style: normal;
   font-variant: small-caps;
   text-transform: none;
+}
+
+.navbar {
+  /* background: linear-gradient(to left, #ba7453, #d1a984); */
+  background-color: transparent;
+}
+
+.navbar a {
+  color: black;
+  font-weight: bold;
+  text-shadow: 1px 1px white;
 }

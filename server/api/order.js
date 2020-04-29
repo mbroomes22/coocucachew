@@ -30,6 +30,21 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/', async (req, res, next) => {
+  try {
+    const userOrders = await Order.findAll({
+      where: {
+        userId: req.sessions.passport.user,
+        isPending: false
+      },
+      include: Product
+    })
+    res.json(userOrders)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.put('/:orderId', async (req, res, next) => {
   console.log('REQ.BODY IN ORDER PUT ROUTE', req.body)
   try {

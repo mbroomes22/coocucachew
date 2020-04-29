@@ -19,9 +19,7 @@ export class SingleProduct extends Component {
   }
 
   componentDidMount() {
-    // console.log('^*^*^', this.props)
     // this.props.match.params.productId ? (
-    console.log(this.props.match.params.productId)
     this.props.getProduct(this.props.match.params.productId)
 
     // : ('loading')
@@ -36,13 +34,9 @@ export class SingleProduct extends Component {
   //     price: this.props.singleProduct.price,
   //     description: this.props.singleProduct.description,
   //   }
-  //   console.log('I AM PROPS:', this.props)
   //   this.props.addProduct(productInfo)
-  //   console.log('I AM ORDERID:', event.target)
   // }
   async handleClick(product) {
-    console.log('I AM PROPS:', this.props)
-    console.log('I AM EVENT:', event.target.value)
     const orderproduct = this.props.singleProduct
     const userId = this.props.user.id
 
@@ -78,7 +72,6 @@ export class SingleProduct extends Component {
   // }
 
   render() {
-    console.log('THIS IS STATE: ', this.state)
     const singleProduct = this.props.singleProduct
     return (
       <div className="singleProduct_page">
@@ -103,7 +96,7 @@ export class SingleProduct extends Component {
             <button onClick={this.Increament}>+</button>
           </form> */}
           <button
-            className="addToCart_button"
+            className="buttonC"
             type="submit"
             onClick={e => {
               this.handleClick(e)

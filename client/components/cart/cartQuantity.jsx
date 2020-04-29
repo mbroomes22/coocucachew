@@ -22,7 +22,6 @@ export class CartQuantity extends React.Component {
   }
 
   componentDidMount() {
-    // console.log('cart quantity component did mount', this.props.product)
     this.setState({
       quantity: this.props.product.orderProduct.quantity
     })
@@ -47,7 +46,6 @@ export class CartQuantity extends React.Component {
       this.state.quantity * parseInt(this.props.product.price.substring(1), 10)
     ls.set('subtotal', newPrice)
     ls.set('total', newPrice + 6)
-    // console.log(this.props)
 
     this.props.updateCartProduct(
       this.props.cart.id,
@@ -106,12 +104,10 @@ export class CartQuantity extends React.Component {
     })
 
     const {product, cart, deleteProduct} = this.props
-    console.log('PROPS-------------', product.id, cart.id)
     deleteProduct(product.id, cart.id)
   }
 
   render() {
-    // console.log('inside of cart quantity render', this.props)
     return (
       <div>
         <form onSubmit={e => this.handleUpdate(e)}>

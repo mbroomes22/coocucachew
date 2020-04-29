@@ -48,6 +48,11 @@ export class ConfirmOrder extends Component {
 
   render() {
     const {values: {name, email, streetAddress, zipCode, state}} = this.props
+    const {cart} = this.props
+    let total = 0
+    cart[0].products.map(
+      item => (total += item.price.slice(1) * item.orderProduct.quantity)
+    )
     return (
       <div>
         <br />
@@ -57,23 +62,30 @@ export class ConfirmOrder extends Component {
         <h1 className="header">Confirm Order Details</h1>
         <br />
         <h2>Shipping Address</h2>
-        <ul>
-          <ol>
-            <h3>Name:</h3> <br /> {name}
-          </ol>
-          <ol>
-            <h3>Email:</h3> <br /> {email}
-          </ol>
-          <ol>
-            <h3>Street Address:</h3> <br /> {streetAddress}
-          </ol>
-          <ol>
-            <h3>ZIP code:</h3> <br /> {zipCode}
-          </ol>
-          <ol>
-            <h3>State:</h3> <br /> {state}
-          </ol>
-        </ul>
+        <div className="card-container">
+          <ul className="card">
+            <ol>
+              <h3>Name:</h3> {name}
+              <br />
+            </ol>
+            <ol>
+              <h3>Email:</h3> {email}
+              <br />
+            </ol>
+            <ol>
+              <h3>Street Address:</h3> {streetAddress}
+              <br />
+            </ol>
+            <ol>
+              <h3>ZIP code:</h3> {zipCode}
+              <br />
+            </ol>
+            <ol>
+              <h3>State:</h3> {state}
+              <br />
+            </ol>
+          </ul>
+        </div>
         <h2>Payment Method</h2>
         <ul>
           <ol>
@@ -84,28 +96,36 @@ export class ConfirmOrder extends Component {
         <h2>Review Items</h2>
         <br />
         <br />
-        {/* <ul>
-          {this.props.cartItems.map(item => (
-            <div key={item.id}>
-              <ol>
-                <h3>{item.name}</h3> <br />
-              </ol>
-              <ol>
-                <h3>{item.description}</h3> <br />
-              </ol>
-              <ol>
-                <h3>{item.qty}</h3> <br />
-              </ol>
-              <ol>
-                <h3>{item.price}</h3> <br />
-              </ol>
-            </div>
-          ))}
-        </ul> */}
-        <h2>Order Total</h2>
+        <ul className="checkout-card-container">
+          {cart[0].products &&
+            cart[0].products.map(item => (
+              <div key={item.id} className="checkout-card">
+                <ol>
+                  <h3>{item.name}</h3>
+                </ol>
+                <ol>
+                  <h3>
+                    <img src={item.imageUrl} width="75px" />
+                  </h3>
+                </ol>
+                <ol>
+                  <h3>Qty: {item.orderProduct.quantity}</h3>
+                </ol>
+                <ol>
+                  <h3>{item.price}</h3>
+                </ol>
+              </div>
+            ))}
+        </ul>
+        <h3>Subtotal</h3>
+        ${total}
         <br />
-        {/* {total} */}
-        9.99
+        <h3>Shipping</h3>
+        $6
+        <br />
+        <h2>Total</h2>
+        ${total + 6}
+        <br />
         <br />
         <button
           type="submit"
@@ -120,9 +140,9 @@ export class ConfirmOrder extends Component {
   }
 }
 
-const mapState = state => {
-  console.log('confirmation order State=>', state)
-}
+const mapState = state => ({
+  cart: state.cart
+})
 
 const mapDispatch = dispatch => ({
   addOrder: (orderSubTotal, orderTotal, orderUserID) =>
