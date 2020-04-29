@@ -114,6 +114,9 @@ export class ConfirmOrder extends Component {
         <h3>Subtotal</h3>
         ${total}
         <br />
+        <h3>Shipping</h3>
+        $6
+        <br />
         <h2>Total</h2>
         ${total + 6}
         <br />
