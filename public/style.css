@@ -43,11 +43,22 @@ form div {
 }
 
 .header {
-  background-color: rgba(26, 155, 194, 0.824);
+  background-color: #dfb3bd;
   display: flex;
   justify-content: center;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 15px;
+  margin-bottom: 15px;
+
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 30px;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: #362f47;
+  font-weight: 700;
+  text-decoration: overline solid rgb(68, 68, 68);
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: none;
 }
 
 .field {
