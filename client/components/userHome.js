@@ -9,8 +9,6 @@ import {getOrderHistory} from '../store/saveOrder'
  */
 export const UserHome = props => {
   const {name, isLoggedIn} = props
-  console.log('USER HOME Props=>', props)
-  console.log('USER HOME GET ORDERS=>', props.getOrders)
   return (
     <div>
       {isLoggedIn ? (

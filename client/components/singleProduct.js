@@ -96,7 +96,7 @@ export class SingleProduct extends Component {
             <button onClick={this.Increament}>+</button>
           </form> */}
           <button
-            className="addToCart_button"
+            className="buttonC"
             type="submit"
             onClick={e => {
               this.handleClick(e)
