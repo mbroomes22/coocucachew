@@ -18,7 +18,6 @@ export class CartCheckout extends React.Component {
     e.preventDefault()
     // const cartForDb = ls.get('localStorage')
     const {cart, id, updateDbCart} = this.props
-    console.log('handle update works')
     updateDbCart(cart, id)
   }
 
