@@ -16,10 +16,8 @@ export class CartList extends React.Component {
     this.setPropsToLocalStorage = this.setPropsToLocalStorage.bind(this)
   }
 
-  //set the props in the local window storage & calculate totals
   setPropsToLocalStorage() {
     let subtotal = 0
-    // console.log('inside of set props to local storage', this.props.cart)
     if (this.props.cart[0] && ls.get('isPending') === true) {
       ls.set('id', this.props.cart[0].id)
       ls.set('isPending', this.props.cart[0].isPending)
@@ -58,7 +56,6 @@ export class CartList extends React.Component {
   }
 
   render() {
-    console.log('inside cartlist render', this.props)
     this.setPropsToLocalStorage()
     const {step} = this.state
     return this.props.cart[0] ? (

@@ -100,7 +100,7 @@ export class CartQuantity extends React.Component {
   }
 
   clearAll(e) {
-    e.preventDefault()
+    // e.preventDefault()
     this.setState({
       quantity: 0
     })
