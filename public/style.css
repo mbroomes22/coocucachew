@@ -80,6 +80,15 @@ form div {
   text-shadow: 1px 1px grey;
 }
 
+#main-header {
+  background-color: rgba(26, 155, 194, 0.824);
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  font-family: Chalkduster, fantasy;
+}
+
 .cartproducts {
   font-family: Chalkduster, fantasy;
   text-shadow: 1px 1px white;

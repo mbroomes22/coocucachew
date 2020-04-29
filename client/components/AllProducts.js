@@ -29,7 +29,7 @@ export class AllProducts extends React.Component {
                       <h4 className="all-product-container">{product.name}</h4>
                     </Link>
                     <h4 className="product-price">{product.price}</h4>
-                    <img src={product.imageUrl} width="276" height="255" />
+                    <img src={product.imageUrl} width="276" />
                     <p className="product-description">{product.description}</p>
                     {isAdmin ? (
                       <button
