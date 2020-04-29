@@ -3,6 +3,7 @@ import axios from 'axios'
 //action type
 export const UPDATE_USER_ORDER_HISTORY = 'UPDATE_USER_ORDER_HISTORY'
 export const UPDATE_USER_ADDRESS = 'UPDATE_USER_ADDRESS'
+export const GET_USER_ORDER_HISTORY = 'GET_USER_ORDER_HISTORY'
 
 //action creator
 export const updateUserOrderHistory = newOrder => ({
@@ -13,6 +14,11 @@ export const updateUserOrderHistory = newOrder => ({
 export const updateUserAddress = newAddress => ({
   type: UPDATE_USER_ADDRESS,
   newAddress
+})
+
+export const getUserOrderHistory = orders => ({
+  type: GET_USER_ORDER_HISTORY,
+  orders
 })
 
 //change isPending to false in orders db
@@ -39,6 +45,17 @@ export const updateUserAddresses = (userId, newAddress) => {
   }
 }
 
+export const getOrderHistory = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get(`/api/order/`)
+      dispatch(getUserOrderHistory(data))
+    } catch (error) {
+      console.error('Sorry, could not process order:', error)
+    }
+  }
+}
+
 //initial state
 
 const initialState = {}
@@ -49,7 +66,9 @@ export default function ordersReducer(state = initialState, action) {
     case UPDATE_USER_ORDER_HISTORY:
       return action.newOrder
     case UPDATE_USER_ADDRESS:
-      return action.newAddress
+      return {...state, address: action.newAddress}
+    case GET_USER_ORDER_HISTORY:
+      return action.orders
     default:
       return state
   }

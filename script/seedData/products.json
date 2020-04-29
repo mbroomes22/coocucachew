@@ -1,124 +1,174 @@
 [
   {
-    "name": "quos",
-    "description": "Id modi et.",
-    "price": 3,
-    "productCategoryId": 1
-  },
-  {
-    "name": "optio",
-    "description": "Quia voluptatem modi ullam provident nesciunt.",
-    "price": 5,
-    "productCategoryId": 1
-  },
-  {
-    "name": "dolor",
-    "description": "Veniam beatae ipsa vel a est quaerat.",
-    "price": 5,
-    "productCategoryId": 2
-  },
-  {
-    "name": "et",
-    "description": "Totam voluptatem aut eos dolorum architecto labore.",
-    "price": 10,
-    "productCategoryId": 2
-  },
-  {
-    "name": "dolores",
-    "description": "Quo totam ut omnis eaque nemo.",
-    "price": 7,
-    "productCategoryId": 2
-  },
-  {
-    "name": "sint",
+    "name": "Apple Platz",
     "description":
-      "Qui dolor nisi doloremque fuga praesentium repudiandae blanditiis natus.",
-    "price": 7,
+      "Platz occupies the sweet spot between cake and pie in a cupcake",
+    "imageUrl":
+      "https://cincyshopper.com/wp-content/uploads/2015/07/Apple-Pie-Cupcakes-2.jpg",
+    "price": 3,
+    "productCategoryId": 4
+  },
+  {
+    "name": "Summer Berry'",
+    "description": "A delicious vanilla cupcake with a mix of berries",
+    "imageUrl":
+      "https://bakerbynature.com/wp-content/uploads/2017/04/untitled-51-of-68-2.jpg",
+    "price": 5,
+    "productCategoryId": 4
+  },
+  {
+    "name": "Espresso Chocolate Chunk",
+    "description":
+      "Artisan organic espresso beans infused with our cookies and paired with our white chocolate chunks",
+    "imageUrl":
+      "https://cdn.shopify.com/s/files/1/1540/1281/products/Espresso_Chocolate_Chunk_540x.png?v=1569239786",
+    "price": 5,
     "productCategoryId": 1
   },
   {
-    "name": "vel",
-    "description": "Commodi est ratione aut qui.",
+    "name": "Tiny Raspberry Jam",
+    "description":
+      "Cookies made with the tart, sweet goodness of totally fresh raspberries",
+    "imageUrl":
+      "https://cdn.shopify.com/s/files/1/1540/1281/products/choc_jam_inside_600x600NEW_540x.png?v=1581639491",
+    "price": 10,
+    "productCategoryId": 1
+  },
+  {
+    "name": "Cherry truffle",
+    "description":
+      "Cherry, meringue, and dark chocolate are all mixed together in this amazing truffle",
+    "imageUrl":
+      "https://coffeebeanflavor.com/wp-content/uploads/2016/07/Dark-Chocolate-Cherry-Truffle.jpg",
+    "price": 7,
+    "productCategoryId": 2
+  },
+  {
+    "name": "Peach Brown",
+    "description": "Peach covered in milk chocolate",
+    "imageUrl":
+      "http://cdn.meduriworlddelights.com/images/main/Milk-Chocolate-Peach-Treasures-33008-main.jpg",
+    "price": 7,
+    "productCategoryId": 2
+  },
+  {
+    "name": "Blueberry Pop",
+    "description": "Wild Maine Blueberries mixed in this delicious cake pop",
+    "imageUrl":
+      "https://www.readersdigest.ca/wp-content/uploads/sites/14/2016/08/wild-blueberry-cake-pops-1024x696.jpg",
     "price": 6,
     "productCategoryId": 3
   },
   {
-    "name": "et",
-    "description":
-      "Dolorem iure quam eos error debitis necessitatibus est iste suscipit.",
+    "name": "Just chocolate'",
+    "description": "Chocolate cake pop covered in dark chocolate frosting",
+    "imageUrl":
+      "https://www.sugarsweet.ca/uploads/1/2/9/2/129270739/s305153677804097004_p24_i2_w720.jpeg",
     "price": 10,
+    "productCategoryId": 3
+  },
+  {
+    "name": "Triple Chocolate",
+    "description":
+      "A blend of dark chocolate, milk chocolate, and dark Belgian cocoa- a chocolate lover’s dream come true!",
+    "imageUrl":
+      "https://cdn.shopify.com/s/files/1/1540/1281/products/TripleChocolateLavaCookie_New_1080x.png?v=1588009518",
+    "price": 3,
     "productCategoryId": 1
   },
   {
-    "name": "consequuntur",
-    "description": "Atque ea optio omnis vero autem ducimus et.",
-    "price": 3,
-    "productCategoryId": 2
-  },
-  {
-    "name": "ut",
+    "name": "Sea Salt Chocolate Chunk",
     "description":
-      "Aperiam repudiandae nesciunt soluta deserunt quia voluptatem qui.",
+      "A blend of organic dark and milk chocolate and a touch of sea salt attained from the coastal areas of France.",
+    "imageUrl":
+      "https://cdn.shopify.com/s/files/1/1540/1281/products/Sea-Salt-Chocolate-Chunk_a7ddd218-7328-47af-8d84-6aa4e4ed6498_540x.png?v=1527429042",
     "price": 4,
-    "productCategoryId": 4
+    "productCategoryId": 1
   },
   {
-    "name": "vero",
-    "description": "Quia provident itaque beatae enim veniam.",
+    "name": "Pecan Pie Chocolate",
+    "description":
+      "Shortbread cookie with roasted pecans and sea salt caramels, coated in milk chocolate on the bottom.",
+    "imageUrl":
+      "https://cdn.shopify.com/s/files/1/1110/4668/products/pecan-pie_1024x1024@2x.jpg?v=1559574083",
     "price": 5,
     "productCategoryId": 2
   },
   {
-    "name": "voluptatem",
-    "description": "Nisi et aut beatae.",
+    "name": "Salted Caramel Cupcake",
+    "description":
+      "Dulce de Leche cake with Swirls of salted caramel buttercream (sea salt).",
+    "imageUrl":
+      "https://www.buttercupbakeshop.com/wp-content/uploads/2017/06/Salted-Caramel.jpg",
     "price": 7,
-    "productCategoryId": 1
+    "productCategoryId": 4
   },
   {
-    "name": "placeat",
-    "description": "Nostrum quaerat voluptatem asperiores facilis omnis.",
+    "name": "Kitchen Sink",
+    "description":
+      "Crisp organic toffee, crunchy organic pretzels, rich organic chocolate makes your mouth say, yes please!",
+    "imageUrl":
+      "https://cdn.shopify.com/s/files/1/1540/1281/products/kitchen_sink_fullsize_600x600_cf40a902-23ba-4e60-b771-65b7f0ea6f03_540x.png?v=1569315839",
     "price": 4,
     "productCategoryId": 1
   },
   {
-    "name": "dolorum",
-    "description": "Necessitatibus voluptas rerum repellendus qui sed animi.",
+    "name": "Hazelnut Chocolate Truffles",
+    "description": "Who doesn't love a good hazelnut and chocolate combo?",
+    "imageUrl":
+      "https://149366112.v2.pressablecdn.com/wp-content/uploads/2016/03/hazelnut-chocolate-truffle-eggs.jpg",
     "price": 10,
     "productCategoryId": 2
   },
   {
-    "name": "doloremque",
-    "description": "Vel ut minus.",
+    "name": "Rocky Road Peanut Chip",
+    "description": "Yes, it's super chocolatey, peanutty, and marshmallowy",
+    "imageUrl":
+      "https://cdn.shopify.com/s/files/1/1540/1281/products/RockyRoad_New_540x.png?v=1576703986",
     "price": 3,
     "productCategoryId": 1
   },
   {
-    "name": "vel",
-    "description": "Sequi porro sint aliquam in ut.",
+    "name": "Betterfinger",
+    "description":
+      "2 pieces of crispy peanut butter core dipped in milk chocolate.",
+    "imageUrl":
+      "https://cdn.shopify.com/s/files/1/1110/4668/products/candy-bar_better-finger_1024x1024@2x.jpg?v=1585104647",
     "price": 9,
     "productCategoryId": 2
   },
   {
-    "name": "ut",
-    "description": "Voluptas in ratione est ut itaque amet ratione ullam.",
+    "name": "Galaxy Cake Pops",
+    "description": "They're out of this world good",
+    "imageUrl":
+      "https://i.pinimg.com/564x/e4/23/b5/e423b511a97965876c018de401d68adb.jpg",
     "price": 8,
     "productCategoryId": 3
   },
   {
-    "name": "officiis",
-    "description": "Ea perspiciatis odio laborum.",
+    "name": "Dark Chocolate Cupcake W/ Peanut Butter",
+    "description":
+      "Dark choc cake with Reese’s PB cups inside and PB icing. For all you peanut butter freaks out there.",
+    "imageUrl":
+      "https://www.buttercupbakeshop.com/wp-content/uploads/2017/04/Dark-Choc-Peanut-Butter-Cupcake.jpg",
     "price": 3,
     "productCategoryId": 4
   },
   {
-    "name": "deserunt",
-    "description": "Qui maxime aut tenetur.",
+    "name": "Ube Cupcake",
+    "description":
+      "A vanilla cocoa cupcake frosted with cream cheese frosting.",
+    "imageUrl":
+      "https://www.buttercupbakeshop.com/wp-content/uploads/2016/11/Ube-Cupcake.jpg",
     "price": 8,
     "productCategoryId": 4
   },
   {
-    "name": "ex",
-    "description": "Neque aut praesentium adipisci voluptatem assumenda atque.",
+    "name": "Cookies’n’Cream Cupcake",
+    "description":
+      "Vanilla cake stuffed with a whole Oreo (yes a whole one) topped with an Oreo crumb buttercream.",
+    "imageUrl":
+      "https://www.buttercupbakeshop.com/wp-content/uploads/2017/06/CookiesnCream-Cupcake.jpg",
     "price": 9,
     "productCategoryId": 4
   }
