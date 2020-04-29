@@ -52,10 +52,13 @@
     "productCategoryId": 3
   },
   {
-    "name": "consequuntur",
-    "description": "Atque ea optio omnis vero autem ducimus et.",
+    "name": "Triple Chocolate",
+    "description":
+      "A blend of dark chocolate, milk chocolate, and dark Belgian cocoa- a chocolate lover’s dream come true!",
+    "imageUrl":
+      "https://cdn.shopify.com/s/files/1/1540/1281/products/TripleChocolateLavaCookie_New_1080x.png?v=1588009518",
     "price": 3,
-    "productCategoryId": 2
+    "productCategoryId": 1
   },
   {
     "name": "ut",
