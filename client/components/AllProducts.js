@@ -26,11 +26,11 @@ export class AllProducts extends React.Component {
                 return (
                   <div key={product.id} className="card">
                     <Link to={`/products/${product.id}`}>
-                      <h4>{product.name}</h4>
+                      <h4 className="all-product-container">{product.name}</h4>
                     </Link>
-                    <h4>{product.price}</h4>
-                    <img src={product.imageUrl} width="200" />
-                    <p>{product.description}</p>
+                    <h4 className="product-price">{product.price}</h4>
+                    <img src={product.imageUrl} width="276" />
+                    <p className="product-description">{product.description}</p>
                     {isAdmin ? (
                       <button
                         className="button"

@@ -56,7 +56,7 @@ form div {
 }
 
 .header {
-  background-color: rgba(26, 155, 194, 0.824);
+  background-color: #dfb3bd;
   display: flex;
   justify-content: center;
   padding: 20px;
@@ -78,6 +78,15 @@ form div {
   margin-bottom: 20px;
   font-family: Chalkduster, fantasy;
   text-shadow: 1px 1px grey;
+}
+
+#main-header {
+  background-color: rgba(26, 155, 194, 0.824);
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  font-family: Chalkduster, fantasy;
 }
 
 .cartproducts {
@@ -160,6 +169,71 @@ form div {
 
 .form {
   margin: 2%;
+}
+
+.all-product-container {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  word-spacing: -1.4px;
+  color: #c46aa6;
+  font-weight: 700;
+  text-decoration: none solid rgb(68, 68, 68);
+  font-style: normal;
+  font-variant: normal;
+  text-transform: capitalize;
+}
+
+.product-price {
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.6px;
+  word-spacing: -1.4px;
+  color: #a169c1;
+  font-weight: 700;
+  text-decoration: none solid rgb(68, 68, 68);
+  font-style: normal;
+  font-variant: normal;
+  text-transform: capitalize;
+}
+
+.product-description {
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  word-spacing: 2.4px;
+  color: #5c0b70;
+  font-weight: 400;
+  text-decoration: none solid rgb(68, 68, 68);
+  font-style: normal;
+  font-variant: normal;
+  text-transform: capitalize;
+}
+
+.singleProduct-description {
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.2px;
+  word-spacing: 2px;
+  color: #5c0b70;
+  font-weight: 700;
+  text-decoration: none solid rgb(68, 68, 68);
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+}
+
+#navBar-container {
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  font-size: 25px;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: #362f47;
+  font-weight: 700;
+  text-decoration: underline solid rgb(68, 68, 68);
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: none;
 }
 
 .navbar {

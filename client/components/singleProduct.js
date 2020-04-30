@@ -82,11 +82,11 @@ export class SingleProduct extends Component {
           <div className="singleProduct_image">
             <img src={singleProduct.imageUrl} width="200" />
           </div>
-          <div className="singleProduct_description">
+          <div className="product-description">
             <p>{singleProduct.description}</p>
           </div>
           <div className="singleProduct_price">
-            <p>{singleProduct.price}</p>
+            <p className="product-price">{singleProduct.price}</p>
           </div>
         </div>
         <div className="quantity_change">
